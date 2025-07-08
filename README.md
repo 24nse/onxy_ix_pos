@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # onyx_ix_pos
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# onxy_ix_pos
+>>>>>>> 47261bc561f64d9afba39d1c9987f9d2c7a0a04a
