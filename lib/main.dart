@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onyx_ix_pos/presentation/modules/home/view/home_screen.dart';
 
 void main() {
   runApp(const OnyxIxPosApp());
@@ -9,6 +10,9 @@ class OnyxIxPosApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomeScreen(),
+    );
   }
 }
