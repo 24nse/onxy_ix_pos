@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:onyx_ix_pos/core/utils/app_colors.dart';
+import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 
-abstract class Styles {
+abstract class AppStyles {
   static const textStyle24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
