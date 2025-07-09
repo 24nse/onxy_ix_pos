@@ -6,9 +6,10 @@ import 'package:onyx_ix_pos/core/utils/theme/theme_cubit.dart';
 import 'package:onyx_ix_pos/core/widgets/custom_hover_icon_container.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/home/data/local/mock_products.dart';
+import 'package:onyx_ix_pos/home/presentation/view/widgets/category_tabs.dart';
 import 'package:onyx_ix_pos/home/presentation/view/widgets/language_menu_button.dart';
-import 'package:onyx_ix_pos/home/presentation/view/widgets/order_summary_widget.dart';
-import 'package:onyx_ix_pos/home/presentation/view/widgets/product_catalog_widget.dart';
+import 'package:onyx_ix_pos/home/presentation/view/widgets/order_summary_section.dart';
+import 'package:onyx_ix_pos/home/presentation/view/widgets/product_catalog_section.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
@@ -43,15 +44,11 @@ class HomeScreen extends HookWidget {
       body: LayoutBuilder(
         builder: (context, constraints) {
           return (isFullScreen.value)
-              ?      OrderSummaryWidget()
+              ? OrderSummarySection()
               : Row(
                   children: [
-                  Expanded(
-                    flex: 2,
-                    child: ProductCatalogWidget()),
-                   Expanded(
-                    flex: 1,
-                    child: OrderSummaryWidget()),
+                    Expanded(flex: 2, child: ProductCatalogSection()),
+                    Expanded(flex: 1, child: OrderSummarySection()),
                   ],
                 );
         },

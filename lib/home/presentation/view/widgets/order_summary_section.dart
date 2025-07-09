@@ -4,8 +4,8 @@ import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
 import 'package:onyx_ix_pos/home/presentation/view_models/full_screen_cubit.dart';
 
-class OrderSummaryWidget extends StatelessWidget {
-  const OrderSummaryWidget({super.key});
+class OrderSummarySection extends StatelessWidget {
+  const OrderSummarySection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,6 @@ class OrderSummaryWidget extends StatelessWidget {
                   icon: const Icon(Icons.fullscreen),
                   onPressed: () {
                     context.read<FullScreenCubit>().toggleFullScreen();
-                  
                   },
                 ),
               ],

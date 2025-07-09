@@ -14,6 +14,7 @@ final List<Product> mockProducts = [
     name: 'Latte',
     category: 'Beverages',
     price: 4.50,
+    
     image:
         "https://media.istockphoto.com/id/1127245421/photo/woman-hands-praying-for-blessing-from-god-on-sunset-background.jpg?s=1024x1024&w=is&k=20&c=faoiFapQkhucuLuor9gBnblJ4KJpqvEgariqalvzRas=",
   ),
