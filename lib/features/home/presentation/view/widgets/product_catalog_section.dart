@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
@@ -6,6 +7,7 @@ import 'package:onyx_ix_pos/features/home/data/local/mock_products.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view/widgets/category_tabs.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view/widgets/product_card.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view/widgets/search_bar_from_field.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 
 
 class ProductCatalogSection extends StatefulWidget {
@@ -94,7 +96,23 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
                             ),
                         itemCount: filteredProducts.length,
                         itemBuilder: (context, index) {
-                          return ProductCard(product: filteredProducts[index]);
+                          return ProductCard(
+                            product: filteredProducts[index],
+                           onAddToCart: () {
+                    context.read<CartCubit>().addToCart(filteredProducts[index]);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          AppLocalizations.of(
+                                context,
+                              )?.translate('item_added_to_cart_successfully') ??
+                              'Item added to cart successfully.',
+                        ),
+                        duration: const Duration(seconds: 1),
+                      ),
+                    );
+                  },
+                            );
                         },
                       ),
                     ),
