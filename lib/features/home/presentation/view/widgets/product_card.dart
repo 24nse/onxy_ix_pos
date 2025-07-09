@@ -5,8 +5,9 @@ import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
 import 'package:onyx_ix_pos/features/home/domain/entities/product.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key, required this.product});
+  const ProductCard({super.key, required this.product, required this.onAddToCart});
   final Product product;
+   final VoidCallback onAddToCart;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -62,7 +63,7 @@ class ProductCard extends StatelessWidget {
                       child: SizedBox(
                         width: 200,
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: onAddToCart,
                           icon: const Icon(Icons.add_circle_outline, size: 16),
                           label: Text(
                             AppLocalizations.of(
