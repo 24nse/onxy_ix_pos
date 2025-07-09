@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 
 class HoverableMenuItem extends StatefulWidget {
-  // final double width;
-  // final double height;
+  final double width;
+  final double height;
   final double borderRadius;
   final double borderWidth;
   final String label;
   const HoverableMenuItem({
-    // required this.width,
-    // required this.height,
+    required this.width,
+    required this.height,
     required this.borderRadius,
     required this.borderWidth,
     required this.label,
@@ -30,8 +30,7 @@ class HoverableMenuItemState extends State<HoverableMenuItem> {
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
-        alignment: Alignment.
-        center,
+        alignment: Alignment.center,
         duration: const Duration(milliseconds: 150),
 padding:  EdgeInsets.zero,
         // width: widget.width,
