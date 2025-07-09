@@ -8,6 +8,8 @@ import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.d
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/cart_list.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/order_calculation_section.dart';
+import 'package:onyx_ix_pos/features/order/presentation/views/widgets/payment_details_section.dart';
+import 'package:onyx_ix_pos/features/order/presentation/views/widgets/proceed_to_checkout_button.dart';
 
 class OrderSummarySection extends StatelessWidget {
   const OrderSummarySection({super.key});
@@ -64,9 +66,18 @@ class OrderSummarySection extends StatelessWidget {
             const SizedBox(height: 16),
             BlocBuilder<CartCubit, CartState>(
               builder: (context, state) {
-                return state.items.isNotEmpty
-                    ? const OrderCalculationSection()
-                    : const SizedBox.shrink();
+                if (state.items.isEmpty) {
+                  return const SizedBox.shrink();
+                }
+                return const Column(
+                  children: [
+                    OrderCalculationSection(),
+                    SizedBox(height: 16),
+                    PaymentDetailsSection(),
+                    SizedBox(height: 16),
+                    ProceedToCheckoutButton(),
+                  ],
+                );
               },
             ),
           ],
