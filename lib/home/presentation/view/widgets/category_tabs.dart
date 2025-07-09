@@ -35,33 +35,42 @@ class _CategoryTabsState extends State<CategoryTabs> {
             final icon = category['icon'] as IconData;
             final isSelected = widget.selectedCategory == label;
 
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: GestureDetector(
-                onTap: () => widget.onCategorySelected(label),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: isSelected
-                        ? Theme.of(context).colorScheme.primary
-                        : Colors.grey.shade200,
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    children: [
-                      Icon(icon,
-                          color: isSelected ? Colors.white : Colors.black54, size: 20),
-                      const SizedBox(width: 6),
-                      Text(
-                        AppLocalizations.of(context)
-                                ?.translate(label.toLowerCase()) ??
-                            label,
-                        style: TextStyle(
-                          color: isSelected ? Colors.white : Colors.black87,
-                          fontWeight: FontWeight.w600,
+            return Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: GestureDetector(
+                  onTap: () => widget.onCategorySelected(label),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.grey.shade200,
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: Icon(icon,
+                              color: isSelected ? Colors.white : Colors.black54, size: 20),
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 6),
+                        Flexible(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              AppLocalizations.of(context)
+                                      ?.translate(label.toLowerCase()) ??
+                                  label,
+                              style: TextStyle(
+                                color: isSelected ? Colors.white : Colors.black87,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -6,6 +6,7 @@ import 'package:onyx_ix_pos/core/utils/theme/app_theme.dart';
 import 'package:onyx_ix_pos/core/utils/theme/theme_cubit.dart';
 import 'package:onyx_ix_pos/core/localization/locale_cubit.dart';
 import 'package:onyx_ix_pos/home/presentation/view/home_screen.dart';
+import 'package:onyx_ix_pos/home/presentation/view_models/full_screen_cubit.dart';
 
 void main() {
   runApp(const OnyxIxPosApp());
@@ -20,6 +21,9 @@ class OnyxIxPosApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => LocaleCubit()),
+        BlocProvider(
+          create: (_) => FullScreenCubit(),
+        ),
       ],
       child: BlocBuilder<ThemeCubit, bool>(
         builder: (context, isDarkMode) {
