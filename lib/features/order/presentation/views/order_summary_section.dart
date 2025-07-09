@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
-import 'package:onyx_ix_pos/features/home/data/local/mock_products.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/cart_list.dart';
+import 'package:onyx_ix_pos/features/order/presentation/views/widgets/order_calculation_section.dart';
 
 class OrderSummarySection extends StatelessWidget {
   const OrderSummarySection({super.key});
@@ -43,17 +46,28 @@ class OrderSummarySection extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Expanded(
-              flex: 2,
-              child: mockProducts.isEmpty
-                  ? Center(
-                      child: Text(
-                        AppLocalizations.of(
-                              context,
-                            )?.translate('your_cart_is_empty') ??
-                            'Your cart is empty',
-                      ),
-                    )
-                  : CartList(),
+              child: BlocBuilder<CartCubit, CartState>(
+                builder: (context, state) {
+                  return state.items.isEmpty
+                      ? Center(
+                          child: Text(
+                            AppLocalizations.of(
+                                  context,
+                                )?.translate('your_cart_is_empty') ??
+                                'Your cart is empty',
+                          ),
+                        )
+                      : const CartList();
+                },
+              ),
+            ),
+            const SizedBox(height: 16),
+            BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                return state.items.isNotEmpty
+                    ? const OrderCalculationSection()
+                    : const SizedBox.shrink();
+              },
             ),
           ],
         ),

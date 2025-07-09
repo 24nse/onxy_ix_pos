@@ -46,14 +46,25 @@ class HomeScreen extends HookWidget {
         builder: (context, constraints) {
           return BlocBuilder<FullScreenCubit, bool>(
             builder: (context, state) {
-              return state
-                  ? OrderSummarySection()
-                  : Row(
-                      children: [
-                        Expanded(flex: 4, child: ProductCatalogSection()),
-                        Expanded(flex: 3, child: OrderSummarySection()),
-                      ],
-                    );
+              if (state) {
+                return const OrderSummarySection();
+              }
+
+              if (constraints.maxWidth < 900) {
+                return const Column(
+                  children: [
+                    Expanded(child: ProductCatalogSection()),
+                    Expanded(child: OrderSummarySection()),
+                  ],
+                );
+              } else {
+                return const Row(
+                  children: [
+                    Expanded(flex: 4, child: ProductCatalogSection()),
+                    Expanded(flex: 3, child: OrderSummarySection()),
+                  ],
+                );
+              }
             },
           );
         },

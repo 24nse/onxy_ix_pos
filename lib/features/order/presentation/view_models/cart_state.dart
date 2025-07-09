@@ -5,9 +5,17 @@ class CartState {
 
   CartState({required this.items});
 
-  double get subtotal => items.fold(0, (sum, item) => sum + item.total);
-  double get taxAmount => subtotal * 0.10;
-  double get grandTotal => subtotal + taxAmount;
+  double get subtotal =>
+      items.fold(0, (sum, item) => sum + (item.product.price * item.quantity));
+
+  double get discountAmount =>
+      items.fold(0, (sum, item) => sum + item.discountAmount);
+
+  double get subtotalAfterDiscount => subtotal - discountAmount;
+
+  double get taxAmount => items.fold(0, (sum, item) => sum + item.taxAmount);
+
+  double get grandTotal => subtotalAfterDiscount + taxAmount;
 
   CartState copyWith({
     List<CartItem>? items,
