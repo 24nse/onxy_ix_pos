@@ -10,6 +10,7 @@ import 'package:onyx_ix_pos/home/presentation/view/widgets/category_tabs.dart';
 import 'package:onyx_ix_pos/home/presentation/view/widgets/language_menu_button.dart';
 import 'package:onyx_ix_pos/home/presentation/view/widgets/order_summary_section.dart';
 import 'package:onyx_ix_pos/home/presentation/view/widgets/product_catalog_section.dart';
+import 'package:onyx_ix_pos/home/presentation/view_models/full_screen_cubit.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
@@ -43,14 +44,18 @@ class HomeScreen extends HookWidget {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          return (isFullScreen.value)
-              ? OrderSummarySection()
+          return BlocBuilder<FullScreenCubit,bool>(builder: (context, state) {
+      
+        return state?    OrderSummarySection()
               : Row(
                   children: [
                     Expanded(flex: 2, child: ProductCatalogSection()),
                     Expanded(flex: 1, child: OrderSummarySection()),
                   ],
                 );
+          
+          });
+            
         },
       ),
     );

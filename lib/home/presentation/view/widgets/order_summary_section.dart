@@ -19,10 +19,15 @@ class OrderSummarySection extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  AppLocalizations.of(context)?.translate('order_summary') ??
-                      'Order Summary',
-                  style: AppStyles.textStyle20,
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      AppLocalizations.of(context)?.translate('order_summary') ??
+                          'Order Summary',
+                      style: AppStyles.textStyle20,
+                    ),
+                  ),
                 ),
                 IconButton(
                   icon: const Icon(Icons.fullscreen),

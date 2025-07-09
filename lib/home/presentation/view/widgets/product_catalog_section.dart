@@ -40,8 +40,9 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
     return Card(
       margin: const EdgeInsets.all(16.0),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -58,6 +59,13 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Text(
+                AppLocalizations.of(context)?.translate('product_catalog') ?? 'Product Catalog',
+                style: AppStyles.textStyle16),
+              
+            ),
             CategoryTabs(
               categories: [...categories],
               selectedCategory: _selectedCategory,
@@ -69,7 +77,7 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0,),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
