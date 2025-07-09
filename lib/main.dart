@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_theme.dart';
 import 'package:onyx_ix_pos/core/utils/theme/theme_cubit.dart';
+import 'package:onyx_ix_pos/core/localization/locale_cubit.dart';
 import 'package:onyx_ix_pos/presentation/modules/home/view/home_screen.dart';
 
 void main() {
@@ -13,19 +16,34 @@ class OnyxIxPosApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return  BlocProvider(
-      create: (_) => ThemeCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ThemeCubit()),
+        BlocProvider(create: (_) => LocaleCubit()),
+      ],
       child: BlocBuilder<ThemeCubit, bool>(
         builder: (context, isDarkMode) {
-    return 
-     MaterialApp(
-      debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: HomeScreen(),
+          return BlocBuilder<LocaleCubit, Locale>(
+            builder: (context, locale) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+                localizationsDelegates: [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                locale: locale,
+                supportedLocales: const [Locale('en', ''), Locale('ar', '')],
+                home: HomeScreen(),
+              );
+            },
+          );
+        },
+      ),
     );
-      
-        }));
   }
 }
