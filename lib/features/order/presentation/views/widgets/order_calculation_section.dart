@@ -9,6 +9,7 @@ class OrderCalculationSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Expanded(
           flex: 2,
@@ -17,7 +18,11 @@ class OrderCalculationSection extends StatelessWidget {
         const SizedBox(width: 20),
         Expanded(
           flex: 3,
-          child: SizedBox(),
+          child: Container(
+            color: Colors.blue[400],
+            height: 150,
+
+          ),
         ),
       ],
     );
