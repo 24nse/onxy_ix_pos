@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
-import 'package:onyx_ix_pos/home/data/local/mock_products.dart';
-import 'package:onyx_ix_pos/home/presentation/view/widgets/category_tabs.dart';
-import 'package:onyx_ix_pos/home/presentation/view/widgets/product_card.dart';
-import 'package:onyx_ix_pos/home/presentation/view/widgets/search_bar_from_field.dart';
+import 'package:onyx_ix_pos/features/home/data/local/mock_products.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view/widgets/category_tabs.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view/widgets/product_card.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view/widgets/search_bar_from_field.dart';
+
 
 class ProductCatalogSection extends StatefulWidget {
   const ProductCatalogSection({super.key});

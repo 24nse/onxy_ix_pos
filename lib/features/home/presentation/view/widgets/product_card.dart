@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
-import 'package:onyx_ix_pos/home/domain/entities/product.dart';
+import 'package:onyx_ix_pos/features/home/domain/entities/product.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});

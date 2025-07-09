@@ -1,4 +1,4 @@
-import 'package:onyx_ix_pos/home/domain/entities/product.dart';
+import 'package:onyx_ix_pos/features/home/domain/entities/product.dart';
 
 final List<Product> mockProducts = [
   Product(

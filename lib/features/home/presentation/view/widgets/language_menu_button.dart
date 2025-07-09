@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onyx_ix_pos/core/localization/locale_cubit.dart';
 import 'package:onyx_ix_pos/core/widgets/custom_hover_icon_container.dart';
-import 'package:onyx_ix_pos/home/presentation/view/widgets/hover_menu_item.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view/widgets/hover_menu_item.dart';
 
 class LanguageMenuButton extends StatelessWidget {
   static const double _menuItemWidth = 5;
   static const double _menuItemHeight = 20;
-  static const double _borderRadius = 4;
+  static const double _borderRadius = 2;
   static const double _borderWidth = 0;
 
   @override
@@ -57,10 +57,11 @@ class LanguageMenuButton extends StatelessWidget {
   ) {
     return PopupMenuItem<Locale>(
       height: 30,
+      padding: EdgeInsets.symmetric(horizontal: 4),
       value: value,
       child: HoverableMenuItem(
-        // width: _menuItemWidth,
-        // height: _menuItemHeight,
+        width: _menuItemWidth,
+        height: _menuItemHeight,
         
         borderRadius: _borderRadius,
         borderWidth: _borderWidth,
