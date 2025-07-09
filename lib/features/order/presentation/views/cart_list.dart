@@ -10,44 +10,46 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 class CartList extends HookWidget {
   const CartList({super.key});
 
+  GridColumn _buildGridColumn(String name, String label) {
+    return GridColumn(
+      columnName: name,
+      label: Center(
+        child: FittedBox(fit: BoxFit.scaleDown, child: Text(label)),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit,CartState>(
-
+    return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
-        return SfDataGrid(
-            source: OrderDataGridSource(cartItems: state.items, cubit: CartCubit()),
-              rowHeight: 70,
-          columnWidthMode: ColumnWidthMode.fill,
-          gridLinesVisibility: GridLinesVisibility.none,
-          headerGridLinesVisibility: GridLinesVisibility.none,
-          columns: <GridColumn>[
-  GridColumn(
-    columnName: 'item',
-    label: Center(child: Text('Item')),
-  ),
-  GridColumn(
-    columnName: 'price',
-    label: Center(child: Text('Price')),
-  ),
-  GridColumn(
-    columnName: 'qty',
-    label: Center(child: Text('Qty')),
-  ),
-  GridColumn(
-    columnName: 'total',
-    label: Center(child: Text('Total')),
-  ),
-  GridColumn(
-    columnName: 'delete',
-    label: Center(child: Text('')),
-  ),
-],
-
-          );
-      }
+        return Flexible(
+          child: SfDataGrid(
+            source: OrderDataGridSource(
+              cartItems: state.items,
+              cubit: context.read<CartCubit>(),
+            ),
+            rowHeight: 70,
+            headerRowHeight: state.items.isEmpty ? 0 : 40,
+            columnWidthMode: ColumnWidthMode.fill,
+            gridLinesVisibility: GridLinesVisibility.none,
+            headerGridLinesVisibility: GridLinesVisibility.none,
+            columns: <GridColumn>[
+              _buildGridColumn('item', 'Item'),
+              _buildGridColumn('product', 'Product'),
+              _buildGridColumn('price', 'Price'),
+              _buildGridColumn('qty', 'Qty'),
+              _buildGridColumn('disc', 'Disc %'),
+              _buildGridColumn('disc_amt', 'Disc Amt'),
+              _buildGridColumn('tax', 'Tax %'),
+              _buildGridColumn('tax_amt', 'Tax Amt'),
+              _buildGridColumn('total', 'Total'),
+              _buildGridColumn('delete', 'Del'),
+            ],
+          ),
+        );
+      },
     );
-
   }
 }
 

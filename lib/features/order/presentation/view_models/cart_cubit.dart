@@ -5,12 +5,7 @@ import 'package:onyx_ix_pos/features/home/domain/entities/product.dart';
 import 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit()
-    : super(CartState(items: []));
-
-
-
- 
+  CartCubit() : super(CartState(items: []));
 
   void addToCart(Product product) {
     final items = List<CartItem>.from(state.items);
@@ -51,8 +46,10 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void startNewOrder() {
-    emit(CartState(items: [],));
+    emit(CartState(items: []));
   }
+
+    
 
   void clearCart() {
     emit(state.copyWith(items: []));

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+
 import 'package:onyx_ix_pos/features/home/domain/entities/cart_item.dart';
-import 'package:onyx_ix_pos/features/home/domain/entities/product.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -9,21 +9,24 @@ class OrderDataGridSource extends DataGridSource {
     required List<CartItem> cartItems,
     required this.cubit,
   }) {
-    _cartItems = cartItems.map<DataGridRow>((item) {
-      return DataGridRow(cells: [
-        DataGridCell<CartItem>(columnName: 'item', value: item),
-        DataGridCell<String>(
-          columnName: 'price',
-          value: '\$${item.product.price.toStringAsFixed(2)}',
-        ),
-        DataGridCell<CartItem>(columnName: 'qty', value: item),
-        DataGridCell<String>(
-          columnName: 'total',
-          value: '\$${(item.product.price * item.quantity).toStringAsFixed(2)}',
-        ),
-        DataGridCell<CartItem>(columnName: 'delete', value: item),
-      ]);
-    }).toList();
+    _cartItems = cartItems
+        .map<DataGridRow>(
+          (item) => DataGridRow(
+            cells: [
+              DataGridCell<CartItem>(columnName: 'item', value: item),
+              DataGridCell<CartItem>(columnName: 'product', value: item),
+              DataGridCell<CartItem>(columnName: 'price', value: item),
+              DataGridCell<CartItem>(columnName: 'qty', value: item),
+              DataGridCell<CartItem>(columnName: 'disc', value: item),
+              DataGridCell<CartItem>(columnName: 'disc_amt', value: item),
+              DataGridCell<CartItem>(columnName: 'tax', value: item),
+              DataGridCell<CartItem>(columnName: 'tax_amt', value: item),
+              DataGridCell<CartItem>(columnName: 'total', value: item),
+              DataGridCell<CartItem>(columnName: 'delete', value: item),
+            ],
+          ),
+        )
+        .toList();
   }
 
   late List<DataGridRow> _cartItems;
@@ -31,89 +34,59 @@ class OrderDataGridSource extends DataGridSource {
 
   @override
   List<DataGridRow> get rows => _cartItems;
-@override
-DataGridRowAdapter buildRow(DataGridRow row) {
-  final int index = rows.indexOf(row);
-  final Map<String, dynamic> cellValues = {
-    for (var cell in row.getCells()) cell.columnName: cell.value
-  };
 
-  final item = cellValues['item'] as CartItem;
-  final product = item.product;
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    final item = row.getCells().first.value as CartItem;
+    return DataGridRowAdapter(
+      color: Colors.grey[100],
+      cells: [
+        _buildImageCell(item),
+        _buildTextCell(item.product.name, alignment: Alignment.centerLeft),
+        _buildTextCell('\$${item.product.price.toStringAsFixed(2)}'),
+        _buildQtyCell(item),
+        _buildTextCell('${item.discountPercent.toStringAsFixed(0)}%'),
+        _buildTextCell('\$${item.discountAmount.toStringAsFixed(2)}'),
+        _buildTextCell('${item.taxPercent.toStringAsFixed(0)}%'),
+        _buildTextCell('\$${item.taxAmount.toStringAsFixed(2)}'),
+        _buildTextCell('\$${item.total.toStringAsFixed(2)}'),
+        _buildDeleteButton(item),
+      ],
+    );
+  }
 
-  return DataGridRowAdapter(
-    color:Colors.grey[100],
-    cells: [
-      _buildBorderedCell(_buildItemCell(product), isFirst: index == 0),
-      _buildBorderedCell(_buildTextCell(cellValues['price']), isFirst: index == 0),
-      _buildBorderedCell(_buildQtyCell(item), isFirst: index == 0),
-      _buildBorderedCell(_buildTextCell(cellValues['total']), isFirst: index == 0),
-      _buildBorderedCell(_buildDeleteButton(item), isFirst: index == 0),
-    ],
-  );
-}
-
-
-Widget _buildBorderedCell(Widget child, {required bool isFirst}) {
-  return Container(
-    alignment: Alignment.center,
-    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-    decoration: BoxDecoration(
-      border: Border(
-        top: isFirst ? const BorderSide(width: 1, color: Colors.grey) : BorderSide.none,
-        bottom: const BorderSide(width: 1, color: Colors.grey),
-      ),
-    ),
-    child: child,
-  );
-}
-
-
-  Widget _buildItemCell(Product product) => Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4.0),
-            child: Image.network(
-              product.image,
-              width: 50,
-              height: 50,
-              fit: BoxFit.cover,
-            ),
+  Widget _buildImageCell(CartItem item) => Container(
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(4.0),
+          child: Image.network(
+            item.product.image,
+            width: 50,
+            height: 50,
+            fit: BoxFit.cover,
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              product.name,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.w500),
-            ),
-          ),
-        ],
+        ),
       );
 
   Widget _buildQtyCell(CartItem item) => Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          IconButton(
-            icon: const Icon(Icons.remove),
-            onPressed: () => cubit.decrementQuantity(item),
-          ),
+          IconButton(icon: const Icon(Icons.remove), onPressed: () => cubit.decrementQuantity(item)),
           Text('${item.quantity}'),
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () => cubit.incrementQuantity(item),
-          ),
+          IconButton(icon: const Icon(Icons.add), onPressed: () => cubit.incrementQuantity(item)),
         ],
       );
+
+  
 
   Widget _buildDeleteButton(CartItem item) => IconButton(
         icon: const Icon(Icons.delete, color: Colors.red),
         onPressed: () => cubit.removeFromCart(item),
       );
 
-  Widget _buildTextCell(String text) => Text(
-        text,
-        style: const TextStyle(fontWeight: FontWeight.w400),
-        textAlign: TextAlign.center,
+  Widget _buildTextCell(String text, {Alignment alignment = Alignment.center}) => Container(
+        alignment: alignment,
+        padding: const EdgeInsets.all(8.0),
+        child: Text(text, overflow: TextOverflow.ellipsis),
       );
 }
