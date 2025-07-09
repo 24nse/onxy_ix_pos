@@ -25,7 +25,9 @@ class OrderSummarySection extends StatelessWidget {
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      AppLocalizations.of(context)?.translate('order_summary') ??
+                      AppLocalizations.of(
+                            context,
+                          )?.translate('order_summary') ??
                           'Order Summary',
                       style: AppStyles.textStyle20,
                     ),
@@ -42,14 +44,16 @@ class OrderSummarySection extends StatelessWidget {
             const SizedBox(height: 16),
             Expanded(
               flex: 2,
-              child:mockProducts.isEmpty? Center(
-                child: Text(
-                  AppLocalizations.of(
-                        context,
-                      )?.translate('your_cart_is_empty') ??
-                      'Your cart is empty',
-                ),
-              ):CartList(),
+              child: mockProducts.isEmpty
+                  ? Center(
+                      child: Text(
+                        AppLocalizations.of(
+                              context,
+                            )?.translate('your_cart_is_empty') ??
+                            'Your cart is empty',
+                      ),
+                    )
+                  : CartList(),
             ),
           ],
         ),
