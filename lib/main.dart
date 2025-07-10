@@ -8,6 +8,7 @@ import 'package:onyx_ix_pos/core/localization/locale_cubit.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view/home_screen.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/payment_cubit.dart';
 
 void main() {
   runApp(const OnyxIxPosApp());
@@ -27,6 +28,9 @@ class OnyxIxPosApp extends StatelessWidget {
         ),
            BlocProvider(
           create: (_) => CartCubit(),
+        ),
+             BlocProvider(
+          create: (_) => PaymentCubit(),
         ),
       ],
       child: BlocBuilder<ThemeCubit, bool>(

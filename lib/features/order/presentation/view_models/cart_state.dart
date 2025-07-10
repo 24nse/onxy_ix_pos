@@ -2,8 +2,14 @@ import 'package:onyx_ix_pos/features/home/domain/entities/cart_item.dart';
 
 class CartState {
   final List<CartItem> items;
+  final String paymentInput;
+  final double amountPaid;
 
-  CartState({required this.items});
+  CartState({
+    required this.paymentInput,
+    required this.amountPaid,
+    required this.items,
+  });
 
   double get subtotal =>
       items.fold(0, (sum, item) => sum + (item.product.price * item.quantity));
@@ -17,11 +23,20 @@ class CartState {
 
   double get grandTotal => subtotalAfterDiscount + taxAmount;
 
+  double get remainingAmount => grandTotal - amountPaid;
+  double get change =>
+      (amountPaid > grandTotal) ? amountPaid - grandTotal : 0.0;
+  bool get isPaidInFull => remainingAmount <= 0 && items.isNotEmpty;
+
   CartState copyWith({
     List<CartItem>? items,
     String? paymentInput,
     double? amountPaid,
   }) {
-    return CartState(items: items ?? this.items);
+    return CartState(
+      items: items ?? this.items,
+      paymentInput: paymentInput ?? this.paymentInput,
+      amountPaid: amountPaid ?? this.amountPaid,
+    );
   }
 }

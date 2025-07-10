@@ -11,9 +11,12 @@ import 'package:onyx_ix_pos/features/home/presentation/view/widgets/language_men
 import 'package:onyx_ix_pos/features/order/presentation/views/order_summary_section.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view/widgets/product_catalog_section.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
+  
+
 
   @override
   Widget build(BuildContext context) {
