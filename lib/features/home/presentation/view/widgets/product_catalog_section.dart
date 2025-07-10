@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
 import 'package:onyx_ix_pos/features/home/data/local/mock_products.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view/widgets/category_tabs.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view/widgets/product_card.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view/widgets/search_bar_from_field.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
-
 
 class ProductCatalogSection extends StatefulWidget {
   const ProductCatalogSection({super.key});
@@ -31,14 +31,14 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
   @override
   Widget build(BuildContext context) {
     final filteredProducts = mockProducts.where((product) {
-      final matchesSearchTerm = _searchTerm.isEmpty ||
+      final matchesSearchTerm =
+          _searchTerm.isEmpty ||
           product.name.toLowerCase().contains(_searchTerm);
-      final matchesCategory = _selectedCategory == 'All' ||
-          product.category.toLowerCase() ==
-              _selectedCategory.toLowerCase();
+      final matchesCategory =
+          _selectedCategory == 'All' ||
+          product.category.toLowerCase() == _selectedCategory.toLowerCase();
       return matchesSearchTerm && matchesCategory;
     }).toList();
-
 
     return Card(
       margin: const EdgeInsets.all(16.0),
@@ -48,7 +48,10 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
               child: FormBuilder(
                 key: _formKey,
                 child: SearchBarFromField(
@@ -63,11 +66,15 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
               child: Text(
-                AppLocalizations.of(context)?.translate('product_catalog') ?? 'Product Catalog',
-                style: AppStyles.textStyle16),
-              
+                AppLocalizations.of(context)?.translate('product_catalog') ??
+                    'Product Catalog',
+                style: AppStyles.textStyle16,
+              ),
             ),
             CategoryTabs(
               categories: [...categories],
@@ -80,7 +87,7 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0,),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -98,21 +105,14 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
                         itemBuilder: (context, index) {
                           return ProductCard(
                             product: filteredProducts[index],
-                           onAddToCart: () {
-                    context.read<CartCubit>().addToCart(filteredProducts[index]);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          AppLocalizations.of(
-                                context,
-                              )?.translate('item_added_to_cart_successfully') ??
-                              'Item added to cart successfully.',
-                        ),
-                        duration: const Duration(seconds: 1),
-                      ),
-                    );
-                  },
-                            );
+                            onAddToCart: () {
+                              context.read<CartCubit>().addToCart(
+                                filteredProducts[index],
+                              );
+
+                              showCustomToast(context);
+                            },
+                          );
                         },
                       ),
                     ),
