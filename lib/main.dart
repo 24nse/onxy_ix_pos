@@ -37,20 +37,24 @@ class OnyxIxPosApp extends StatelessWidget {
         builder: (context, isDarkMode) {
           return BlocBuilder<LocaleCubit, Locale>(
             builder: (context, locale) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                theme: AppTheme.lightTheme,
-                darkTheme: AppTheme.darkTheme,
-                themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-                localizationsDelegates: [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                locale: locale,
-                supportedLocales: const [Locale('en', ''), Locale('ar', '')],
-                home: HomeScreen(),
+              return Builder(
+                builder: (context) {
+                  return MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    theme: AppTheme.lightTheme(context),
+                    darkTheme: AppTheme.darkTheme(context),
+                    themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+                    localizationsDelegates: const [
+                      AppLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    locale: locale,
+                    supportedLocales: const [Locale('en', ''), Locale('ar', '')],
+                    home: HomeScreen(),
+                  );
+                }
               );
             },
           );

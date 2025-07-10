@@ -3,17 +3,17 @@ import 'app_colors.dart';
 import 'app_styles.dart';
 
 class AppTheme {
-  static ThemeData get lightTheme {
+  static ThemeData lightTheme(BuildContext context) {
     return ThemeData(
       primaryColor: AppColors.primaryLight,
       scaffoldBackgroundColor: AppColors.backgroundLight,
       cardColor: AppColors.cardLight,
       textTheme: TextTheme(
-        displayLarge: AppStyles.textStyle24.copyWith(color: AppColors.textPrimaryLight),
-        displayMedium: AppStyles.textStyle20.copyWith(color: AppColors.textPrimaryLight),
-        bodyLarge: AppStyles.textStyle16.copyWith(color: AppColors.textPrimaryLight),
-        labelLarge: AppStyles.textStyle16Bold,
-        bodySmall: AppStyles.textStyle12.copyWith(color: AppColors.textSecondaryLight),
+        displayLarge: AppStyles.textStyle24(context).copyWith(color: AppColors.textPrimaryLight),
+        displayMedium: AppStyles.textStyle20(context).copyWith(color: AppColors.textPrimaryLight),
+        bodyLarge: AppStyles.textStyle16(context).copyWith(color: AppColors.textPrimaryLight),
+        labelLarge: AppStyles.textStyle16Bold(context),
+        bodySmall: AppStyles.textStyle12(context).copyWith(color: AppColors.textSecondaryLight),
       ),
       colorScheme: const ColorScheme.light(
         primary: AppColors.primaryLight,
@@ -26,7 +26,7 @@ class AppTheme {
         color: AppColors.primaryLight,
         elevation: 0,
         iconTheme: const IconThemeData(color: AppColors.white),
-        titleTextStyle: AppStyles.textStyle20.copyWith(color: AppColors.white),
+        titleTextStyle: AppStyles.textStyle20(context).copyWith(color: AppColors.white),
       ),
       buttonTheme: const ButtonThemeData(
         buttonColor: AppColors.primaryLight,
@@ -35,17 +35,17 @@ class AppTheme {
     );
   }
 
-  static ThemeData get darkTheme {
+  static ThemeData darkTheme(BuildContext context) {
     return ThemeData(
       primaryColor: AppColors.primaryDark,
       scaffoldBackgroundColor: AppColors.backgroundDark,
       cardColor: AppColors.cardDark,
       textTheme: TextTheme(
-        displayLarge: AppStyles.textStyle24.copyWith(color: AppColors.textPrimaryDark),
-        displayMedium: AppStyles.textStyle20.copyWith(color: AppColors.textPrimaryDark),
-        bodyLarge: AppStyles.textStyle16.copyWith(color: AppColors.textPrimaryDark),
-        labelLarge: AppStyles.textStyle16Bold,
-        bodySmall: AppStyles.textStyle12.copyWith(color: AppColors.textSecondaryDark),
+        displayLarge: AppStyles.textStyle24(context).copyWith(color: AppColors.textPrimaryDark),
+        displayMedium: AppStyles.textStyle20(context).copyWith(color: AppColors.textPrimaryDark),
+        bodyLarge: AppStyles.textStyle16(context).copyWith(color: AppColors.textPrimaryDark),
+        labelLarge: AppStyles.textStyle16Bold(context),
+        bodySmall: AppStyles.textStyle12(context).copyWith(color: AppColors.textSecondaryDark),
       ),
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primaryDark,
@@ -58,7 +58,7 @@ class AppTheme {
         color: AppColors.primaryDark,
         elevation: 0,
         iconTheme: const IconThemeData(color: AppColors.white),
-        titleTextStyle: AppStyles.textStyle24.copyWith(color: AppColors.white),
+        titleTextStyle: AppStyles.textStyle24(context).copyWith(color: AppColors.white),
       ),
       buttonTheme: const ButtonThemeData(
         buttonColor: AppColors.primaryDark,

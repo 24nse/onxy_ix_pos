@@ -5,6 +5,7 @@ import 'package:onyx_ix_pos/core/utils/functions/key_action.dart';
 import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/payment_cubit.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 
 class PaymentCalculatorSection extends HookWidget {
   const PaymentCalculatorSection({super.key});
@@ -35,8 +36,8 @@ class PaymentCalculatorSection extends HookWidget {
                     ),
                     child: Text(
                       state,
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: getResponsiveFontSize(context, fontSize: 14),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -160,7 +161,7 @@ class PaymentCalculatorSection extends HookWidget {
             const SizedBox(height: 16),
             _buildCalcButtonWidget(
               context,
-              const Text('Payment', style: TextStyle(fontSize: 18)),
+              Text('Payment', style: TextStyle(fontSize: getResponsiveFontSize(context, fontSize: 18))),
               () {
                 final payment = context.read<PaymentCubit>().state;
                 context.read<CartCubit>().updatePaymentInput(payment);
@@ -191,7 +192,7 @@ class PaymentCalculatorSection extends HookWidget {
         alignment: Alignment.center,
         child: Text(
           text,
-          style: const TextStyle(fontSize: 18, color: Colors.black),
+          style: TextStyle(fontSize: getResponsiveFontSize(context, fontSize: 18), color: Colors.black),
         ),
       ),
     );

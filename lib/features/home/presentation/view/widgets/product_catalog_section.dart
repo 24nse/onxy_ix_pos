@@ -73,7 +73,7 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
               child: Text(
                 AppLocalizations.of(context)?.translate('product_catalog') ??
                     'Product Catalog',
-                style: AppStyles.textStyle16,
+                style: AppStyles.textStyle16(context),
               ),
             ),
             CategoryTabs(

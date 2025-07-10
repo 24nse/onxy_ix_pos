@@ -15,7 +15,15 @@ class CartList extends HookWidget {
     return GridColumn(
       columnName: name,
       label: Center(
-        child: FittedBox(fit: BoxFit.scaleDown, child: Text(label, style: TextStyle(fontSize: getResponsiveFontSize(context, fontSize: 14)))),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: getResponsiveFontSize(context, fontSize: 14),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -28,6 +36,7 @@ class CartList extends HookWidget {
           source: OrderDataGridSource(
             cartItems: state.items,
             cubit: context.read<CartCubit>(),
+            context: context,
           ),
           rowHeight: 65,
           headerRowHeight: state.items.isEmpty ? 0 : 40,

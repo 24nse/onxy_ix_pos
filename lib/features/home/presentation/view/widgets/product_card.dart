@@ -3,6 +3,7 @@ import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
 import 'package:onyx_ix_pos/features/home/domain/entities/product.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product, required this.onAddToCart});
@@ -40,16 +41,16 @@ class ProductCard extends StatelessWidget {
               children: [
                 Text(
                   product.name,
-                  style: AppStyles.textStyle16.copyWith(
+                  style: AppStyles.textStyle16(context).copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(product.category, style: AppStyles.textStyle12),
+                Text(product.category, style: AppStyles.textStyle12(context)),
                 const SizedBox(height: 8),
                 Text(
                   '\$${product.price.toStringAsFixed(2)}',
-                  style: AppStyles.textStyle16.copyWith(
+                  style: AppStyles.textStyle16(context).copyWith(
                     fontWeight: FontWeight.bold,
                     
                     color:Colors.blue.shade700,
@@ -79,8 +80,8 @@ class ProductCard extends StatelessWidget {
                             ),
                             backgroundColor: AppColors.secondaryLight,
                             foregroundColor: Colors.white,
-                            textStyle: AppStyles.textStyle16Bold.copyWith(
-                              fontSize: 12,
+                            textStyle: AppStyles.textStyle16Bold(context).copyWith(
+                              fontSize: getResponsiveFontSize(context, fontSize: 12),
                             ),
                           ),
                         ),
