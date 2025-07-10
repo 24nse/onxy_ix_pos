@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
@@ -69,13 +70,24 @@ class OrderSummarySection extends StatelessWidget {
                 if (state.items.isEmpty) {
                   return const SizedBox.shrink();
                 }
-                return const Column(
+                return  Column(
                   children: [
                     OrderCalculationSection(),
                     SizedBox(height: 16),
                     PaymentDetailsSection(),
                     SizedBox(height: 16),
-                    ProceedToCheckoutButton(),
+                    ProceedToCheckoutButton(
+                      onPressed: () {
+                        context.read<CartCubit>().clearCart();
+                        showCustomToast(context,
+                          message: AppLocalizations.of(
+                                context,
+                              )?.translate('order_completed') ??
+                              'Order completed',
+                        );
+
+                      },
+                    ),
                   ],
                 );
               },
