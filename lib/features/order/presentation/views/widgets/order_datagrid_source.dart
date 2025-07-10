@@ -38,55 +38,94 @@ class OrderDataGridSource extends DataGridSource {
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
     final item = row.getCells().first.value as CartItem;
+    final rowIndex = _cartItems.indexOf(row);
+    final isFirstRow = rowIndex == 0;
+      final rowBorder = BoxDecoration(
+    border: Border(
+      top: isFirstRow ? const BorderSide(color: Colors.grey, width: 0.5) : BorderSide.none,
+      bottom: const BorderSide(color: Colors.grey, width: 0.5),
+    ),
+    // color: Colors.grey[100], 
+
+    
+  );
     return DataGridRowAdapter(
-      color: Colors.grey[100],
+      // color: Colors.grey[100],
       cells: [
-        _buildImageCell(item),
-        _buildTextCell(item.product.name, alignment: Alignment.centerLeft),
-        _buildTextCell('\$${item.product.price.toStringAsFixed(2)}'),
-        _buildQtyCell(item),
-        _buildTextCell('${item.discountPercent.toStringAsFixed(0)}%'),
-        _buildTextCell('\$${item.discountAmount.toStringAsFixed(2)}'),
-        _buildTextCell('${item.taxPercent.toStringAsFixed(0)}%'),
-        _buildTextCell('\$${item.taxAmount.toStringAsFixed(2)}'),
-        _buildTextCell('\$${item.total.toStringAsFixed(2)}'),
-        _buildDeleteButton(item),
+        _buildBorder( _buildImageCell(item), rowBorder),
+        _buildBorder(_buildTextCell(item.product.name, alignment: Alignment.centerLeft),rowBorder),
+        _buildBorder(_buildTextCell('\$${item.product.price.toStringAsFixed(2)}'),rowBorder),
+       _buildBorder( _buildQtyCell(item), rowBorder),
+        _buildBorder(_buildTextCell('${item.discountPercent.toStringAsFixed(0)}%'), rowBorder),
+       _buildBorder( _buildTextCell('\$${item.discountAmount.toStringAsFixed(2)}'), rowBorder),
+        _buildBorder(_buildTextCell('${item.taxPercent.toStringAsFixed(0)}%'), rowBorder),
+        _buildBorder(_buildTextCell('\$${item.taxAmount.toStringAsFixed(2)}'),rowBorder),
+       _buildBorder( _buildTextCell('\$${item.total.toStringAsFixed(2)}'),rowBorder),
+      _buildBorder(  _buildDeleteButton(item), rowBorder),
       ],
     );
   }
 
   Widget _buildImageCell(CartItem item) => Container(
-        padding: const EdgeInsets.all(8.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(4.0),
-          child: Image.network(
-            item.product.image,
-            width: 50,
-            height: 50,
-            fit: BoxFit.cover,
-          ),
-        ),
-      );
+    padding: const EdgeInsets.all(8.0),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(4.0),
+      child: Image.network(
+        item.product.image,
+        width: 50,
+        height: 50,
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
 
   Widget _buildQtyCell(CartItem item) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(icon: const Icon(Icons.remove), onPressed: () => cubit.decrementQuantity(item)),
-          Text('${item.quantity}'),
-          IconButton(icon: const Icon(Icons.add), onPressed: () => cubit.incrementQuantity(item)),
-        ],
-      );
-
-  
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Container(
+        height: 30,
+        width: 30,
+        padding: EdgeInsets.zero,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 0.1),
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        child: IconButton(
+          icon: const Icon(Icons.remove, size: 15),
+          onPressed: () => cubit.decrementQuantity(item),
+        ),
+      ),
+      FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text('${item.quantity}')),
+      IconButton(
+        icon: const Icon(Icons.add, size: 10),
+        onPressed: () => cubit.incrementQuantity(item),
+      ),
+    ],
+  );
 
   Widget _buildDeleteButton(CartItem item) => IconButton(
-        icon: const Icon(Icons.delete, color: Colors.red),
-        onPressed: () => cubit.removeFromCart(item),
-      );
+    icon: const Icon(Icons.delete, color: Colors.red),
+    onPressed: () => cubit.removeFromCart(item),
+  );
 
-  Widget _buildTextCell(String text, {Alignment alignment = Alignment.center}) => Container(
-        alignment: alignment,
-        padding: const EdgeInsets.all(8.0),
-        child: Text(text, overflow: TextOverflow.ellipsis),
-      );
+  Widget _buildTextCell(
+    String text, {
+    Alignment alignment = Alignment.center,
+  }) => Container(
+    alignment: alignment,
+    padding: const EdgeInsets.all(8.0),
+    child: Text(text, overflow: TextOverflow.ellipsis,style: TextStyle(
+      fontSize: 10
+    ),),
+  );
+}
+
+Widget _buildBorder(Widget child, BoxDecoration decoration) {
+  return Container(
+    decoration: decoration,
+      child: child,
+    
+  );
 }

@@ -17,84 +17,86 @@ class OrderSummarySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(16.0),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return LayoutBuilder(
+      builder: (context,constrain) {
+        return Card(
+          margin: const EdgeInsets.all(16.0),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      AppLocalizations.of(
-                            context,
-                          )?.translate('order_summary') ??
-                          'Order Summary',
-                      style: AppStyles.textStyle20,
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.fullscreen),
-                  onPressed: () {
-                    context.read<FullScreenCubit>().toggleFullScreen();
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: BlocBuilder<CartCubit, CartState>(
-                builder: (context, state) {
-                  return state.items.isEmpty
-                      ? Center(
-                          child: Text(
-                            AppLocalizations.of(
-                                  context,
-                                )?.translate('your_cart_is_empty') ??
-                                'Your cart is empty',
-                          ),
-                        )
-                      : const CartList();
-                },
-              ),
-            ),
-            const SizedBox(height: 16),
-            BlocBuilder<CartCubit, CartState>(
-              builder: (context, state) {
-                if (state.items.isEmpty) {
-                  return const SizedBox.shrink();
-                }
-                return  Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    OrderCalculationSection(),
-                    SizedBox(height: 16),
-                    PaymentDetailsSection(),
-                    SizedBox(height: 16),
-                    ProceedToCheckoutButton(
-                      onPressed: () {
-                        context.read<CartCubit>().clearCart();
-                        showCustomToast(context,
-                          message: AppLocalizations.of(
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          AppLocalizations.of(
                                 context,
-                              )?.translate('order_completed') ??
-                              'Order completed',
-                        );
-
+                              )?.translate('order_summary') ??
+                              'Order Summary',
+                          style: AppStyles.textStyle20,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.fullscreen),
+                      onPressed: () {
+                        context.read<FullScreenCubit>().toggleFullScreen();
                       },
                     ),
                   ],
-                );
-              },
+                ),
+                const SizedBox(height: 16),
+                Expanded(
+                  child: BlocBuilder<CartCubit, CartState>(
+                    builder: (context, state) {
+                      return state.items.isEmpty
+                          ? Center(
+                              child: Text(
+                                AppLocalizations.of(
+                                      context,
+                                    )?.translate('your_cart_is_empty') ??
+                                    'Your cart is empty',
+                              ),
+                            )
+                          : Column(
+                            children: [
+                              ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxHeight: 200
+                                ),
+                                child: const CartList()),
+                               OrderCalculationSection(),
+                               SizedBox(height: 16),
+                               PaymentDetailsSection(),
+                               SizedBox(height: 16),
+                               ProceedToCheckoutButton(
+                                 onPressed: () {
+                                   context.read<CartCubit>().clearCart();
+                                   showCustomToast(context,
+                                     message: AppLocalizations.of(
+                                                               context,
+                                                             )?.translate('order_completed') ??
+                                                             'Order completed',
+                                   );
+                                                          
+                                 },
+                               ),
+                            ],
+                          );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 16),
+              
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 }
