@@ -24,7 +24,7 @@ class PaymentCalculatorSection extends HookWidget {
                 Expanded(
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    height: 40,
+                    height: MediaQuery.of(context).size.height * 0.04,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
                       // vertical: 16,
@@ -50,13 +50,15 @@ class PaymentCalculatorSection extends HookWidget {
                   child: Container(
                     alignment: Alignment.center,
 
-                    height: 40,
+                   height: MediaQuery.of(context).size.height * 0.04,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Icon(Icons.backspace_outlined, color: Colors.black),
+                    child: Center(child: Icon(
+                      
+                      Icons.backspace_outlined, color: Colors.black,size: 20,)),
                   ),
                 ),
               ],
@@ -136,6 +138,7 @@ class PaymentCalculatorSection extends HookWidget {
                   () => context.read<PaymentCubit>().onKeyPressed(DecimalKey()),
                 ),
                 ElevatedButton(
+                  
                   onPressed: () =>
                       context.read<PaymentCubit>().onKeyPressed(ClearKey()),
                   style: ElevatedButton.styleFrom(
@@ -145,10 +148,11 @@ class PaymentCalculatorSection extends HookWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  child: Icon(
-                    Icons.backspace_outlined,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    size: 24,
+                  child: Center(
+                    child: Icon(
+                      Icons.backspace_outlined,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ],
@@ -182,9 +186,13 @@ class PaymentCalculatorSection extends HookWidget {
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 18, color: Colors.black),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 18, color: Colors.black),
+        ),
       ),
     );
   }
