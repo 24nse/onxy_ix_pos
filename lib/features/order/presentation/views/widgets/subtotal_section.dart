@@ -70,7 +70,7 @@ class SubtotalSection extends StatelessWidget {
             child: Text(
               amount,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: getResponsiveFontSize(context, fontSize: 14),
                 fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
                 color: color,
               ),

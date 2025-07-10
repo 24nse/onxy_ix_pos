@@ -14,10 +14,7 @@ class OrderCalculationSection extends StatelessWidget {
       children: [
         Expanded(flex: 2, child: SubtotalSection()),
         const SizedBox(width: 20),
-        Expanded(
-          flex: 3,
-          child: PaymentCalculatorSection(),
-        ),
+        Expanded(flex: 3, child: PaymentCalculatorSection()),
       ],
     );
   }

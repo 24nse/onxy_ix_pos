@@ -37,7 +37,7 @@ class OrderSummarySection extends StatelessWidget {
                                 context,
                               )?.translate('order_summary') ??
                               'Order Summary',
-                          style: AppStyles.textStyle20,
+                          style: AppStyles.textStyle20(context),
                         ),
                       ),
                     ),

@@ -22,28 +22,41 @@ class PaymentDetailsSection extends StatelessWidget {
               Text(
                 'Payment Details:',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: getResponsiveFontSize(context, fontSize: 16)),
+                  fontWeight: FontWeight.bold,
+                  fontSize: getResponsiveFontSize(context, fontSize: 16),
+                ),
               ),
               const SizedBox(height: 8),
               Expanded(
                 flex: 2,
-                child: _buildDetailRow(context, 'Amount Paid:', '\$${state.amountPaid.toStringAsFixed(2)}')),
+                child: _buildDetailRow(
+                  context,
+                  'Amount Paid:',
+                  '\$${state.amountPaid.toStringAsFixed(2)}',
+                ),
+              ),
               Expanded(
                 flex: 1,
                 child: _buildDetailRow(
-                    context, 'Remaining:', '\$${state.remainingAmount.toStringAsFixed(2)}',
-                    isRemaining: true),
+                  context,
+                  'Remaining:',
+                  '\$${state.remainingAmount.toStringAsFixed(2)}',
+                  isRemaining: true,
+                ),
               ),
               if (state.amountPaid > 0)
                 _buildClearPaymentButtonWidget(
                   context,
                   FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text('Clear All Payments',
-                          style: TextStyle(
-                              fontSize: getResponsiveFontSize(context, fontSize: 12),
-                              color: Colors.black))),
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'Clear All Payments',
+                      style: TextStyle(
+                        fontSize: getResponsiveFontSize(context, fontSize: 12),
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                   () {
                     context.read<CartCubit>().clearPayment();
                   },
@@ -55,8 +68,12 @@ class PaymentDetailsSection extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailRow(BuildContext context, String title, String value,
-      {bool isRemaining = false}) {
+  Widget _buildDetailRow(
+    BuildContext context,
+    String title,
+    String value, {
+    bool isRemaining = false,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -86,6 +103,7 @@ class PaymentDetailsSection extends StatelessWidget {
     );
   }
 }
+
 Widget _buildClearPaymentButtonWidget(
   BuildContext context,
   Widget child,
@@ -96,13 +114,15 @@ Widget _buildClearPaymentButtonWidget(
       SizedBox(
         child: ElevatedButton(
           onPressed: onPressed,
-        
+
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.symmetric(horizontal: 16),
             minimumSize: const Size(200, 30),
             backgroundColor: Color.fromARGB(255, 204, 201, 201),
             foregroundColor: Theme.of(context).colorScheme.onPrimary,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
           ),
           child: child,
         ),
