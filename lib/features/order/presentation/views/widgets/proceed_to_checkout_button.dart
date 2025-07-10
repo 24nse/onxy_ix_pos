@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 
 class ProceedToCheckoutButton extends StatelessWidget {
   const ProceedToCheckoutButton({super.key, this.onPressed});
@@ -18,9 +19,9 @@ final void Function()? onPressed;
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          child: const Text(
+          child: Text(
             'Proceed to Checkout',
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: TextStyle(color: Colors.white, fontSize: getResponsiveFontSize(context, fontSize: 16)),
           ),
         ),
       ),
