@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
 
 class PaymentDetailsSection extends StatelessWidget {
@@ -11,29 +12,42 @@ class PaymentDetailsSection extends StatelessWidget {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         return Container(
+          height: MediaQuery.of(context).size.height * 0.15,
+          width: double.infinity,
           color: Colors.green[50],
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Payment Details:',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: getResponsiveFontSize(context, fontSize: 16)),
               ),
               const SizedBox(height: 8),
-              _buildDetailRow('Amount Paid:', '\$${state.amountPaid.toStringAsFixed(2)}'),
-              _buildDetailRow('Remaining:', '\$${state.remainingAmount.toStringAsFixed(2)}',
-                  isRemaining: true),
-
-           if(state.amountPaid>0)
-             _buildClearPaymentButtonWidget(
-              context,
-              const Text('Clear All Payments'),
-              () {
-              context.read<CartCubit>().clearPayment();
-              },
-            ),
-           
+              Expanded(
+                flex: 2,
+                child: _buildDetailRow(context, 'Amount Paid:', '\$${state.amountPaid.toStringAsFixed(2)}')),
+              Expanded(
+                flex: 1,
+                child: _buildDetailRow(
+                    context, 'Remaining:', '\$${state.remainingAmount.toStringAsFixed(2)}',
+                    isRemaining: true),
+              ),
+              if (state.amountPaid > 0)
+                _buildClearPaymentButtonWidget(
+                  context,
+                  FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text('Clear All Payments',
+                          style: TextStyle(
+                              fontSize: getResponsiveFontSize(context, fontSize: 12),
+                              color: Colors.black))),
+                  () {
+                    context.read<CartCubit>().clearPayment();
+                  },
+                ),
             ],
           ),
         );
@@ -41,22 +55,31 @@ class PaymentDetailsSection extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailRow(String title, String value, {bool isRemaining = false}) {
+  Widget _buildDetailRow(BuildContext context, String title, String value,
+      {bool isRemaining = false}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            color: isRemaining ? Colors.red : Colors.black,
-            fontWeight: isRemaining ? FontWeight.bold : FontWeight.normal,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: getResponsiveFontSize(context, fontSize: 14),
+              color: isRemaining ? Colors.red : Colors.black,
+              fontWeight: isRemaining ? FontWeight.bold : FontWeight.normal,
+            ),
           ),
         ),
-        Text(
-          value,
-          style: TextStyle(
-            color: isRemaining ? Colors.red : Colors.black,
-            fontWeight: FontWeight.bold,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            value,
+            style: TextStyle(
+              fontSize: getResponsiveFontSize(context, fontSize: 14),
+              color: isRemaining ? Colors.red : Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
@@ -70,11 +93,13 @@ Widget _buildClearPaymentButtonWidget(
 ) {
   return Row(
     children: [
-      Expanded(
+      SizedBox(
         child: ElevatedButton(
           onPressed: onPressed,
         
           style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            minimumSize: const Size(200, 30),
             backgroundColor: Color.fromARGB(255, 204, 201, 201),
             foregroundColor: Theme.of(context).colorScheme.onPrimary,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
