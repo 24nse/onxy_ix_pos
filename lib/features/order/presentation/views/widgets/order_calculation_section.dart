@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/subtotal_section.dart';
+
+import 'payment_calculator_section.dart';
 
 class OrderCalculationSection extends StatelessWidget {
   const OrderCalculationSection({super.key});
@@ -11,18 +12,11 @@ class OrderCalculationSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Expanded(
-          flex: 2,
-          child: SubtotalSection(),
-        ),
+        Expanded(flex: 2, child: SubtotalSection()),
         const SizedBox(width: 20),
         Expanded(
           flex: 3,
-          child: Container(
-            color: Colors.blue[400],
-            height: 150,
-
-          ),
+          child: PaymentCalculatorSection(),
         ),
       ],
     );

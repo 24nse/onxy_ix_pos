@@ -18,8 +18,9 @@ class SubtotalSection extends StatelessWidget {
                 '\$${state.subtotalAfterDiscount.toStringAsFixed(2)}'),
             _buildSummaryRow(
                 'Tax (10%)', '\$${state.taxAmount.toStringAsFixed(2)}'),
-            const Divider(height: 20, thickness: 1),
+            const Divider(height: 5, thickness: 0.1),
             _buildSummaryRow(
+              color: Color(0xFF3B5998),
                 'Grand Total', '\$${state.grandTotal.toStringAsFixed(2)}',
                 isTotal: true),
           ],
@@ -28,7 +29,7 @@ class SubtotalSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSummaryRow(String title, String amount, {bool isTotal = false}) {
+  Widget _buildSummaryRow(String title, String amount, {bool isTotal = false, Color color = Colors.black}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
@@ -39,6 +40,7 @@ class SubtotalSection extends StatelessWidget {
             style: TextStyle(
               fontSize: isTotal ? 18 : 14,
               fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
+              color: color
             ),
           ),
           Text(
@@ -46,6 +48,7 @@ class SubtotalSection extends StatelessWidget {
             style: TextStyle(
               fontSize: isTotal ? 18 : 14,
               fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
+              color: color,
             ),
           ),
         ],
