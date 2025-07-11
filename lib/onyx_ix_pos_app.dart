@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:onyx_ix_pos/service_locator.dart';
+import 'package:onyx_ix_pos/core/utils/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';

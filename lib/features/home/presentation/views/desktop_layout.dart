@@ -11,10 +11,10 @@ class DesktopLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FullScreenCubit, bool>(
       builder: (context, state) {
-        return state?OrderSummarySection(): Row(
+        return state?const OrderSummarySection(): Row(
           children: [
-            Expanded(flex: 4, child: ProductCatalogSection()),
-            Expanded(flex: 4, child: OrderSummarySection()),
+            Expanded(flex: 4, child:const ProductCatalogSection()),
+            Expanded(flex: 4, child:const OrderSummarySection()),
           ],
         );
       },
