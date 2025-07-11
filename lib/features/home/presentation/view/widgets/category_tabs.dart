@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
-import 'package:onyx_ix_pos/core/utils/responsive.dart';
+import 'package:onyx_ix_pos/core/utils/adaptive_layout.dart';
 
 
 class CategoryTabs extends StatefulWidget {
@@ -30,7 +30,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
           color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(4),
         ),
-        child: Responsive(
+        child: AdaptiveLayout(
           mobile: _buildScrollableLayout(),
           tablet: _buildExpandedLayout(),
           desktop: _buildExpandedLayout(),

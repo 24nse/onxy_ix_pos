@@ -43,6 +43,7 @@ class CartList extends HookWidget {
           columnWidthMode: ColumnWidthMode.fill,
           gridLinesVisibility: GridLinesVisibility.none,
           headerGridLinesVisibility: GridLinesVisibility.none,
+          shrinkWrapRows: true,
           columns: <GridColumn>[
             _buildGridColumn(context, 'item', 'Item'),
             _buildGridColumn(context, 'product', 'Product'),
