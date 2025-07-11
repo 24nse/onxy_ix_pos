@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 
-import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
-import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_state.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/order_datagrid_source.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';

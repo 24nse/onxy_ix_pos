@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onyx_ix_pos/features/home/domain/entities/cart_item.dart';
+import 'package:onyx_ix_pos/features/order/domain/entities/cart_item.dart';
 import 'package:onyx_ix_pos/features/home/domain/entities/product.dart';
 
 import 'cart_state.dart';

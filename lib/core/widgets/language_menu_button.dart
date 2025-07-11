@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onyx_ix_pos/core/localization/locale_cubit.dart';
+import 'package:onyx_ix_pos/features/settings/presentation/cubits/locale_cubit.dart';
 import 'package:onyx_ix_pos/core/widgets/custom_hover_icon_container.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/widgets/hover_menu_item.dart';
+import 'package:onyx_ix_pos/core/widgets/hover_menu_item.dart';
 
 class LanguageMenuButton extends StatelessWidget {
   static const double _menuItemWidth = 5;

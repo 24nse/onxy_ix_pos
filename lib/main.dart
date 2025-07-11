@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_theme.dart';
-import 'package:onyx_ix_pos/core/utils/theme/theme_cubit.dart';
-import 'package:onyx_ix_pos/core/localization/locale_cubit.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/home_screen.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
-import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
-import 'package:onyx_ix_pos/features/order/presentation/view_models/payment_cubit.dart';
+import 'package:onyx_ix_pos/features/settings/presentation/cubits/theme_cubit.dart';
+import 'package:onyx_ix_pos/features/settings/presentation/cubits/locale_cubit.dart';
+import 'package:onyx_ix_pos/features/home/presentation/views/home_screen.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view_models/cubits/full_screen_cubit.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/payment_cubit.dart';
 
 void main() {
   runApp(const OnyxIxPosApp());

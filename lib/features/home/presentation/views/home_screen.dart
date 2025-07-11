@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
-import 'package:onyx_ix_pos/core/utils/theme/theme_cubit.dart';
+import 'package:onyx_ix_pos/features/settings/presentation/cubits/theme_cubit.dart';
 import 'package:onyx_ix_pos/core/widgets/custom_hover_icon_container.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
-import 'package:onyx_ix_pos/core/utils/adaptive_layout.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/widgets/desktop_layout.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/widgets/mobile_layout.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/widgets/language_menu_button.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/widgets/screen_tabs.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/widgets/tablet_layout.dart';
-import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
+import 'package:onyx_ix_pos/core/widgets/adaptive_layout.dart';
+import 'package:onyx_ix_pos/features/home/presentation/views/desktop_layout.dart';
+import 'package:onyx_ix_pos/features/home/presentation/views/mobile_layout.dart';
+import 'package:onyx_ix_pos/core/widgets/language_menu_button.dart';
+import 'package:onyx_ix_pos/features/home/presentation/views/widgets/screen_tabs.dart';
+import 'package:onyx_ix_pos/features/home/presentation/views/tablet_layout.dart';
+import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});

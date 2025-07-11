@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
-import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
+import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
 import 'package:onyx_ix_pos/features/home/data/local/mock_products.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/widgets/category_tabs.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/widgets/product_card.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view/widgets/search_bar_from_field.dart';
-import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
+import 'package:onyx_ix_pos/features/home/presentation/views/widgets/category_tabs.dart';
+import 'package:onyx_ix_pos/features/home/presentation/views/widgets/product_card.dart';
+import 'package:onyx_ix_pos/core/widgets/search_bar_from_field.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
 
 class ProductCatalogSection extends StatefulWidget {
   const ProductCatalogSection({super.key});
