@@ -64,7 +64,7 @@ class HomeScreen extends HookWidget {
                 return const Row(
                   children: [
                     Expanded(flex: 4, child: ProductCatalogSection()),
-                    Expanded(flex: 3, child: OrderSummarySection()),
+                    Expanded(flex: 4, child: OrderSummarySection()),
                   ],
                 );
               }
