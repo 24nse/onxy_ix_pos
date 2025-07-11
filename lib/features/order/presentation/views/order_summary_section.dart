@@ -24,7 +24,7 @@ class OrderSummarySection extends StatelessWidget {
         return Card(
           margin: const EdgeInsets.only(
             top: 16,
-            left: 16,
+            left: 8,
             right: 16,
             bottom: 56,
           ),

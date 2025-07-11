@@ -11,7 +11,6 @@ import 'package:onyx_ix_pos/features/home/presentation/views/mobile_layout.dart'
 import 'package:onyx_ix_pos/core/widgets/language_menu_button.dart';
 import 'package:onyx_ix_pos/features/home/presentation/views/widgets/screen_tabs.dart';
 import 'package:onyx_ix_pos/features/home/presentation/views/tablet_layout.dart';
-import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
@@ -54,8 +53,8 @@ class HomeScreen extends HookWidget {
         ),
         body: AdaptiveLayout(
            mobileLayout: (context) =>const MobileLayout(),
-        tabletLayout: (context) =>TabletLayout(),
-        desktopLayout: (context) => DesktopLayout(),
+        tabletLayout: (context) =>const TabletLayout(),
+        desktopLayout: (context) =>const DesktopLayout(),
         ),
       ),
     );

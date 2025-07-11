@@ -42,7 +42,7 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
     }).toList();
 
     return Card(
-      margin: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.only(top: 16, bottom: 16, right: 8,left: 16),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
