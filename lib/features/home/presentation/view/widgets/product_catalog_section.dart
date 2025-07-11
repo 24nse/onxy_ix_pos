@@ -20,23 +20,24 @@ class ProductCatalogSection extends StatefulWidget {
 class _ProductCatalogSectionState extends State<ProductCatalogSection> {
   final _formKey = GlobalKey<FormBuilderState>();
   String _searchTerm = '';
-  final List<Map<String, dynamic>> categories = [
-    {'label': 'All', 'icon': Icons.list_alt_outlined},
-    {'label': 'Beverages', 'icon': Icons.local_cafe_outlined},
-    {'label': 'Snacks', 'icon': Icons.cookie_outlined},
-    {'label': 'Meals', 'icon': Icons.restaurant_outlined},
-  ];
 
-  String _selectedCategory = 'All';
+  String _selectedCategory = 'all';
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    final List<Map<String, dynamic>> categories = [
+      {'label': 'all', 'icon': Icons.list_alt_outlined},
+      {'label': 'beverages', 'icon': Icons.local_cafe_outlined},
+      {'label': 'snacks', 'icon': Icons.cookie_outlined},
+      {'label': 'meals', 'icon': Icons.restaurant_outlined},
+    ];
     final filteredProducts = mockProducts.where((product) {
       final matchesSearchTerm =
           _searchTerm.isEmpty ||
           product.name.toLowerCase().contains(_searchTerm);
       final matchesCategory =
-          _selectedCategory == 'All' ||
-          product.category.toLowerCase() == _selectedCategory.toLowerCase();
+          _selectedCategory == 'all' ||
+          product.category.toLowerCase() == _selectedCategory;
       return matchesSearchTerm && matchesCategory;
     }).toList();
 
@@ -56,7 +57,7 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
                 key: _formKey,
                 child: SearchBarFromField(
                   name: "Search",
-                  hintText: "Search products",
+                  hintText: localizations?.translate('search_products') ?? 'Search products',
                   onChanged: (value) {
                     setState(() {
                       _searchTerm = value?.toLowerCase() ?? '';

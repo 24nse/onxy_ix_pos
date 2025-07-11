@@ -43,10 +43,7 @@ class OrderSummarySection extends StatelessWidget {
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(
-                            AppLocalizations.of(
-                                  context,
-                                )?.translate('order_summary') ??
-                                'Order Summary',
+                            AppLocalizations.of(context)?.translate('order_summary') ?? 'Order Summary',
                             style: theme.textTheme.displayMedium,
                           ),
                         ),
@@ -67,10 +64,7 @@ class OrderSummarySection extends StatelessWidget {
                       return state.items.isEmpty
                           ? Center(
                               child: Text(
-                                AppLocalizations.of(
-                                      context,
-                                    )?.translate('your_cart_is_empty') ??
-                                    'Your cart is empty',
+                                AppLocalizations.of(context)?.translate('your_cart_is_empty') ?? 'Your cart is empty',
                                 style: theme.textTheme.bodyLarge?.copyWith(
                                     color: theme.colorScheme.onSurface
                                         .withOpacity(0.6)),

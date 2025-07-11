@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/functions/key_action.dart';
 import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
@@ -21,7 +22,11 @@ class PaymentCalculatorSection extends HookWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Enter Payment Amount:', style: textTheme.labelLarge),
+            Text(
+              AppLocalizations.of(context)?.translate('enter_payment_amount') ??
+                  'Enter Payment Amount:',
+              style: textTheme.labelLarge,
+            ),
             const SizedBox(height: 8),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,7 +161,7 @@ class PaymentCalculatorSection extends HookWidget {
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
-                    'add Payment',
+                    AppLocalizations.of(context)?.translate('add_payment') ?? 'add Payment',
                     style: textTheme.labelLarge?.copyWith(
                       color: colorScheme.onPrimary,
                     ),

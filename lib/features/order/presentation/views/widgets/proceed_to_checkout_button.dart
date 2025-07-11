@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 
 class ProceedToCheckoutButton extends StatelessWidget {
   const ProceedToCheckoutButton({super.key, this.onPressed});
@@ -21,7 +22,8 @@ class ProceedToCheckoutButton extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
-            'Proceed to Checkout',
+            AppLocalizations.of(context)?.translate('proceed_to_checkout') ??
+                'Proceed to Checkout',
             style: theme.textTheme.labelLarge?.copyWith(
               color: theme.colorScheme.onPrimary,
               fontWeight: FontWeight.bold,
