@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
-import 'package:onyx_ix_pos/core/utils/functions/key_action.dart';
-import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
-import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
-import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
-import 'package:onyx_ix_pos/features/order/presentation/view_models/payment_cubit.dart';
+import 'package:onyx_ix_pos/features/order/domain/entities/key_action.dart';
+import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view_models/cubits/full_screen_cubit.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/payment_cubit.dart';
 
 class PaymentCalculatorSection extends HookWidget {
   const PaymentCalculatorSection({super.key});

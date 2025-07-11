@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
-import 'package:onyx_ix_pos/core/utils/adaptive_layout.dart';
+import 'package:onyx_ix_pos/core/widgets/adaptive_layout.dart';
 
 class CategoryTabs extends StatefulWidget {
   final List<Map<String, dynamic>> categories;

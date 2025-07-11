@@ -1,4 +1,4 @@
-import 'package:onyx_ix_pos/features/home/domain/entities/cart_item.dart';
+import 'package:onyx_ix_pos/features/order/domain/entities/cart_item.dart';
 
 class CartState {
   final List<CartItem> items;

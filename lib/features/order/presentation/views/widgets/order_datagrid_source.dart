@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
-import 'package:onyx_ix_pos/features/home/domain/entities/cart_item.dart';
-import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
+import 'package:onyx_ix_pos/features/order/domain/entities/cart_item.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class OrderDataGridSource extends DataGridSource {
