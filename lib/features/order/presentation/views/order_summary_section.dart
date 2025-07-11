@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -7,7 +9,7 @@ import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
-import 'package:onyx_ix_pos/features/order/presentation/views/cart_list.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view/widgets/cart_list.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/order_calculation_section.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/payment_details_section.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/proceed_to_checkout_button.dart';
@@ -18,36 +20,44 @@ class OrderSummarySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context,constrain) {
+      builder: (context, constrain) {
         return Card(
-          margin: const EdgeInsets.all(16.0),
+          margin: const EdgeInsets.only(
+            top: 16,
+            left: 16,
+            right: 16,
+            bottom: 16,
+          ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          AppLocalizations.of(
-                                context,
-                              )?.translate('order_summary') ??
-                              'Order Summary',
-                          style: AppStyles.textStyle20(context),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            AppLocalizations.of(
+                                  context,
+                                )?.translate('order_summary') ??
+                                'Order Summary',
+                            style: AppStyles.textStyle20(context),
+                          ),
                         ),
                       ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.fullscreen),
-                      onPressed: () {
-                        context.read<FullScreenCubit>().toggleFullScreen();
-                      },
-                    ),
-                  ],
+                      IconButton(
+                        icon: const Icon(Icons.fullscreen),
+                        onPressed: () {
+                          context.read<FullScreenCubit>().toggleFullScreen();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Expanded(
@@ -63,40 +73,39 @@ class OrderSummarySection extends StatelessWidget {
                               ),
                             )
                           : Column(
-                            children: [
-                              ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  maxHeight: 200
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ConstrainedBox(
+                                  constraints: BoxConstraints(maxHeight: 170),
+                                  child: const CartList(),
                                 ),
-                                child: const CartList()),
-                               OrderCalculationSection(),
-                               SizedBox(height: 16),
-                               PaymentDetailsSection(),
-                               SizedBox(height: 16),
-                               ProceedToCheckoutButton(
-                                 onPressed: () {
-                                   context.read<CartCubit>().clearCart();
-                                   showCustomToast(context,
-                                     message: AppLocalizations.of(
-                                                               context,
-                                                             )?.translate('order_completed') ??
-                                                             'Order completed',
-                                   );
-                                                          
-                                 },
-                               ),
-                            ],
-                          );
+                                OrderCalculationSection(),
+                                SizedBox(height: 4),
+                                PaymentDetailsSection(),
+                                SizedBox(height: 4),
+                                ProceedToCheckoutButton(
+                                  onPressed: () {
+                                    context.read<CartCubit>().clearCart();
+                                    showCustomToast(
+                                      context,
+                                      message:
+                                          AppLocalizations.of(
+                                            context,
+                                          )?.translate('order_completed') ??
+                                          'Order completed',
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
                     },
                   ),
                 ),
-                const SizedBox(height: 16),
-              
               ],
             ),
           ),
         );
-      }
+      },
     );
   }
 }

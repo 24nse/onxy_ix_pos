@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/utils/functions/key_action.dart';
 import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/payment_cubit.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
@@ -12,19 +13,26 @@ class PaymentCalculatorSection extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return BlocBuilder<PaymentCubit, String>(
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('Enter Payment Amount:'),
+            Text(
+              'Enter Payment Amount:',
+              style: TextStyle(
+                fontSize: getResponsiveFontSize(context, fontSize: 12),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 8),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Container(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.centerRight,
                     height: MediaQuery.of(context).size.height * 0.04,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
@@ -37,7 +45,7 @@ class PaymentCalculatorSection extends HookWidget {
                     child: Text(
                       state,
                       style: TextStyle(
-                        fontSize: getResponsiveFontSize(context, fontSize: 14),
+                        fontSize: getResponsiveFontSize(context, fontSize: 12),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -51,15 +59,21 @@ class PaymentCalculatorSection extends HookWidget {
                   child: Container(
                     alignment: Alignment.center,
 
-                   height: MediaQuery.of(context).size.height * 0.04,
+                    height: MediaQuery.of(context).size.height * 0.04,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Center(child: Icon(
-                      
-                      Icons.backspace_outlined, color: Colors.black,size: 20,)),
+                    child: Center(
+                      child: Flexible(
+                        child: Icon(
+                          size: 20,
+                          Icons.backspace_outlined,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -69,7 +83,7 @@ class PaymentCalculatorSection extends HookWidget {
               crossAxisCount: 3,
               mainAxisSpacing: 4,
               crossAxisSpacing: 4,
-              childAspectRatio: 4,
+              childAspectRatio: context.read<FullScreenCubit>().state? 7:6.5/2,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               children: [
@@ -139,7 +153,6 @@ class PaymentCalculatorSection extends HookWidget {
                   () => context.read<PaymentCubit>().onKeyPressed(DecimalKey()),
                 ),
                 ElevatedButton(
-                  
                   onPressed: () =>
                       context.read<PaymentCubit>().onKeyPressed(ClearKey()),
                   style: ElevatedButton.styleFrom(
@@ -150,24 +163,37 @@ class PaymentCalculatorSection extends HookWidget {
                     ),
                   ),
                   child: Center(
-                    child: Icon(
-                      Icons.backspace_outlined,
-                      color: Colors.black,
+                    child: Flexible(
+                      child: Icon(
+                        Icons.backspace_outlined,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-            _buildCalcButtonWidget(
-              context,
-              Text('Payment', style: TextStyle(fontSize: getResponsiveFontSize(context, fontSize: 18))),
-              () {
-                final payment = context.read<PaymentCubit>().state;
-                context.read<CartCubit>().updatePaymentInput(payment);
-                context.read<CartCubit>().addPayment();
-                context.read<PaymentCubit>().reset();
-              },
+            const SizedBox(height: 8),
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height / 30,
+              child: _buildCalcButtonWidget(
+                context,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    'add Payment',
+                    style: TextStyle(
+                      fontSize: getResponsiveFontSize(context, fontSize: 12),
+                    ),
+                  ),
+                ),
+                () {
+                  final payment = context.read<PaymentCubit>().state;
+                  context.read<CartCubit>().updatePaymentInput(payment);
+                  context.read<CartCubit>().addPayment();
+                  context.read<PaymentCubit>().reset();
+                },
+              ),
             ),
           ],
         );
@@ -180,9 +206,11 @@ class PaymentCalculatorSection extends HookWidget {
     String text,
     VoidCallback onPressed,
   ) {
+    
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
+        
         backgroundColor: Theme.of(context).primaryColor,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
@@ -192,7 +220,10 @@ class PaymentCalculatorSection extends HookWidget {
         alignment: Alignment.center,
         child: Text(
           text,
-          style: TextStyle(fontSize: getResponsiveFontSize(context, fontSize: 18), color: Colors.black),
+          style: TextStyle(
+            fontSize: getResponsiveFontSize(context, fontSize: 12),
+            color: Colors.black,
+          ),
         ),
       ),
     );

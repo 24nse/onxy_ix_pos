@@ -45,91 +45,137 @@ class OrderDataGridSource extends DataGridSource {
     final isFirstRow = rowIndex == 0;
     final rowBorder = BoxDecoration(
       border: Border(
-        top: isFirstRow ? const BorderSide(color: Colors.grey, width: 0.5) : BorderSide.none,
+        top: isFirstRow
+            ? const BorderSide(color: Colors.grey, width: 0.5)
+            : BorderSide.none,
         bottom: const BorderSide(color: Colors.grey, width: 0.5),
       ),
-      // color: Colors.grey[100], 
+      // color: Colors.grey[100],
     );
     return DataGridRowAdapter(
       // color: Colors.grey[100],
       cells: [
         _buildBorder(_buildImageCell(item), rowBorder),
-        _buildBorder(_buildTextCell(item.product.name, alignment: Alignment.centerLeft), rowBorder),
-        _buildBorder(_buildTextCell('\$${item.product.price.toStringAsFixed(2)}'), rowBorder),
+        _buildBorder(
+          _buildTextCell(item.product.name, alignment: Alignment.centerLeft),
+          rowBorder,
+        ),
+        _buildBorder(
+          _buildTextCell('\$${item.product.price.toStringAsFixed(2)}'),
+          rowBorder,
+        ),
         _buildBorder(_buildQtyCell(item), rowBorder),
-        _buildBorder(_buildTextCell('${item.discountPercent.toStringAsFixed(0)}%'), rowBorder),
-        _buildBorder(_buildTextCell('\$${item.discountAmount.toStringAsFixed(2)}'), rowBorder),
-        _buildBorder(_buildTextCell('${item.taxPercent.toStringAsFixed(0)}%'), rowBorder),
-        _buildBorder(_buildTextCell('\$${item.taxAmount.toStringAsFixed(2)}'), rowBorder),
-        _buildBorder(_buildTextCell('\$${item.total.toStringAsFixed(2)}'), rowBorder),
+        _buildBorder(
+          _buildTextCell('${item.discountPercent.toStringAsFixed(0)}%'),
+          rowBorder,
+        ),
+        _buildBorder(
+          _buildTextCell('\$${item.discountAmount.toStringAsFixed(2)}'),
+          rowBorder,
+        ),
+        _buildBorder(
+          _buildTextCell('${item.taxPercent.toStringAsFixed(0)}%'),
+          rowBorder,
+        ),
+        _buildBorder(
+          _buildTextCell('\$${item.taxAmount.toStringAsFixed(2)}'),
+          rowBorder,
+        ),
+        _buildBorder(
+          _buildTextCell('\$${item.total.toStringAsFixed(2)}'),
+          rowBorder,
+        ),
         _buildBorder(_buildDeleteButton(item), rowBorder),
       ],
     );
   }
 
   Widget _buildImageCell(CartItem item) => Container(
-        padding: const EdgeInsets.all(8.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(4.0),
-          child: Image.network(
-            item.product.image,
-            width: 50,
-            height: 50,
-            fit: BoxFit.cover,
-          ),
-        ),
-      );
+    padding: const EdgeInsets.all(8.0),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(4.0),
+      child: Image.network(
+        item.product.image,
+        width: 50,
+        height: 50,
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
 
-  Widget _buildQtyCell(CartItem item) => Row(
+  Widget _buildQtyCell(CartItem item) {
+    final double containerSize = getResponsiveFontSize(context, fontSize: 30);
+    final double iconSize = getResponsiveFontSize(context, fontSize: 15);
+
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: 30,
-            width: 30,
-            padding: EdgeInsets.zero,
+            height: containerSize,
+            width: containerSize,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey, width: 0.1),
               borderRadius: BorderRadius.circular(4.0),
             ),
             child: IconButton(
-              icon: const Icon(Icons.remove, size: 15),
+              padding: EdgeInsets.zero,
+              icon: Icon(Icons.remove, size: iconSize),
               onPressed: () => cubit.decrementQuantity(item),
             ),
           ),
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text('${item.quantity}'),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: getResponsiveFontSize(context, fontSize: 8),
+            ),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                '${item.quantity}',
+                style: TextStyle(
+                  fontSize: getResponsiveFontSize(context, fontSize: 14),
+                ),
+              ),
+            ),
           ),
-          IconButton(
-            icon: const Icon(Icons.add, size: 10),
-            onPressed: () => cubit.incrementQuantity(item),
+          Container(
+            height: containerSize,
+            width: containerSize,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey, width: 0.1),
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(Icons.add, size: iconSize),
+              onPressed: () => cubit.incrementQuantity(item),
+            ),
           ),
         ],
-      );
+      ),
+    );
+  }
 
   Widget _buildDeleteButton(CartItem item) => IconButton(
-        icon: const Icon(Icons.delete, color: Colors.red),
-        onPressed: () => cubit.removeFromCart(item),
-      );
-
-  Widget _buildTextCell(String text, {Alignment alignment = Alignment.center}) =>
-      Container(
-        alignment: alignment,
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          text,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            fontSize: getResponsiveFontSize(context, fontSize: 10),
-          ),
-        ),
-      );
-}
-
-Widget _buildBorder(Widget child, BoxDecoration decoration) {
-  return Container(
-    decoration: decoration,
-      child: child,
-    
+    icon: const Icon(Icons.delete, color: Colors.red),
+    onPressed: () => cubit.removeFromCart(item),
   );
+
+  Widget _buildTextCell(
+    String text, {
+    Alignment alignment = Alignment.center,
+  }) => Container(
+    alignment: alignment,
+    padding: const EdgeInsets.all(8.0),
+    child: Text(
+      text,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(fontSize: getResponsiveFontSize(context, fontSize: 10)),
+    ),
+  );
+
+  Widget _buildBorder(Widget child, BoxDecoration decoration) {
+    return Container(decoration: decoration, child: child);
+  }
 }

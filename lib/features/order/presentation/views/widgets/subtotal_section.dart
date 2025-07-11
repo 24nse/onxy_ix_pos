@@ -13,7 +13,7 @@ class SubtotalSection extends StatelessWidget {
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-        
+
           children: [
             _buildSummaryRow(
               context,
@@ -51,26 +51,25 @@ class SubtotalSection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                overflow: TextOverflow.ellipsis,
-                title,
-                style: TextStyle(
-                  fontSize: getResponsiveFontSize(context, fontSize: 14),
-                  fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-                  color: color,
-                ),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              overflow: TextOverflow.ellipsis,
+              title,
+              style: TextStyle(
+                fontSize: getResponsiveFontSize(context, fontSize: 12),
+                fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
+                color: color,
               ),
             ),
           ),
+Spacer(),
           FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
               amount,
               style: TextStyle(
-                fontSize: getResponsiveFontSize(context, fontSize: 14),
+                fontSize: getResponsiveFontSize(context, fontSize: 12),
                 fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
                 color: color,
               ),

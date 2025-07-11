@@ -12,37 +12,36 @@ class PaymentDetailsSection extends StatelessWidget {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.15,
+        //  height: MediaQuery.sizeOf(context).height/10,
           width: double.infinity,
           color: Colors.green[50],
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 12),
           child: Column(
+            
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Payment Details:',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: getResponsiveFontSize(context, fontSize: 16),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  'Payment Details:',
+                  style: TextStyle(
+                    color: Colors.blue[400],
+                    fontWeight: FontWeight.bold,
+                    fontSize: getResponsiveFontSize(context, fontSize: 12,),
+                  ),
                 ),
               ),
-              const SizedBox(height: 8),
-              Expanded(
-                flex: 2,
-                child: _buildDetailRow(
-                  context,
-                  'Amount Paid:',
-                  '\$${state.amountPaid.toStringAsFixed(2)}',
-                ),
+              const SizedBox(height: 4),
+              _buildDetailRow(
+                context,
+                'Amount Paid:',
+                '\$${state.amountPaid.toStringAsFixed(2)}',
               ),
-              Expanded(
-                flex: 1,
-                child: _buildDetailRow(
-                  context,
-                  'Remaining:',
-                  '\$${state.remainingAmount.toStringAsFixed(2)}',
-                  isRemaining: true,
-                ),
+              _buildDetailRow(
+                context,
+                'Remaining:',
+                '\$${state.remainingAmount.toStringAsFixed(2)}',
+                isRemaining: true,
               ),
               if (state.amountPaid > 0)
                 _buildClearPaymentButtonWidget(
@@ -52,6 +51,7 @@ class PaymentDetailsSection extends StatelessWidget {
                     child: Text(
                       'Clear All Payments',
                       style: TextStyle(
+                        fontWeight: FontWeight.bold,
                         fontSize: getResponsiveFontSize(context, fontSize: 12),
                         color: Colors.black,
                       ),
@@ -82,7 +82,7 @@ class PaymentDetailsSection extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-              fontSize: getResponsiveFontSize(context, fontSize: 14),
+              fontSize: getResponsiveFontSize(context, fontSize: 12),
               color: isRemaining ? Colors.red : Colors.black,
               fontWeight: isRemaining ? FontWeight.bold : FontWeight.normal,
             ),
@@ -93,7 +93,7 @@ class PaymentDetailsSection extends StatelessWidget {
           child: Text(
             value,
             style: TextStyle(
-              fontSize: getResponsiveFontSize(context, fontSize: 14),
+              fontSize: getResponsiveFontSize(context, fontSize: 12),
               color: isRemaining ? Colors.red : Colors.black,
               fontWeight: FontWeight.bold,
             ),
@@ -109,24 +109,20 @@ Widget _buildClearPaymentButtonWidget(
   Widget child,
   VoidCallback onPressed,
 ) {
-  return Row(
-    children: [
-      SizedBox(
-        child: ElevatedButton(
-          onPressed: onPressed,
-
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            minimumSize: const Size(200, 30),
-            backgroundColor: Color.fromARGB(255, 204, 201, 201),
-            foregroundColor: Theme.of(context).colorScheme.onPrimary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
-            ),
-          ),
-          child: child,
-        ),
+  return ElevatedButton(
+    onPressed: onPressed,
+        
+    style: ElevatedButton.styleFrom(
+      padding: EdgeInsets.symmetric(horizontal: 8),
+          minimumSize:  Size(
+        double.infinity,30),
+    
+      backgroundColor: Color.fromARGB(255, 245, 244, 244),
+      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
       ),
-    ],
+    ),
+    child: child,
   );
 }
