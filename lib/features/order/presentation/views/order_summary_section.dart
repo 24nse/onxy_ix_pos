@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
-import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
@@ -19,6 +18,8 @@ class OrderSummarySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return LayoutBuilder(
       builder: (context, constrain) {
         return Card(
@@ -46,7 +47,7 @@ class OrderSummarySection extends StatelessWidget {
                                   context,
                                 )?.translate('order_summary') ??
                                 'Order Summary',
-                            style: AppStyles.textStyle20(context),
+                            style: theme.textTheme.displayMedium,
                           ),
                         ),
                       ),
@@ -70,6 +71,9 @@ class OrderSummarySection extends StatelessWidget {
                                       context,
                                     )?.translate('your_cart_is_empty') ??
                                     'Your cart is empty',
+                                style: theme.textTheme.bodyLarge?.copyWith(
+                                    color: theme.colorScheme.onSurface
+                                        .withOpacity(0.6)),
                               ),
                             )
                           : Column(

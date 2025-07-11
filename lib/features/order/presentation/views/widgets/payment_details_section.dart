@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
-import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
 
 class PaymentDetailsSection extends StatelessWidget {
@@ -9,27 +8,27 @@ class PaymentDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         return Container(
-        //  height: MediaQuery.sizeOf(context).height/10,
           width: double.infinity,
-          color: Colors.green[50],
-          padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 12),
+          color: colorScheme.secondaryContainer.withOpacity(0.3),
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
           child: Column(
             
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Text(
-                  'Payment Details:',
-                  style: TextStyle(
-                    color: Colors.blue[400],
-                    fontWeight: FontWeight.bold,
-                    fontSize: getResponsiveFontSize(context, fontSize: 12,),
-                  ),
-                ),
+                child: Text('Payment Details:',
+                    style: textTheme.labelLarge?.copyWith(
+                      color: colorScheme.onSecondaryContainer,
+                      fontWeight: FontWeight.bold,
+                    )),
               ),
               const SizedBox(height: 4),
               _buildDetailRow(
@@ -44,22 +43,23 @@ class PaymentDetailsSection extends StatelessWidget {
                 isRemaining: true,
               ),
               if (state.amountPaid > 0)
-                _buildClearPaymentButtonWidget(
-                  context,
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      'Clear All Payments',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: getResponsiveFontSize(context, fontSize: 12),
-                        color: Colors.black,
+                SizedBox(
+                  width: double.infinity,
+                  child: _buildClearPaymentButtonWidget(
+                    context,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'Clear All Payments',
+                        style: textTheme.labelLarge?.copyWith(
+                          color: colorScheme.error,
+                        ),
                       ),
                     ),
+                    () {
+                      context.read<CartCubit>().clearPayment();
+                    },
                   ),
-                  () {
-                    context.read<CartCubit>().clearPayment();
-                  },
                 ),
             ],
           ),
@@ -74,6 +74,12 @@ class PaymentDetailsSection extends StatelessWidget {
     String value, {
     bool isRemaining = false,
   }) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+
+    final valueColor = isRemaining ? colorScheme.error : colorScheme.onSurface;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -81,9 +87,8 @@ class PaymentDetailsSection extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Text(
             title,
-            style: TextStyle(
-              fontSize: getResponsiveFontSize(context, fontSize: 12),
-              color: isRemaining ? Colors.red : Colors.black,
+            style: textTheme.bodyLarge?.copyWith(
+              color: isRemaining ? valueColor : colorScheme.onSurface,
               fontWeight: isRemaining ? FontWeight.bold : FontWeight.normal,
             ),
           ),
@@ -92,9 +97,8 @@ class PaymentDetailsSection extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Text(
             value,
-            style: TextStyle(
-              fontSize: getResponsiveFontSize(context, fontSize: 12),
-              color: isRemaining ? Colors.red : Colors.black,
+            style: textTheme.bodyLarge?.copyWith(
+              color: valueColor,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -109,16 +113,11 @@ Widget _buildClearPaymentButtonWidget(
   Widget child,
   VoidCallback onPressed,
 ) {
-  return ElevatedButton(
+  return TextButton(
     onPressed: onPressed,
-        
-    style: ElevatedButton.styleFrom(
-      padding: EdgeInsets.symmetric(horizontal: 8),
-          minimumSize:  Size(
-        double.infinity,30),
-    
-      backgroundColor: Color.fromARGB(255, 245, 244, 244),
-      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+    style: TextButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      minimumSize: const Size(double.infinity, 30),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
       ),

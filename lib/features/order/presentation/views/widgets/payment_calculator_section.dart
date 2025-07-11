@@ -6,26 +6,22 @@ import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart
 import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/payment_cubit.dart';
-import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 
 class PaymentCalculatorSection extends HookWidget {
   const PaymentCalculatorSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     return BlocBuilder<PaymentCubit, String>(
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              'Enter Payment Amount:',
-              style: TextStyle(
-                fontSize: getResponsiveFontSize(context, fontSize: 12),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text('Enter Payment Amount:', style: textTheme.labelLarge),
             const SizedBox(height: 8),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,18 +32,14 @@ class PaymentCalculatorSection extends HookWidget {
                     height: MediaQuery.of(context).size.height * 0.04,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
-                      // vertical: 16,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
+                      color: colorScheme.surfaceVariant.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
                       state,
-                      style: TextStyle(
-                        fontSize: getResponsiveFontSize(context, fontSize: 12),
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -62,17 +54,13 @@ class PaymentCalculatorSection extends HookWidget {
                     height: MediaQuery.of(context).size.height * 0.04,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
+                      color: colorScheme.surfaceVariant.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Center(
-                      child: Flexible(
-                        child: Icon(
-                          size: 20,
-                          Icons.backspace_outlined,
-                          color: Colors.black,
-                        ),
-                      ),
+                    child: Icon(
+                      Icons.backspace_outlined,
+                      size: 20,
+                      color: colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -152,24 +140,11 @@ class PaymentCalculatorSection extends HookWidget {
                   '.',
                   () => context.read<PaymentCubit>().onKeyPressed(DecimalKey()),
                 ),
-                ElevatedButton(
-                  onPressed: () =>
+                _buildCalcButton(
+                  context,
+                  'C',
+                  () =>
                       context.read<PaymentCubit>().onKeyPressed(ClearKey()),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
-                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
-                  child: Center(
-                    child: Flexible(
-                      child: Icon(
-                        Icons.backspace_outlined,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),
@@ -182,8 +157,8 @@ class PaymentCalculatorSection extends HookWidget {
                   fit: BoxFit.scaleDown,
                   child: Text(
                     'add Payment',
-                    style: TextStyle(
-                      fontSize: getResponsiveFontSize(context, fontSize: 12),
+                    style: textTheme.labelLarge?.copyWith(
+                      color: colorScheme.onPrimary,
                     ),
                   ),
                 ),
@@ -201,18 +176,15 @@ class PaymentCalculatorSection extends HookWidget {
     );
   }
 
-  ElevatedButton _buildCalcButton(
+  Widget _buildCalcButton(
     BuildContext context,
     String text,
     VoidCallback onPressed,
   ) {
-    
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        
-        backgroundColor: Theme.of(context).primaryColor,
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
       child: FittedBox(
@@ -220,10 +192,9 @@ class PaymentCalculatorSection extends HookWidget {
         alignment: Alignment.center,
         child: Text(
           text,
-          style: TextStyle(
-            fontSize: getResponsiveFontSize(context, fontSize: 12),
-            color: Colors.black,
-          ),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
         ),
       ),
     );
@@ -236,10 +207,9 @@ Widget _buildCalcButtonWidget(
   VoidCallback onPressed,
 ) {
   return ElevatedButton(
-    onPressed: (true) ? onPressed : null,
-
+    onPressed: onPressed,
     style: ElevatedButton.styleFrom(
-      backgroundColor: Color(0xFF3B5998),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     ),
