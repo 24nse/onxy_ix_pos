@@ -24,15 +24,20 @@ class _CategoryTabsState extends State<CategoryTabs> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        height: 50,
+        alignment: Alignment.center,
+        height: 35,
+        width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: Color(0xFFd1d6e1),
           borderRadius: BorderRadius.circular(4),
         ),
         child: AdaptiveLayout(
-          mobile: _buildScrollableLayout(),
-          tablet: _buildExpandedLayout(),
-          desktop: _buildExpandedLayout(),
+          // mobile: _buildScrollableLayout(),
+          // tablet: _buildExpandedLayout(),
+          // desktop: _buildExpandedLayout(),
+          mobileLayout: (context)=>_buildExpandedLayout(),
+          desktopLayout: (context)=>_buildExpandedLayout(),
+          tabletLayout: (context) => _buildExpandedLayout(),
         ),
       ),
     );
@@ -51,7 +56,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
 
   Widget _buildExpandedLayout() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: widget.categories.map((category) {
         return Expanded(child: _buildTab(category, isExpanded: true));
       }).toList(),
@@ -67,26 +72,34 @@ class _CategoryTabsState extends State<CategoryTabs> {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    final tabColor = isSelected ? colorScheme.primary : theme.cardColor;
-    final onTabColor = isSelected ? colorScheme.onPrimary : colorScheme.onSurface;
+    final tabColor = isSelected ? Color(0xFFe5e9ec) : Color(0xFFd1d6e1);
+    final onTabColor = isSelected ? Color(0xFF676f7a) : Color(0xFFa3a4b6);
 
     final translatedLabel =
         AppLocalizations.of(context)?.translate(label.toLowerCase()) ?? label;
 
     Widget tabContent = Container(
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      height: 25,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(4),
         color: tabColor,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: onTabColor.withOpacity(0.8), size: 20),
+          Icon(icon, color: onTabColor.withOpacity(0.8), size: 14),
           const SizedBox(width: 6),
-          Text(
-            translatedLabel,
-            style: textTheme.labelLarge?.copyWith(color: onTabColor),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              translatedLabel,
+              style: textTheme.labelLarge?.copyWith(
+                color: onTabColor,
+                fontSize: 14,
+              ),
+            ),
           ),
         ],
       ),

@@ -99,8 +99,8 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
                             const SliverGridDelegateWithMaxCrossAxisExtent(
                               maxCrossAxisExtent: 250,
                               childAspectRatio: 2 / 3,
-                              crossAxisSpacing: 16,
-                              mainAxisSpacing: 16,
+                              crossAxisSpacing: 4,
+                              mainAxisSpacing: 4,
                             ),
                         itemCount: filteredProducts.length,
                         itemBuilder: (context, index) {

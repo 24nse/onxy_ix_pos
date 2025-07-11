@@ -13,14 +13,14 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: ClipRRect(
               borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(8),
+                top: Radius.circular(4),
               ),
               child: Image.network(
                 product.image,

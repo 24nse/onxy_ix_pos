@@ -35,9 +35,9 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
-        height: 50,
+        height: 35,
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: Color(0xFFd1d6e1),
           borderRadius: BorderRadius.circular(4),
         ),
         child: Row(
@@ -50,8 +50,15 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
     );
   }
 
-  Widget _buildTab(BuildContext context, int index, String text, IconData icon) {
+  Widget _buildTab(
+    BuildContext context,
+    int index,
+    String text,
+    IconData icon,
+  ) {
     final isSelected = _tabController.index == index;
+    final tabColor = isSelected ? Color(0xFFe5e9ec) : Color(0xFFd1d6e1);
+    final onTabColor = isSelected ? Color(0xFF676f7a) : Color(0xFFa3a4b6);
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
@@ -59,23 +66,24 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
           onTap: () => _tabController.animateTo(index),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: isSelected
-                  ? Theme.of(context).colorScheme.primary
-                  : Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(4),
+              color: tabColor,
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon,
-                    color: isSelected ? Colors.white : Colors.black54, size: 20),
+                Icon(icon, color: onTabColor, size: 14),
                 const SizedBox(width: 8),
-                Text(
-                  text,
-                  style: TextStyle(
-                    color: isSelected ? Colors.white : Colors.black87,
-                    fontWeight: FontWeight.w600,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: onTabColor,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ],
