@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 import 'app_styles.dart';
 
@@ -8,7 +9,7 @@ class AppTheme {
       primaryColor: AppColors.primaryLight,
       scaffoldBackgroundColor: AppColors.backgroundLight,
       cardColor: AppColors.cardLight,
-      textTheme: TextTheme(
+      textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).copyWith(
         displayLarge: AppStyles.textStyle24(context).copyWith(color: AppColors.textPrimaryLight),
         displayMedium: AppStyles.textStyle20(context).copyWith(color: AppColors.textPrimaryLight),
         bodyLarge: AppStyles.textStyle16(context).copyWith(color: AppColors.textPrimaryLight),
@@ -40,7 +41,7 @@ class AppTheme {
       primaryColor: AppColors.primaryDark,
       scaffoldBackgroundColor: AppColors.backgroundDark,
       cardColor: AppColors.cardDark,
-      textTheme: TextTheme(
+      textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).copyWith(
         displayLarge: AppStyles.textStyle24(context).copyWith(color: AppColors.textPrimaryDark),
         displayMedium: AppStyles.textStyle20(context).copyWith(color: AppColors.textPrimaryDark),
         bodyLarge: AppStyles.textStyle16(context).copyWith(color: AppColors.textPrimaryDark),

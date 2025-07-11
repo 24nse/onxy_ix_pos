@@ -60,31 +60,32 @@ class _CategoryTabsState extends State<CategoryTabs> {
   }
 
   Widget _buildTab(Map<String, dynamic> category, {required bool isExpanded}) {
+    final theme = Theme.of(context);
     final label = category['label'] as String;
     final icon = category['icon'] as IconData;
     final isSelected = widget.selectedCategory == label;
 
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    final tabColor = isSelected ? colorScheme.primary : theme.cardColor;
+    final onTabColor = isSelected ? colorScheme.onPrimary : colorScheme.onSurface;
+
     Widget tabContent = Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: isSelected
-            ? Theme.of(context).colorScheme.primary
-            : Colors.grey.shade200,
+        color: tabColor,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon,
-              color: isSelected ? Colors.white : Colors.black54, size: 20),
+          Icon(icon, color: onTabColor.withOpacity(0.8), size: 20),
           const SizedBox(width: 6),
           Text(
             AppLocalizations.of(context)?.translate(label.toLowerCase()) ??
                 label,
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black87,
-              fontWeight: FontWeight.w600,
-            ),
+            style: textTheme.labelLarge?.copyWith(color: onTabColor),
           ),
         ],
       ),
