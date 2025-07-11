@@ -35,10 +35,8 @@ class _CategoryTabsState extends State<CategoryTabs> {
           borderRadius: BorderRadius.circular(4),
         ),
         child: AdaptiveLayout(
-          // mobile: _buildScrollableLayout(),
-          // tablet: _buildExpandedLayout(),
-          // desktop: _buildExpandedLayout(),
-          mobileLayout: (context)=>_buildExpandedLayout(),
+       
+          mobileLayout: (context)=>_buildScrollableLayout(),
           desktopLayout: (context)=>_buildExpandedLayout(),
           tabletLayout: (context) => _buildExpandedLayout(),
         ),
