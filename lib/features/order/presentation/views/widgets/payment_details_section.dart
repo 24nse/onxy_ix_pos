@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
+import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
 
 class PaymentDetailsSection extends StatelessWidget {
   const PaymentDetailsSection({super.key});
@@ -17,7 +18,7 @@ class PaymentDetailsSection extends StatelessWidget {
       builder: (context, state) {
         return Container(
           width: double.infinity,
-          color: colorScheme.secondaryContainer.withOpacity(0.3),
+          color: Color(0xFFe3f0e5),
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
           child: Column(
             
@@ -57,12 +58,19 @@ class PaymentDetailsSection extends StatelessWidget {
                         AppLocalizations.of(context)?.translate('clear_all_payments') ??
                             'Clear All Payments',
                         style: textTheme.labelLarge?.copyWith(
-                          color: colorScheme.error,
+                          color:Colors.black,
+                          fontSize: 12
                         ),
+                        
                       ),
                     ),
                     () {
                       context.read<CartCubit>().clearPayment();
+                      showCustomToast(
+                        context,
+                        title: AppLocalizations.of(context)?.translate('payments_cleared') ?? 'Payments Cleared',
+                        message: AppLocalizations.of(context)?.translate('all_payments_have_been_cleared') ?? 'All payments have been cleared.',
+                      );
                     },
                   ),
                 ),
@@ -123,6 +131,7 @@ Widget _buildClearPaymentButtonWidget(
     style: TextButton.styleFrom(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       minimumSize: const Size(double.infinity, 30),
+      backgroundColor: Color(0xFFdfe0e6),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
       ),

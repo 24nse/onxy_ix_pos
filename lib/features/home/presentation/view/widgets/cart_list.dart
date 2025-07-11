@@ -22,6 +22,7 @@ class CartList extends HookWidget {
             AppLocalizations.of(context)?.translate(label.toLowerCase()) ?? label,
             style: TextStyle(
               fontSize: getResponsiveFontSize(context, fontSize: 14),
+                fontWeight: FontWeight.bold,
             ),
           ),
         ),

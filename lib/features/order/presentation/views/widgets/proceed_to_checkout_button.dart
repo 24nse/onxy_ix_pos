@@ -14,7 +14,7 @@ class ProceedToCheckoutButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: theme.colorScheme.primary,
+          backgroundColor: Color(0xFF3662c0),
           foregroundColor: theme.colorScheme.onPrimary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
           minimumSize: Size(double.infinity, height * 0.06),

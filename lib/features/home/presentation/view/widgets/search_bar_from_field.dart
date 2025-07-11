@@ -12,16 +12,21 @@ class SearchBarFromField extends StatelessWidget {
     return Container(
       height: 35,
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Color(0xFFe5e9ec),
         borderRadius: BorderRadius.circular(4),
       ),
       child: FormBuilderTextField(
-        
+         style: const TextStyle(color: Colors.black), 
         name:name ,
         onChanged: onChanged,
+        
         decoration: InputDecoration(
+         
           hintText: hintText,
-          prefixIcon: const Icon(Icons.search),
+          hintStyle: TextStyle(
+            color: Color(0xFFa3a4b6),
+          ),
+          prefixIcon: const Icon(Icons.search,color: Color(0xFFa3a4b6),size: 18,),
           contentPadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
       border: InputBorder.none
          ),
