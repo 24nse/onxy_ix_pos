@@ -38,6 +38,7 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
                   product.name,
@@ -45,23 +46,25 @@ class ProductCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text(product.category, style: AppStyles.textStyle12(context)),
-                const SizedBox(height: 8),
+                const SizedBox(height: 3),
+                Text(product.category, style: AppStyles.textStyle12(context).copyWith(color: Color(0xFFa3a4b6),)),
+                const SizedBox(height: 3),
                 Text(
                   '\$${product.price.toStringAsFixed(2)}',
                   style: AppStyles.textStyle16(context).copyWith(
                     fontWeight: FontWeight.bold,
                     
-                    color:Colors.blue.shade700,
+                    color:Color(0xFF567cc5),
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 24),
                 Row(
+                  
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: SizedBox(
+                        height: 30,
                         width: 200,
                         child: ElevatedButton.icon(
                           onPressed: onAddToCart,

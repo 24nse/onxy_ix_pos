@@ -91,14 +91,15 @@ class OrderDataGridSource extends DataGridSource {
   }
 
   Widget _buildImageCell(CartItem item) => Container(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all( 4.0),
     child: ClipRRect(
-      borderRadius: BorderRadius.circular(4.0),
-      child: Image.network(
-        item.product.image,
-        width: 50,
-        height: 50,
-        fit: BoxFit.cover,
+      borderRadius: BorderRadius.circular(8.0),
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Image.network(
+          item.product.image,
+          
+        ),
       ),
     ),
   );
@@ -134,6 +135,7 @@ class OrderDataGridSource extends DataGridSource {
               child: Text(
                 '${item.quantity}',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: getResponsiveFontSize(context, fontSize: 14),
                 ),
               ),
@@ -171,7 +173,7 @@ class OrderDataGridSource extends DataGridSource {
     child: Text(
       text,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(fontSize: getResponsiveFontSize(context, fontSize: 10)),
+      style: TextStyle(fontSize: getResponsiveFontSize(context, fontSize: 10,),  fontWeight: FontWeight.bold,),
     ),
   );
 

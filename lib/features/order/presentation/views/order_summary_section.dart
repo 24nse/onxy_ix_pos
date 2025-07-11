@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/functions/snackbar/show_custom_toast.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/full_screen_cubit.dart';
@@ -27,7 +26,7 @@ class OrderSummarySection extends StatelessWidget {
             top: 16,
             left: 16,
             right: 16,
-            bottom: 16,
+            bottom: 56,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -43,7 +42,10 @@ class OrderSummarySection extends StatelessWidget {
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(
-                            AppLocalizations.of(context)?.translate('order_summary') ?? 'Order Summary',
+                            AppLocalizations.of(
+                                  context,
+                                )?.translate('order_summary') ??
+                                'Order Summary',
                             style: theme.textTheme.displayMedium,
                           ),
                         ),
@@ -64,10 +66,14 @@ class OrderSummarySection extends StatelessWidget {
                       return state.items.isEmpty
                           ? Center(
                               child: Text(
-                                AppLocalizations.of(context)?.translate('your_cart_is_empty') ?? 'Your cart is empty',
+                                AppLocalizations.of(
+                                      context,
+                                    )?.translate('your_cart_is_empty') ??
+                                    'Your cart is empty',
                                 style: theme.textTheme.bodyLarge?.copyWith(
-                                    color: theme.colorScheme.onSurface
-                                        .withOpacity(0.6)),
+                                  color: theme.colorScheme.onSurface
+                                      .withOpacity(0.6),
+                                ),
                               ),
                             )
                           : Column(
@@ -76,7 +82,10 @@ class OrderSummarySection extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     child: Column(
                                       children: [
-                                        const CartList(),
+                                        SizedBox(
+                                          height: 140,
+                                          child: const CartList()),
+                                        const SizedBox(height: 8),
                                         OrderCalculationSection(),
                                         const SizedBox(height: 4),
                                         PaymentDetailsSection(),
@@ -90,11 +99,8 @@ class OrderSummarySection extends StatelessWidget {
                                     context.read<CartCubit>().clearCart();
                                     showCustomToast(
                                       context,
-                                      message:
-                                          AppLocalizations.of(
-                                            context,
-                                          )?.translate('order_completed') ??
-                                          'Order completed',
+                                      title: AppLocalizations.of(context)?.translate('checkout_complete') ?? 'Checkout Complete',
+                                      message: AppLocalizations.of(context)?.translate('order_has_been_successfully_processed') ?? 'The order has been successfully processed.',
                                     );
                                   },
                                 ),

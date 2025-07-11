@@ -25,7 +25,7 @@ class PaymentCalculatorSection extends HookWidget {
             Text(
               AppLocalizations.of(context)?.translate('enter_payment_amount') ??
                   'Enter Payment Amount:',
-              style: textTheme.labelLarge,
+              style: textTheme.labelLarge!.copyWith(color: Colors.black),
             ),
             const SizedBox(height: 8),
             Row(
@@ -39,7 +39,7 @@ class PaymentCalculatorSection extends HookWidget {
                       horizontal: 12,
                     ),
                     decoration: BoxDecoration(
-                      color: colorScheme.surfaceVariant.withOpacity(0.5),
+                      color:Color(0xFFdfe0e6),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
@@ -59,7 +59,7 @@ class PaymentCalculatorSection extends HookWidget {
                     height: MediaQuery.of(context).size.height * 0.04,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
-                      color: colorScheme.surfaceVariant.withOpacity(0.5),
+                      color:Color(0xFFdfe0e6),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Icon(
@@ -148,8 +148,14 @@ class PaymentCalculatorSection extends HookWidget {
                 _buildCalcButton(
                   context,
                   'C',
-                  () =>
-                      context.read<PaymentCubit>().onKeyPressed(ClearKey()),
+                  () {
+                  context.read<PaymentCubit>().onKeyPressed(ClearKey());
+                  showCustomToast(
+                    context,
+                    title: AppLocalizations.of(context)?.translate('payment_cleared') ?? 'Payment Cleared',
+                    message: AppLocalizations.of(context)?.translate('payment_amount_has_been_cleared') ?? 'Payment amount has been cleared.',
+                  );
+                },
                 ),
               ],
             ),
@@ -169,9 +175,22 @@ class PaymentCalculatorSection extends HookWidget {
                 ),
                 () {
                   final payment = context.read<PaymentCubit>().state;
-                  context.read<CartCubit>().updatePaymentInput(payment);
-                  context.read<CartCubit>().addPayment();
-                  context.read<PaymentCubit>().reset();
+                  if (payment.isNotEmpty && double.tryParse(payment) != null && double.parse(payment) > 0) {
+                    context.read<CartCubit>().updatePaymentInput(payment);
+                    context.read<CartCubit>().addPayment();
+                    context.read<PaymentCubit>().reset();
+                    showCustomToast(
+                      context,
+                      title: AppLocalizations.of(context)?.translate('payment_added') ?? 'Payment Added',
+                      message: AppLocalizations.of(context)?.translate('payment_has_been_successfully_added') ?? 'Payment has been successfully added.',
+                    );
+                  } else {
+                    showCustomToast(
+                      context,
+                      title: AppLocalizations.of(context)?.translate('invalid_payment') ?? 'Invalid Payment',
+                      message: AppLocalizations.of(context)?.translate('please_enter_a_valid_payment_amount') ?? 'Please enter a valid payment amount.',
+                    );
+                  }
                 },
               ),
             ),
@@ -188,9 +207,12 @@ class PaymentCalculatorSection extends HookWidget {
   ) {
     return ElevatedButton(
       onPressed: onPressed,
+      
       style: ElevatedButton.styleFrom(
+        backgroundColor: Color(0xFFe5e9ec),
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        
       ),
       child: FittedBox(
         fit: BoxFit.scaleDown,
@@ -198,7 +220,8 @@ class PaymentCalculatorSection extends HookWidget {
         child: Text(
           text,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
+            fontSize: 12,
+                color: Colors.black,
               ),
         ),
       ),
@@ -214,7 +237,7 @@ Widget _buildCalcButtonWidget(
   return ElevatedButton(
     onPressed: onPressed,
     style: ElevatedButton.styleFrom(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Color(0xFF95aada),
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     ),

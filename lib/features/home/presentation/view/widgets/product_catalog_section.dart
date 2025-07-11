@@ -97,10 +97,10 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
                       child: GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 250,
-                              childAspectRatio: 2 / 3,
-                              crossAxisSpacing: 4,
-                              mainAxisSpacing: 4,
+                              maxCrossAxisExtent: 300,
+                              childAspectRatio: 2.2/ 3,
+                              crossAxisSpacing: 3,
+                              mainAxisSpacing: 3,
                             ),
                         itemCount: filteredProducts.length,
                         itemBuilder: (context, index) {

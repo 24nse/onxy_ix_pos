@@ -53,7 +53,7 @@ class SubtotalSection extends StatelessWidget {
     final effectiveColor = color ?? defaultColor;
 
     final style = isTotal
-        ? textTheme.labelLarge?.copyWith(color: effectiveColor)
+        ? textTheme.labelLarge?.copyWith(color: Color(0xFF4364b8))
         : textTheme.bodyLarge?.copyWith(color: effectiveColor);
 
     return Padding(
