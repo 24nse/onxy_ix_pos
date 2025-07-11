@@ -67,10 +67,7 @@ class ProductCard extends StatelessWidget {
                           onPressed: onAddToCart,
                           icon: const Icon(Icons.add_circle_outline, size: 16),
                           label: Text(
-                            AppLocalizations.of(
-                                  context,
-                                )?.translate('add_to_cart') ??
-                                'Add to Cart',
+                            AppLocalizations.of(context)?.translate('add_to_cart') ?? 'Add to Cart',
                           ),
                         
                           style: ElevatedButton.styleFrom(

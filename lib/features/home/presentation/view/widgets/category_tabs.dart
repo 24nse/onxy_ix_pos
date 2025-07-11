@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/adaptive_layout.dart';
 
-
 class CategoryTabs extends StatefulWidget {
   final List<Map<String, dynamic>> categories;
   final Function(String) onCategorySelected;
@@ -71,6 +70,9 @@ class _CategoryTabsState extends State<CategoryTabs> {
     final tabColor = isSelected ? colorScheme.primary : theme.cardColor;
     final onTabColor = isSelected ? colorScheme.onPrimary : colorScheme.onSurface;
 
+    final translatedLabel =
+        AppLocalizations.of(context)?.translate(label.toLowerCase()) ?? label;
+
     Widget tabContent = Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -83,8 +85,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
           Icon(icon, color: onTabColor.withOpacity(0.8), size: 20),
           const SizedBox(width: 6),
           Text(
-            AppLocalizations.of(context)?.translate(label.toLowerCase()) ??
-                label,
+            translatedLabel,
             style: textTheme.labelLarge?.copyWith(color: onTabColor),
           ),
         ],

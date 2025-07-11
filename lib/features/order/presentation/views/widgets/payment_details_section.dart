@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
 
@@ -24,21 +25,24 @@ class PaymentDetailsSection extends StatelessWidget {
             children: [
               FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Text('Payment Details:',
-                    style: textTheme.labelLarge?.copyWith(
-                      color: colorScheme.onSecondaryContainer,
-                      fontWeight: FontWeight.bold,
-                    )),
+                child: Text(
+                  AppLocalizations.of(context)?.translate('payment_details') ??
+                      'Payment Details:',
+                  style: textTheme.labelLarge?.copyWith(
+                    color: colorScheme.onSecondaryContainer,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               const SizedBox(height: 4),
               _buildDetailRow(
                 context,
-                'Amount Paid:',
+                AppLocalizations.of(context)?.translate('amount_paid') ?? 'Amount Paid:',
                 '\$${state.amountPaid.toStringAsFixed(2)}',
               ),
               _buildDetailRow(
                 context,
-                'Remaining:',
+                AppLocalizations.of(context)?.translate('remaining') ?? 'Remaining:',
                 '\$${state.remainingAmount.toStringAsFixed(2)}',
                 isRemaining: true,
               ),
@@ -50,7 +54,8 @@ class PaymentDetailsSection extends StatelessWidget {
                     FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Clear All Payments',
+                        AppLocalizations.of(context)?.translate('clear_all_payments') ??
+                            'Clear All Payments',
                         style: textTheme.labelLarge?.copyWith(
                           color: colorScheme.error,
                         ),

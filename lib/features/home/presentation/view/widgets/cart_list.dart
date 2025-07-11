@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cart_state.dart';
@@ -18,7 +19,7 @@ class CartList extends HookWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
-            label,
+            AppLocalizations.of(context)?.translate(label.toLowerCase()) ?? label,
             style: TextStyle(
               fontSize: getResponsiveFontSize(context, fontSize: 14),
             ),
@@ -45,16 +46,16 @@ class CartList extends HookWidget {
           headerGridLinesVisibility: GridLinesVisibility.none,
           shrinkWrapRows: true,
           columns: <GridColumn>[
-            _buildGridColumn(context, 'item', 'Item'),
-            _buildGridColumn(context, 'product', 'Product'),
-            _buildGridColumn(context, 'price', 'Price'),
-            _buildGridColumn(context, 'qty', 'Qty'),
-            _buildGridColumn(context, 'disc', 'Disc %'),
-            _buildGridColumn(context, 'disc_amt', 'Disc Amt'),
-            _buildGridColumn(context, 'tax', 'Tax %'),
-            _buildGridColumn(context, 'tax_amt', 'Tax Amt'),
-            _buildGridColumn(context, 'total', 'Total'),
-            _buildGridColumn(context, 'delete', 'Del'),
+            _buildGridColumn(context, 'item', 'item'),
+            _buildGridColumn(context, 'product', 'product'),
+            _buildGridColumn(context, 'price', 'price'),
+            _buildGridColumn(context, 'qty', 'qty'),
+            _buildGridColumn(context, 'disc_percent', 'disc_percent'),
+            _buildGridColumn(context, 'disc_amt', 'disc_amt'),
+            _buildGridColumn(context, 'tax_percent', 'tax_percent'),
+            _buildGridColumn(context, 'tax_amt', 'tax_amt'),
+            _buildGridColumn(context, 'total', 'total'),
+            _buildGridColumn(context, 'del', 'del'),
           ],
         );
       },
