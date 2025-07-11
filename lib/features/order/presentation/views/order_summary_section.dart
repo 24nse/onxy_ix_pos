@@ -73,16 +73,20 @@ class OrderSummarySection extends StatelessWidget {
                               ),
                             )
                           : Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                ConstrainedBox(
-                                  constraints: BoxConstraints(maxHeight: 170),
-                                  child: const CartList(),
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        const CartList(),
+                                        OrderCalculationSection(),
+                                        const SizedBox(height: 4),
+                                        PaymentDetailsSection(),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                OrderCalculationSection(),
-                                SizedBox(height: 4),
-                                PaymentDetailsSection(),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 ProceedToCheckoutButton(
                                   onPressed: () {
                                     context.read<CartCubit>().clearCart();
