@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 
 class MainScreenTabs extends StatefulWidget implements PreferredSizeWidget {
   const MainScreenTabs({super.key});
@@ -37,7 +38,9 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
       child: Container(
         height: 35,
         decoration: BoxDecoration(
-          color: Color(0xFFd1d6e1),
+          color: Theme.of(context).brightness == Brightness.dark
+              ? AppColors.searchAndTabBarDark
+              : const Color(0xFFd1d6e1),
           borderRadius: BorderRadius.circular(4),
         ),
         child: Row(
@@ -57,8 +60,16 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
     IconData icon,
   ) {
     final isSelected = _tabController.index == index;
-    final tabColor = isSelected ? Color(0xFFe5e9ec) : Color(0xFFd1d6e1);
-    final onTabColor = isSelected ? Color(0xFF676f7a) : Color(0xFFa3a4b6);
+    final tabColor = isSelected
+        ? (Theme.of(context).brightness == Brightness.dark
+            ? AppColors.selectedTabDark
+            : const Color(0xFFe5e9ec))
+        : Colors.transparent;
+    final onTabColor = isSelected
+        ? (Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : const Color(0xFF676f7a))
+        : const Color(0xFFa3a4b6);
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),

@@ -46,11 +46,7 @@ class HomeScreen extends HookWidget {
                   : Icons.dark_mode_outlined,
                             onTap: () {
                 themeCubit.toggleTheme();
-                showCustomToast(
-                  context,
-                  title: AppLocalizations.of(context)?.translate('theme_changed') ?? 'Theme Changed',
-                  message: AppLocalizations.of(context)?.translate('theme_updated_successfully') ?? 'Theme updated successfully.',
-                );
+             
               },
             ),
           ],

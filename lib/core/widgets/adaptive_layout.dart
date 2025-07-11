@@ -3,11 +3,11 @@ import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 
 class AdaptiveLayout extends StatelessWidget {
   const AdaptiveLayout({
-    Key? key,
+    super.key,
     required this.mobileLayout,
     this.tabletLayout,
     required this.desktopLayout,
-  }) : super(key: key);
+  });
 
   final WidgetBuilder mobileLayout;
   final WidgetBuilder? tabletLayout;

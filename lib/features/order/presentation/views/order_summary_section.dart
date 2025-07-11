@@ -1,4 +1,4 @@
-import 'dart:math';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +27,15 @@ class OrderSummarySection extends StatelessWidget {
             left: 16,
             right: 16,
             bottom: 56,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            side: Theme.of(context).brightness == Brightness.dark
+                ? BorderSide(
+                    color: Colors.grey.shade800,
+                    width: 1,
+                  )
+                : BorderSide.none,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -99,8 +108,8 @@ class OrderSummarySection extends StatelessWidget {
                                     context.read<CartCubit>().clearCart();
                                     showCustomToast(
                                       context,
-                                      title: AppLocalizations.of(context)?.translate('checkout_complete') ?? 'Checkout Complete',
-                                      message: AppLocalizations.of(context)?.translate('order_has_been_successfully_processed') ?? 'The order has been successfully processed.',
+                                      title: AppLocalizations.of(context)?.translate('complete_purchase') ?? 'Checkout Complete',
+                                      message: AppLocalizations.of(context)?.translate('action_completed_successfully') ?? 'The order has been successfully processed.',
                                     );
                                   },
                                 ),

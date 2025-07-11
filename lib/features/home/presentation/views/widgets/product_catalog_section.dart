@@ -111,7 +111,11 @@ class _ProductCatalogSectionState extends State<ProductCatalogSection> {
                                 filteredProducts[index],
                               );
 
-                              showCustomToast(context);
+                              showCustomToast(
+                                context,
+                                title: AppLocalizations.of(context)?.translate('add_to_cart') ?? 'Product Added',
+                                message: AppLocalizations.of(context)?.translate('product_added_to_cart_successfully') ?? 'Product has been added to the cart successfully.',
+                              );
                             },
                           );
                         },

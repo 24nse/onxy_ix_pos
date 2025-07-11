@@ -14,7 +14,7 @@ class DigitKey extends KeyAction {
 class DecimalKey extends KeyAction {
   @override
   String execute(String currentAmount) =>
-      currentAmount.contains('.') ? currentAmount : currentAmount + '.';
+      currentAmount.contains('.') ? currentAmount : '$currentAmount.';
 }
 
 class BackspaceKey extends KeyAction {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 import 'package:onyx_ix_pos/features/order/domain/entities/key_action.dart';
 import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/cubits/full_screen_cubit.dart';
@@ -22,10 +23,18 @@ class PaymentCalculatorSection extends HookWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              AppLocalizations.of(context)?.translate('enter_payment_amount') ??
-                  'Enter Payment Amount:',
-              style: textTheme.labelLarge!.copyWith(color: Colors.black),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  AppLocalizations.of(context)?.translate('enter_payment_amount') ??
+                      'Enter Payment Amount:',
+                  style: textTheme.labelLarge!.copyWith(
+                    fontSize: 12
+                  ),
+                ),
+              ),
             ),
             const SizedBox(height: 8),
             Row(
@@ -39,12 +48,19 @@ class PaymentCalculatorSection extends HookWidget {
                       horizontal: 12,
                     ),
                     decoration: BoxDecoration(
-                      color:Color(0xFFdfe0e6),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppColors.searchAndTabBarDark
+                          : const Color(0xFFdfe0e6),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
                       state,
-                      style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                      style: textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
+                      ),
                     ),
                   ),
                 ),
@@ -59,7 +75,9 @@ class PaymentCalculatorSection extends HookWidget {
                     height: MediaQuery.of(context).size.height * 0.04,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
-                      color:Color(0xFFdfe0e6),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? AppColors.searchAndTabBarDark
+                          : const Color(0xFFdfe0e6),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Icon(
@@ -150,11 +168,7 @@ class PaymentCalculatorSection extends HookWidget {
                   'C',
                   () {
                   context.read<PaymentCubit>().onKeyPressed(ClearKey());
-                  showCustomToast(
-                    context,
-                    title: AppLocalizations.of(context)?.translate('payment_cleared') ?? 'Payment Cleared',
-                    message: AppLocalizations.of(context)?.translate('payment_amount_has_been_cleared') ?? 'Payment amount has been cleared.',
-                  );
+               
                 },
                 ),
               ],
@@ -182,7 +196,7 @@ class PaymentCalculatorSection extends HookWidget {
                     showCustomToast(
                       context,
                       title: AppLocalizations.of(context)?.translate('payment_added') ?? 'Payment Added',
-                      message: AppLocalizations.of(context)?.translate('payment_has_been_successfully_added') ?? 'Payment has been successfully added.',
+                      message: AppLocalizations.of(context)?.translate('action_completed_successfully') ?? 'Payment has been successfully added.',
                     );
                   } else {
                     showCustomToast(
@@ -209,7 +223,9 @@ class PaymentCalculatorSection extends HookWidget {
       onPressed: onPressed,
       
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFFe5e9ec),
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? AppColors.searchAndTabBarDark
+            : const Color(0xFFe5e9ec),
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         
@@ -221,7 +237,9 @@ class PaymentCalculatorSection extends HookWidget {
           text,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontSize: 12,
-                color: Colors.black,
+                color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
               ),
         ),
       ),

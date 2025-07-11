@@ -11,6 +11,8 @@ class LanguageMenuButton extends StatelessWidget {
   static const double _borderRadius = 2;
   static const double _borderWidth = 0;
 
+  const LanguageMenuButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     final locale = context.watch<LocaleCubit>().state;

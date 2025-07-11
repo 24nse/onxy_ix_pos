@@ -9,6 +9,7 @@ class AppTheme {
       primaryColor: AppColors.primaryLight,
       scaffoldBackgroundColor: AppColors.backgroundLight,
       cardColor: AppColors.cardLight,
+      
       textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).copyWith(
         displayLarge: AppStyles.textStyle24(context).copyWith(color: AppColors.textPrimaryLight),
         displayMedium: AppStyles.textStyle20(context).copyWith(color: AppColors.textPrimaryLight),
@@ -38,6 +39,7 @@ class AppTheme {
 
   static ThemeData darkTheme(BuildContext context) {
     return ThemeData(
+    
       primaryColor: AppColors.primaryDark,
       scaffoldBackgroundColor: AppColors.backgroundDark,
       cardColor: AppColors.cardDark,
