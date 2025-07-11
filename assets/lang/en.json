@@ -19,6 +19,8 @@
   "snacks": "Snacks",
   "meals": "Meals",
   "item": "Item",
+  "title": "Title",
+  "description": "Description",
   "product": "Product",
   "price": "Price",
   "qty": "Qty",
@@ -28,5 +30,15 @@
   "tax_amt": "Tax Amt",
   "total": "Total",
   "del": "Del",
-  "add_to_cart": "Add to Cart"
+  "add_to_cart": "Add to Cart",
+  "remove_from_cart": "Remove from Cart",
+  "payment_added": "Add Payment",
+  "payments_cleared": "Clear All Payments",
+  "complete_purchase": "Complete Purchase",
+  "product_deleted": "Product Deleted",
+  "product_deleted_successfully": "The product has been successfully removed from the cart.",
+  "success": "Success",
+  "action_completed_successfully": "Action completed successfully",
+  "product_added_to_cart_successfully": "Product added to cart successfully",
+   "all_payments_cleared": "All payments have been cleared."
 }

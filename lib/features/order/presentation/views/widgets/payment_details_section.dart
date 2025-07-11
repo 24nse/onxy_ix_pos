@@ -4,6 +4,7 @@ import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_state.dart';
 import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
+import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 
 class PaymentDetailsSection extends StatelessWidget {
   const PaymentDetailsSection({super.key});
@@ -18,7 +19,9 @@ class PaymentDetailsSection extends StatelessWidget {
       builder: (context, state) {
         return Container(
           width: double.infinity,
-          color: Color(0xFFe3f0e5),
+          color: Theme.of(context).brightness == Brightness.dark
+              ? AppColors.searchAndTabBarDark
+              : const Color(0xFFe3f0e5),
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
           child: Column(
             
@@ -30,7 +33,9 @@ class PaymentDetailsSection extends StatelessWidget {
                   AppLocalizations.of(context)?.translate('payment_details') ??
                       'Payment Details:',
                   style: textTheme.labelLarge?.copyWith(
-                    color: colorScheme.onSecondaryContainer,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : colorScheme.onSecondaryContainer,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -58,7 +63,9 @@ class PaymentDetailsSection extends StatelessWidget {
                         AppLocalizations.of(context)?.translate('clear_all_payments') ??
                             'Clear All Payments',
                         style: textTheme.labelLarge?.copyWith(
-                          color:Colors.black,
+                          color: 
+                             Colors.black,
+                            
                           fontSize: 12
                         ),
                         
@@ -69,7 +76,7 @@ class PaymentDetailsSection extends StatelessWidget {
                       showCustomToast(
                         context,
                         title: AppLocalizations.of(context)?.translate('payments_cleared') ?? 'Payments Cleared',
-                        message: AppLocalizations.of(context)?.translate('all_payments_have_been_cleared') ?? 'All payments have been cleared.',
+                        message: AppLocalizations.of(context)?.translate('all_payments_cleared') ?? 'All payments have been cleared.',
                       );
                     },
                   ),
@@ -103,6 +110,7 @@ class PaymentDetailsSection extends StatelessWidget {
             style: textTheme.bodyLarge?.copyWith(
               color: isRemaining ? valueColor : colorScheme.onSurface,
               fontWeight: isRemaining ? FontWeight.bold : FontWeight.normal,
+              fontSize: 12
             ),
           ),
         ),
@@ -113,6 +121,7 @@ class PaymentDetailsSection extends StatelessWidget {
             style: textTheme.bodyLarge?.copyWith(
               color: valueColor,
               fontWeight: FontWeight.bold,
+              fontSize: 12
             ),
           ),
         ),
@@ -131,7 +140,9 @@ Widget _buildClearPaymentButtonWidget(
     style: TextButton.styleFrom(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       minimumSize: const Size(double.infinity, 30),
-      backgroundColor: Color(0xFFdfe0e6),
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? const Color(0xFFdfe0e6)
+          : const Color(0xFFdfe0e6),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
       ),

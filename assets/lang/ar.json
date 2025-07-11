@@ -19,6 +19,8 @@
   "snacks": "الوجبات الخفيفة",
   "meals": "الوجبات",
   "item": "العنصر",
+  "title": "العنوان",
+  "description": "الوصف",
   "product": "المنتج",
   "price": "السعر",
   "qty": "الكمية",
@@ -28,5 +30,16 @@
   "tax_amt": "مبلغ الضريبة",
   "total": "المجموع",
   "del": "حذف",
-  "add_to_cart": "أضف إلى السلة"
+  "add_to_cart": "إضافة منتج للسلة",
+  "remove_from_cart": "حذف من السلة",
+  "add_payment": "إضافة دفع",
+  "clear_all_payments": "مسح جميع المدفوعات",
+  "complete_purchase": "إتمام عملية الشراء",
+  "product_deleted": "تم حذف المنتج",
+  "product_deleted_successfully": "تمت إزالة المنتج من سلة التسوق بنجاح.",
+  "success": "نجاح",
+  "product_added_to_cart_successfully": "تم إضافة المنتج إلى السلة بنجاح",
+
+  "action_completed_successfully": "تم الإجراء بنجاح",
+  "all_payments_cleared": "تم مسح جميع المدفوعات."
 }

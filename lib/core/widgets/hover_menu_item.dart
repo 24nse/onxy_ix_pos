@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 
 class HoverableMenuItem extends StatefulWidget {
   final double width;
@@ -8,7 +9,7 @@ class HoverableMenuItem extends StatefulWidget {
   final double borderRadius;
   final double borderWidth;
   final String label;
-  const HoverableMenuItem({
+  const HoverableMenuItem({super.key, 
     required this.width,
     required this.height,
     required this.borderRadius,
@@ -26,6 +27,11 @@ class HoverableMenuItemState extends State<HoverableMenuItem> {
   @override
   Widget build(BuildContext context) {
     final bool isHovered = _isHovered;
+    final theme = Theme.of(context);
+    final bool dark = theme.brightness == Brightness.dark;
+
+    final Color activeColor = AppColors.success;
+    final Color textColor = dark ? AppColors.white : AppColors.black;
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -37,7 +43,7 @@ padding:  EdgeInsets.zero,
         // height: widget.height,
         // alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: isHovered ? Colors.green : Colors.transparent,
+          color: isHovered ? activeColor : Colors.transparent,
           // border: Border.all(
           //   color: isHovered ? Colors.green : Colors.grey.shade300,
           //   width: widget.borderWidth,
@@ -48,7 +54,7 @@ padding:  EdgeInsets.zero,
         child: Text(
           widget.label,
           style: TextStyle(
-            color: isHovered ? Colors.white : Colors.black87,
+            color: isHovered ? Colors.white : textColor,
             fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
           ),
         ),

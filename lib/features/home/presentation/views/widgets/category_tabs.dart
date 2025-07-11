@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/widgets/adaptive_layout.dart';
+import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 
 class CategoryTabs extends StatefulWidget {
   final List<Map<String, dynamic>> categories;
@@ -28,7 +29,9 @@ class _CategoryTabsState extends State<CategoryTabs> {
         height: 35,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Color(0xFFd1d6e1),
+          color: Theme.of(context).brightness == Brightness.dark
+              ? AppColors.searchAndTabBarDark
+              : AppColors.tabBarLight,
           borderRadius: BorderRadius.circular(4),
         ),
         child: AdaptiveLayout(
@@ -69,11 +72,18 @@ class _CategoryTabsState extends State<CategoryTabs> {
     final icon = category['icon'] as IconData;
     final isSelected = widget.selectedCategory == label;
 
-    final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    final tabColor = isSelected ? Color(0xFFe5e9ec) : Color(0xFFd1d6e1);
-    final onTabColor = isSelected ? Color(0xFF676f7a) : Color(0xFFa3a4b6);
+    final tabColor = isSelected
+        ? (Theme.of(context).brightness == Brightness.dark
+            ? AppColors.selectedTabDark
+            : AppColors.searchBarLight)
+        : Colors.transparent;
+    final onTabColor = isSelected
+        ? (Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : const Color(0xFF676f7a))
+        : const Color(0xFFa3a4b6);
 
     final translatedLabel =
         AppLocalizations.of(context)?.translate(label.toLowerCase()) ?? label;

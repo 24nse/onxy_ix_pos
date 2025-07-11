@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/features/order/domain/entities/cart_item.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
@@ -161,7 +163,14 @@ class OrderDataGridSource extends DataGridSource {
 
   Widget _buildDeleteButton(CartItem item) => IconButton(
     icon: const Icon(Icons.delete, color: Colors.red),
-    onPressed: () => cubit.removeFromCart(item),
+    onPressed: () {
+      cubit.removeFromCart(item);
+      showCustomToast(
+        context,
+        title: AppLocalizations.of(context)?.translate('product_deleted') ?? 'Product Deleted',
+        message: AppLocalizations.of(context)?.translate('product_deleted_successfully') ?? 'The product has been successfully removed from the cart.',
+      );
+    },
   );
 
   Widget _buildTextCell(

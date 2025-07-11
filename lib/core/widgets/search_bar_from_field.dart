@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 
 class SearchBarFromField extends StatelessWidget {
   const SearchBarFromField({super.key, required this.name, required this.hintText, this.onChanged});
@@ -12,8 +13,13 @@ class SearchBarFromField extends StatelessWidget {
     return Container(
       height: 35,
       decoration: BoxDecoration(
-        color: Color(0xFFe5e9ec),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? AppColors.searchAndTabBarDark
+            : AppColors.searchBarLight,
         borderRadius: BorderRadius.circular(4),
+        border: Theme.of(context).brightness == Brightness.dark
+            ? Border.all(color: Colors.grey.shade700)
+            : null,
       ),
       child: FormBuilderTextField(
          style: const TextStyle(color: Colors.black), 

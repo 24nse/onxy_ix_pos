@@ -13,7 +13,12 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
+        side: Theme.of(context).brightness == Brightness.dark
+            ? BorderSide(color: Colors.grey.shade800, width: 1)
+            : BorderSide.none,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -44,6 +49,9 @@ class ProductCard extends StatelessWidget {
                   product.name,
                   style: AppStyles.textStyle16(context).copyWith(
                     fontWeight: FontWeight.bold,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
                   ),
                 ),
                 const SizedBox(height: 3),
