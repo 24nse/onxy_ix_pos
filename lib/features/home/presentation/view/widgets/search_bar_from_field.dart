@@ -10,17 +10,19 @@ class SearchBarFromField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 35,
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(4),
       ),
       child: FormBuilderTextField(
+        
         name:name ,
         onChanged: onChanged,
         decoration: InputDecoration(
           hintText: hintText,
           prefixIcon: const Icon(Icons.search),
-          contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          contentPadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
       border: InputBorder.none
          ),
       
