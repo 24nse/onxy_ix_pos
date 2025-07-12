@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 
@@ -50,13 +51,13 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
               context,
               0,
               AppLocalizations.of(context)?.translate('products') ?? 'Products',
-              Icons.grid_view,
+              FontAwesomeIcons.thLarge,
             ),
             _buildTab(
               context,
               1,
               AppLocalizations.of(context)?.translate('cart') ?? 'Cart',
-              Icons.shopping_cart,
+              FontAwesomeIcons.cartShopping,
             ),
           ],
         ),
@@ -95,7 +96,7 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: onTabColor, size: 14),
+                Icon(icon, color: onTabColor, size: 16),
                 const SizedBox(width: 8),
                 FittedBox(
                   fit: BoxFit.scaleDown,

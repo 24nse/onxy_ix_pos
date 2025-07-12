@@ -1,74 +1,156 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onyx_ix_pos/features/order/domain/entities/cart_item.dart';
+import 'package:onyx_ix_pos/features/order/domain/entities/payment.dart';
 import 'package:onyx_ix_pos/features/home/domain/entities/product.dart';
+import 'package:onyx_ix_pos/features/order/domain/usecases/add_to_cart.dart';
+import 'package:onyx_ix_pos/features/order/domain/usecases/remove_from_cart.dart';
+import 'package:onyx_ix_pos/features/order/domain/usecases/increment_quantity.dart';
+import 'package:onyx_ix_pos/features/order/domain/usecases/decrement_quantity.dart';
+import 'package:onyx_ix_pos/features/order/domain/usecases/get_cart_items.dart';
+import 'package:onyx_ix_pos/features/order/domain/usecases/calculate_total.dart';
+import 'package:onyx_ix_pos/features/order/domain/usecases/add_payment.dart';
+import 'package:onyx_ix_pos/features/order/domain/usecases/checkout.dart';
 
 import 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(CartState(items: [], paymentInput: '0.0', amountPaid: 0.0));
+  final AddToCartUseCase addToCartUseCase;
+  final RemoveFromCartUseCase removeFromCartUseCase;
+  final IncrementQuantityUseCase incrementQuantityUseCase;
+  final DecrementQuantityUseCase decrementQuantityUseCase;
+  final GetCartItemsUseCase getCartItemsUseCase;
+  final CalculateTotalUseCase calculateTotalUseCase;
+  final AddPaymentUseCase addPaymentUseCase;
+  final CheckoutUseCase checkoutUseCase;
 
-void addPayment(){
-  final paymentValue = double.tryParse(state.paymentInput) ?? 0.0;
-  if (paymentValue > 0) {
-    final newAmountPaid = state.amountPaid + paymentValue;
-    emit(state.copyWith(amountPaid: newAmountPaid, paymentInput: '0.0',));
-  } else {
-    emit(state.copyWith(paymentInput: '0.0')); 
-  }
-}
+  CartCubit({
+    required this.addToCartUseCase,
+    required this.removeFromCartUseCase,
+    required this.incrementQuantityUseCase,
+    required this.decrementQuantityUseCase,
+    required this.getCartItemsUseCase,
+    required this.calculateTotalUseCase,
+    required this.addPaymentUseCase,
+    required this.checkoutUseCase,
+  }) : super(CartState(
+          items: [], 
+          paymentInput: '0.0', 
+          amountPaid: 0.0,
+          error: null,
+        ));
+
+
+
   void addToCart(Product product) {
-    final items = List<CartItem>.from(state.items);
-    final index = items.indexWhere((item) => item.product.id == product.id);
-    if (index == -1) {
-      items.add(CartItem(product: product, quantity: 1));
-    } else {
-      items[index].quantity++;
+    try {
+      addToCartUseCase(product);
+      final items = getCartItemsUseCase(null);
+      emit(state.copyWith(
+        items: items,
+        error: null,
+      ));
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
+  }
+  }
+
+  void removeFromCart(Product product) {
+    try {
+      removeFromCartUseCase(product);
+      final items = getCartItemsUseCase(null);
+      emit(state.copyWith(
+        items: items,
+        error: null,
+      ));
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
+  }
+  }
+
+  void incrementQuantity(Product product) {
+    try {
+      incrementQuantityUseCase(product);
+      final items = getCartItemsUseCase(null);
+      emit(state.copyWith(
+        items: items,
+        error: null,
+      ));
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
+  }
+  }
+
+ 
+  void decrementQuantity(Product product) {
+    try {
+      decrementQuantityUseCase(product);
+      final items = getCartItemsUseCase(null);
+      emit(state.copyWith(
+        items: items,
+        error: null,
+      ));
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
     }
-    emit(state.copyWith(items: items));
   }
 
-  void removeFromCart(CartItem cartItem) {
-    final items = List<CartItem>.from(state.items)..remove(cartItem);
-    emit(state.copyWith(items: items));
-  }
-
-  void incrementQuantity(CartItem cartItem) {
-    final items = List<CartItem>.from(state.items);
-    final index = items.indexOf(cartItem);
-    if (index != -1) {
-      items[index].quantity++;
-      emit(state.copyWith(items: items));
+ 
+  void addPayment(double amount) {
+    try {
+      final payment = Payment(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        amount: amount,
+        timestamp: DateTime.now(),
+      );
+      addPaymentUseCase(payment);
+      
+     
+      final items = getCartItemsUseCase(null);
+      final currentState = state.copyWith(items: items);
+      final grandTotal = currentState.grandTotal;
+      final currentAmountPaid = state.amountPaid;
+      final newAmountPaid = currentAmountPaid + amount;
+      
+      final finalAmountPaid = newAmountPaid > grandTotal ? grandTotal : newAmountPaid;
+      
+      emit(state.copyWith(
+        items: items,
+        amountPaid: finalAmountPaid,
+        error: null,
+      ));
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
     }
   }
 
-  void decrementQuantity(CartItem cartItem) {
-    final items = List<CartItem>.from(state.items);
-    final index = items.indexOf(cartItem);
-    if (index != -1) {
-      if (items[index].quantity > 1) {
-        items[index].quantity--;
-      } else {
-        items.removeAt(index);
+  void checkout() {
+    try {
+      final isPaidInFull = state.isPaidInFull;
+      if (!isPaidInFull) {
+        emit(state.copyWith(error: 'Payment is not complete'));
+        return;
       }
-      emit(state.copyWith(items: items));
+      
+      checkoutUseCase(null);
+      emit(CartState(
+        items: [],
+        paymentInput: '0.0',
+        amountPaid: 0.0,
+        error: null,
+      ));
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
     }
   }
 
   void updatePaymentInput(String input) {
- 
       emit(state.copyWith(paymentInput: input));
-  
-  }
-
-  void startNewOrder() {
-    emit(CartState(items: [], paymentInput: '0.0', amountPaid: 0.0));
   }
 
   void clearPayment() {
-    emit(state.copyWith(amountPaid: 0.0));
+    emit(state.copyWith(amountPaid: 0.0, error: null));
   }
 
-  void clearCart() {
-    emit(state.copyWith(items: []));
+  void clearError() {
+    emit(state.copyWith(error: null));
   }
 }
