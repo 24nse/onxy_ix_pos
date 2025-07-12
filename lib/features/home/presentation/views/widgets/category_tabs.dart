@@ -37,7 +37,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
         child: AdaptiveLayout(
        
           mobileLayout: (context)=>_buildScrollableLayout(),
-          desktopLayout: (context)=>_buildExpandedLayout(),
+          desktopLayout: (context)=>_buildScrollableLayout(),
           tabletLayout: (context) => _buildExpandedLayout(),
         ),
       ),
