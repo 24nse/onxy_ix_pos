@@ -9,7 +9,7 @@ import 'package:onyx_ix_pos/core/widgets/hover_menu_item.dart';
 class LanguageMenuButton extends StatelessWidget {
   static const double _menuItemWidth = 5;
   static const double _menuItemHeight = 20;
-  static const double _borderRadius = 2;
+  static const double _borderRadius = 4;
   static const double _borderWidth = 0;
 
   const LanguageMenuButton({super.key});

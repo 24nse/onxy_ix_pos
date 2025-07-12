@@ -1,40 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 
-class MainScreenTabs extends StatefulWidget implements PreferredSizeWidget {
+class MainScreenTabs extends HookWidget implements PreferredSizeWidget {
   const MainScreenTabs({super.key});
 
   @override
-  State<MainScreenTabs> createState() => _MainScreenTabsState();
-
-  @override
   Size get preferredSize => const Size.fromHeight(60);
-}
-
-class _MainScreenTabsState extends State<MainScreenTabs> {
-  late TabController _tabController;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _tabController = DefaultTabController.of(context);
-    _tabController.addListener(_handleTabSelection);
-  }
-
-  @override
-  void dispose() {
-    _tabController.removeListener(_handleTabSelection);
-    super.dispose();
-  }
-
-  void _handleTabSelection() {
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
+    final TabController tabController = DefaultTabController.of(context);
+    useListenable(tabController); 
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
@@ -49,12 +29,14 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
           children: [
             _buildTab(
               context,
+              tabController,
               0,
               AppLocalizations.of(context)?.translate('products') ?? 'Products',
               Icons.grid_view,
             ),
             _buildTab(
               context,
+              tabController,
               1,
               AppLocalizations.of(context)?.translate('cart') ?? 'Cart',
               Icons.shopping_cart,
@@ -67,26 +49,31 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
 
   Widget _buildTab(
     BuildContext context,
+    TabController tabController,
     int index,
     String text,
     IconData icon,
   ) {
-    final isSelected = _tabController.index == index;
+    final isSelected = tabController.index == index;
+
+    final theme = Theme.of(context);
     final tabColor = isSelected
-        ? (Theme.of(context).brightness == Brightness.dark
+        ? (theme.brightness == Brightness.dark
             ? AppColors.selectedTabDark
             : const Color(0xFFe5e9ec))
         : Colors.transparent;
+
     final onTabColor = isSelected
-        ? (Theme.of(context).brightness == Brightness.dark
+        ? (theme.brightness == Brightness.dark
             ? Colors.white
             : const Color(0xFF676f7a))
         : const Color(0xFFa3a4b6);
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
         child: GestureDetector(
-          onTap: () => _tabController.animateTo(index),
+          onTap: () => tabController.animateTo(index),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
@@ -102,11 +89,11 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
                   fit: BoxFit.scaleDown,
                   child: Text(
                     text,
-                    style:Theme.of(context).textTheme.displayLarge!.copyWith(
-                      fontSize: getResponsiveFontSize(context, fontSize: 14),
-                      color: onTabColor,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                          fontSize: getResponsiveFontSize(context, fontSize: 14),
+                          color: onTabColor,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                 ),
               ],

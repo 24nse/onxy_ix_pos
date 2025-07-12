@@ -163,7 +163,7 @@ class OrderDataGridSource extends DataGridSource {
   }
 
   Widget _buildDeleteButton(CartItem item) => IconButton(
-    icon: const Icon(FontAwesomeIcons.trashCan, color: Colors.red),
+    icon: const Icon(FontAwesomeIcons.trashCan, color: Colors.red,size: 14,),
     onPressed: () {
       cubit.removeFromCart(item.product);
       showCustomToast(
