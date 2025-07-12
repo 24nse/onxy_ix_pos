@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/core/widgets/adaptive_layout.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 
-class CategoryTabs extends StatefulWidget {
+class CategoryTabs extends HookWidget {
   final List<Map<String, dynamic>> categories;
   final Function(String) onCategorySelected;
   final String selectedCategory;
@@ -17,16 +18,12 @@ class CategoryTabs extends StatefulWidget {
   });
 
   @override
-  State<CategoryTabs> createState() => _CategoryTabsState();
-}
-
-class _CategoryTabsState extends State<CategoryTabs> {
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        // alignment: Alignment.center,
+        alignment: Alignment.center,
+        
         height: 35,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -36,51 +33,51 @@ class _CategoryTabsState extends State<CategoryTabs> {
           borderRadius: BorderRadius.circular(4),
         ),
         child: AdaptiveLayout(
-       
-          mobileLayout: (context)=>_buildScrollableLayout(),
-          desktopLayout: (context)=>   _buildExpandedLayout(),
-          tabletLayout: (context) => _buildExpandedLayout(),
+          mobileLayout: (context) => _buildScrollableLayout(context),
+          desktopLayout: (context) => _buildExpandedLayout(context),
+          tabletLayout: (context) => _buildExpandedLayout(context),
         ),
       ),
     );
   }
 
-  Widget _buildScrollableLayout() {
+  Widget _buildScrollableLayout(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: widget.categories.map((category) {
-          return _buildTab(category, isExpanded: false);
+        children: categories.map((category) {
+          return _buildTab(context, category, isExpanded: false);
         }).toList(),
       ),
     );
   }
 
-  Widget _buildExpandedLayout() {
+  Widget _buildExpandedLayout(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: widget.categories.map((category) {
-        return Expanded(child: _buildTab(category, isExpanded: true));
+      children: categories.map((category) {
+        return Expanded(child: _buildTab(context, category, isExpanded: true));
       }).toList(),
     );
   }
 
-
-  Widget _buildTab(Map<String, dynamic> category, {required bool isExpanded}) {
+  Widget _buildTab(BuildContext context, Map<String, dynamic> category,
+      {required bool isExpanded}) {
     final theme = Theme.of(context);
     final label = category['label'] as String;
     final icon = category['icon'] as IconData;
-    final isSelected = widget.selectedCategory == label;
+    final isSelected = selectedCategory == label;
 
     final textTheme = theme.textTheme;
 
     final tabColor = isSelected
-        ? (Theme.of(context).brightness == Brightness.dark
+        ? (theme.brightness == Brightness.dark
             ? AppColors.selectedTabDark
             : AppColors.searchBarLight)
         : Colors.transparent;
+
     final onTabColor = isSelected
-        ? (Theme.of(context).brightness == Brightness.dark
+        ? (theme.brightness == Brightness.dark
             ? Colors.white
             : const Color(0xFF676f7a))
         : const Color(0xFFa3a4b6);
@@ -89,7 +86,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
         AppLocalizations.of(context)?.translate(label.toLowerCase()) ?? label;
 
     Widget tabContent = Container(
-      margin: EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
       height: 25,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
@@ -99,7 +96,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: onTabColor.withValues(alpha: 0.8), size: 14),
+          Icon(icon, color: onTabColor.withAlpha(200), size: 14),
           const SizedBox(width: 6),
           FittedBox(
             fit: BoxFit.scaleDown,
@@ -117,7 +114,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
     );
 
     return GestureDetector(
-      onTap: () => widget.onCategorySelected(label),
+      onTap: () => onCategorySelected(label),
       child: isExpanded
           ? tabContent
           : Padding(

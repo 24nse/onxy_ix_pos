@@ -30,7 +30,7 @@ class CustomHoverIconContainer extends HookWidget {
 
     // Colors
     final Color activeColor = AppColors.success;
-    final Color inactiveColor = dark ? AppColors.cardDark : AppColors.cardLight;
+    final Color inactiveColor = dark ? AppColors.cardDark : AppColors.backgroundLight;
     final Color borderColor = isActive || isHovered.value
         ? activeColor
         : (dark ? AppColors.borderDark : AppColors.borderLight);
@@ -45,8 +45,8 @@ class CustomHoverIconContainer extends HookWidget {
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          padding: const EdgeInsets.all(8),
+          margin: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             color: isActive || isHovered.value ? activeColor : inactiveColor,
             borderRadius: BorderRadius.circular(borderRadius),
@@ -62,7 +62,7 @@ class CustomHoverIconContainer extends HookWidget {
                 : [],
           ),
           child: icon != null
-              ? Icon(icon, color: iconColor)
+              ? Icon(icon, color: iconColor, size: 22)
               : imageAsset != null
               ? Image.asset(
                   imageAsset!,
