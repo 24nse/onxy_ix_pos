@@ -54,7 +54,7 @@ class CustomHoverIconContainer extends HookWidget {
             boxShadow: isActive || isHovered.value
                 ? [
                     BoxShadow(
-                      color: activeColor.withOpacity(0.2),
+                      color: activeColor.withValues(alpha: 0.2),
                       blurRadius: 8,
                       spreadRadius: 1,
                     ),

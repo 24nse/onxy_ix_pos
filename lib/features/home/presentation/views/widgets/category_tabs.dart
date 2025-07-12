@@ -23,9 +23,9 @@ class _CategoryTabsState extends State<CategoryTabs> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Container(
-        alignment: Alignment.center,
+        // alignment: Alignment.center,
         height: 35,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -37,7 +37,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
         child: AdaptiveLayout(
        
           mobileLayout: (context)=>_buildScrollableLayout(),
-          desktopLayout: (context)=>_buildExpandedLayout(),
+          desktopLayout: (context)=>   _buildExpandedLayout(),
           tabletLayout: (context) => _buildExpandedLayout(),
         ),
       ),
@@ -63,6 +63,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
       }).toList(),
     );
   }
+
 
   Widget _buildTab(Map<String, dynamic> category, {required bool isExpanded}) {
     final theme = Theme.of(context);
@@ -97,15 +98,16 @@ class _CategoryTabsState extends State<CategoryTabs> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: onTabColor.withOpacity(0.8), size: 14),
+          Icon(icon, color: onTabColor.withValues(alpha: 0.8), size: 14),
           const SizedBox(width: 6),
           FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
               translatedLabel,
               style: textTheme.labelLarge?.copyWith(
+                fontWeight: FontWeight.w100,
                 color: onTabColor,
-                fontSize: 14,
+                fontSize: 12,
               ),
             ),
           ),

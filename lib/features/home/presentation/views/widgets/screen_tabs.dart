@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
+import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 
 class MainScreenTabs extends StatefulWidget implements PreferredSizeWidget {
   const MainScreenTabs({super.key});
@@ -45,8 +46,18 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
         ),
         child: Row(
           children: [
-            _buildTab(context, 0, 'Products', Icons.grid_view),
-            _buildTab(context, 1, 'Cart', Icons.shopping_cart),
+            _buildTab(
+              context,
+              0,
+              AppLocalizations.of(context)?.translate('products') ?? 'Products',
+              Icons.grid_view,
+            ),
+            _buildTab(
+              context,
+              1,
+              AppLocalizations.of(context)?.translate('cart') ?? 'Cart',
+              Icons.shopping_cart,
+            ),
           ],
         ),
       ),

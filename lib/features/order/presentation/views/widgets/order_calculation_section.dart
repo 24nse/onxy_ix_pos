@@ -13,9 +13,9 @@ class OrderCalculationSection extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
+        children:const [
           Expanded(flex: 6, child: SubtotalSection()),
-          const SizedBox(width: 20),
+           SizedBox(width: 20),
           Expanded(flex: 5, child: PaymentCalculatorSection()),
         ],
       ),

@@ -17,18 +17,23 @@ class SubtotalSection extends StatelessWidget {
           children: [
             _buildSummaryRow(
               context,
-              AppLocalizations.of(context)?.translate('subtotal_post_discount') ?? 'Subtotal (Post-Discount)',
+              AppLocalizations.of(
+                    context,
+                  )?.translate('subtotal_post_discount') ??
+                  'Subtotal (Post-Discount)',
               '\$${state.subtotalAfterDiscount.toStringAsFixed(2)}',
             ),
             _buildSummaryRow(
               context,
-              AppLocalizations.of(context)?.translate('tax_10_percent') ?? 'Tax (10%)',
+              AppLocalizations.of(context)?.translate('tax_10_percent') ??
+                  'Tax (10%)',
               '\$${state.taxAmount.toStringAsFixed(2)}',
             ),
             const Divider(height: 5, thickness: 0.1),
             _buildSummaryRow(
               context,
-              AppLocalizations.of(context)?.translate('grand_total') ?? 'Grand Total',
+              AppLocalizations.of(context)?.translate('grand_total') ??
+                  'Grand Total',
               '\$${state.grandTotal.toStringAsFixed(2)}',
               isTotal: true,
               color: theme.colorScheme.primary,
@@ -49,7 +54,7 @@ class SubtotalSection extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    final defaultColor = theme.colorScheme.onSurface.withOpacity(0.8);
+    final defaultColor = theme.colorScheme.onSurface.withValues(alpha: 0.8);
     final effectiveColor = color ?? defaultColor;
 
     final style = isTotal
@@ -63,18 +68,11 @@ class SubtotalSection extends StatelessWidget {
         children: [
           FittedBox(
             fit: BoxFit.scaleDown,
-            child: Text(
-              overflow: TextOverflow.ellipsis,
-              title,
-              style: style,
-            ),
+            child: Text(overflow: TextOverflow.ellipsis, title, style: style),
           ),
           FittedBox(
             fit: BoxFit.scaleDown,
-            child: Text(
-              amount,
-              style: style,
-            ),
+            child: Text(amount, style: style),
           ),
         ],
       ),

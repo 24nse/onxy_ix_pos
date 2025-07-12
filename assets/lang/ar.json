@@ -41,5 +41,7 @@
   "product_added_to_cart_successfully": "تم إضافة المنتج إلى السلة بنجاح",
 
   "action_completed_successfully": "تم الإجراء بنجاح",
-  "all_payments_cleared": "تم مسح جميع المدفوعات."
+  "all_payments_cleared": "تم مسح جميع المدفوعات.",
+  "products": "المنتجات",
+  "cart": "السلة"
 }

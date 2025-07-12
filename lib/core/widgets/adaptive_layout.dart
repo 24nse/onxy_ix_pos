@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
+import 'package:onyx_ix_pos/features/home/presentation/views/mobile_layout.dart';
 
 class AdaptiveLayout extends StatelessWidget {
   const AdaptiveLayout({
@@ -19,12 +20,12 @@ class AdaptiveLayout extends StatelessWidget {
       builder: (context, constraints) {
         final width = constraints.maxWidth;
 
-        if (width >= SizeConfig.desktop) {
-          return desktopLayout(context);
-        } else if (width >= SizeConfig.tablet && tabletLayout != null) {
+        if (width < SizeConfig.mobile) {
+          return mobileLayout(context);
+        } else if (width <= SizeConfig.tablet && tabletLayout != null) {
           return tabletLayout!(context);
         } else {
-          return mobileLayout(context);
+          return desktopLayout(context);
         }
       },
     );

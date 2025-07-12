@@ -33,8 +33,8 @@ class OnyxIxPosApp extends StatelessWidget {
                 builder: (context) {
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
-                    theme: AppTheme.lightTheme(context),
-                    darkTheme: AppTheme.darkTheme(context),
+                    theme: AppTheme.lightTheme(context,locale),
+                    darkTheme: AppTheme.darkTheme(context,locale),
                     themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
                     localizationsDelegates: const [
                       AppLocalizations.delegate,

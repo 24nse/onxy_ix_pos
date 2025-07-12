@@ -40,5 +40,7 @@
   "success": "Success",
   "action_completed_successfully": "Action completed successfully",
   "product_added_to_cart_successfully": "Product added to cart successfully",
-   "all_payments_cleared": "All payments have been cleared."
+   "all_payments_cleared": "All payments have been cleared.",
+    "products": "products",
+  "cart": "cart"
 }

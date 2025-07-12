@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
@@ -24,17 +22,14 @@ class OrderSummarySection extends StatelessWidget {
         return Card(
           margin: const EdgeInsets.only(
             top: 16,
-            left: 8,
+            left: 16,
             right: 16,
             bottom: 56,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
             side: Theme.of(context).brightness == Brightness.dark
-                ? BorderSide(
-                    color: Colors.grey.shade800,
-                    width: 1,
-                  )
+                ? BorderSide(color: Colors.grey.shade800, width: 1)
                 : BorderSide.none,
           ),
           child: Padding(
@@ -80,8 +75,9 @@ class OrderSummarySection extends StatelessWidget {
                                     )?.translate('your_cart_is_empty') ??
                                     'Your cart is empty',
                                 style: theme.textTheme.bodyLarge?.copyWith(
-                                  color: theme.colorScheme.onSurface
-                                      .withOpacity(0.6),
+                                  color: theme.colorScheme.onSurface.withValues(
+                                    alpha: 0.6,
+                                  ),
                                 ),
                               ),
                             )
@@ -93,7 +89,8 @@ class OrderSummarySection extends StatelessWidget {
                                       children: [
                                         SizedBox(
                                           height: 140,
-                                          child: const CartList()),
+                                          child: const CartList(),
+                                        ),
                                         const SizedBox(height: 8),
                                         OrderCalculationSection(),
                                         const SizedBox(height: 4),
@@ -108,8 +105,18 @@ class OrderSummarySection extends StatelessWidget {
                                     context.read<CartCubit>().clearCart();
                                     showCustomToast(
                                       context,
-                                      title: AppLocalizations.of(context)?.translate('complete_purchase') ?? 'Checkout Complete',
-                                      message: AppLocalizations.of(context)?.translate('action_completed_successfully') ?? 'The order has been successfully processed.',
+                                      title:
+                                          AppLocalizations.of(
+                                            context,
+                                          )?.translate('complete_purchase') ??
+                                          'Checkout Complete',
+                                      message:
+                                          AppLocalizations.of(
+                                            context,
+                                          )?.translate(
+                                            'action_completed_successfully',
+                                          ) ??
+                                          'The order has been successfully processed.',
                                     );
                                   },
                                 ),
