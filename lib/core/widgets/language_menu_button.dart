@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/features/settings/presentation/cubits/locale_cubit.dart';
 import 'package:onyx_ix_pos/core/widgets/custom_hover_icon_container.dart';
 import 'package:onyx_ix_pos/core/widgets/hover_menu_item.dart';
@@ -59,13 +60,19 @@ class LanguageMenuButton extends StatelessWidget {
       height: 30,
       padding: EdgeInsets.symmetric(horizontal: 4),
       value: value,
-      child: HoverableMenuItem(
-        width: _menuItemWidth,
-        height: _menuItemHeight,
-        
-        borderRadius: _borderRadius,
-        borderWidth: _borderWidth,
-        label: label,
+      child: DefaultTextStyle(
+        style: Theme.of(context).textTheme.displayLarge!.copyWith(
+          fontSize: getResponsiveFontSize(context, fontSize: 15)
+        ),
+        child: HoverableMenuItem(
+          width: _menuItemWidth,
+          height: _menuItemHeight,
+          
+          borderRadius: _borderRadius,
+          borderWidth: _borderWidth,
+          label: label,
+          
+        ),
       ),
     );
   }

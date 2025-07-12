@@ -49,6 +49,7 @@ padding:  EdgeInsets.zero,
         child: Text(
           widget.label,
           style: TextStyle(
+            
             color: isHovered ? Colors.white : textColor,
             fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
           ),

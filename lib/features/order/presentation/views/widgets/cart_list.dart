@@ -20,10 +20,10 @@ class CartList extends HookWidget {
           fit: BoxFit.scaleDown,
           child: Text(
             AppLocalizations.of(context)?.translate(label.toLowerCase()) ?? label,
-            style: TextStyle(
-              fontSize: getResponsiveFontSize(context, fontSize: 12),
-                fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.displayLarge!.copyWith(
+              fontSize: getResponsiveFontSize(context, fontSize: 10),
+              fontWeight: FontWeight.bold
+            )
           ),
         ),
       ),

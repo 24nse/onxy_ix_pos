@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 
@@ -51,13 +51,13 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
               context,
               0,
               AppLocalizations.of(context)?.translate('products') ?? 'Products',
-              FontAwesomeIcons.thLarge,
+              Icons.grid_view,
             ),
             _buildTab(
               context,
               1,
               AppLocalizations.of(context)?.translate('cart') ?? 'Cart',
-              FontAwesomeIcons.cartShopping,
+              Icons.shopping_cart,
             ),
           ],
         ),
@@ -96,14 +96,14 @@ class _MainScreenTabsState extends State<MainScreenTabs> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: onTabColor, size: 16),
+                Icon(icon, color: onTabColor, size: 14),
                 const SizedBox(width: 8),
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
                     text,
-                    style: TextStyle(
-                      fontSize: 18,
+                    style:Theme.of(context).textTheme.displayLarge!.copyWith(
+                      fontSize: getResponsiveFontSize(context, fontSize: 14),
                       color: onTabColor,
                       fontWeight: FontWeight.w600,
                     ),

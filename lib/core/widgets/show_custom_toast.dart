@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 
 void showCustomToast(BuildContext context, {String? title, String? message, bool isError = false}) {
   final double width = MediaQuery.of(context).size.width;
@@ -29,6 +30,7 @@ void showCustomToast(BuildContext context, {String? title, String? message, bool
                 maxLines: 3,
                 title ?? AppLocalizations.of(context)?.translate('success') ?? 'Success',
                 style: TextStyle(
+                  fontSize: getResponsiveFontSize(context, fontSize: 10),
                   fontWeight: FontWeight.bold,
                   color: isError ? Colors.white : Colors.black,
                 ),

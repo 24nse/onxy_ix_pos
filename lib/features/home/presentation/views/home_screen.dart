@@ -34,6 +34,8 @@ class HomeScreen extends HookWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
+            style:  TextTheme.of(context).displayLarge!.copyWith(fontSize:  getResponsiveFontSize(context, fontSize: 20)),
+            
             AppLocalizations.of(context)?.translate('app_title') ??
                 'Onyx IX POS',
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 import 'package:onyx_ix_pos/features/order/domain/entities/key_action.dart';
 import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
@@ -30,8 +31,9 @@ class PaymentCalculatorSection extends HookWidget {
                 child: Text(
                   AppLocalizations.of(context)?.translate('enter_payment_amount') ??
                       'Enter Payment Amount:',
-                  style: textTheme.labelLarge!.copyWith(
-                    fontSize: 12
+                  style: textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: getResponsiveFontSize(context, fontSize: 12)
                   ),
                 ),
               ),
@@ -183,6 +185,7 @@ class PaymentCalculatorSection extends HookWidget {
                   child: Text(
                     AppLocalizations.of(context)?.translate('add_payment') ?? 'add Payment',
                     style: textTheme.labelLarge?.copyWith(
+                      fontSize: getResponsiveFontSize(context, fontSize: 12),
                       color: colorScheme.onPrimary,
                     ),
                   ),
@@ -251,7 +254,8 @@ class PaymentCalculatorSection extends HookWidget {
         child: Text(
           text,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            fontSize: getResponsiveFontSize(context, fontSize: 12),
                 color: Theme.of(context).brightness == Brightness.dark
                 ? Colors.white
                 : Colors.black,

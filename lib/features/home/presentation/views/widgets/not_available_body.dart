@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 
 class NotAvailableBody extends StatelessWidget {
   const NotAvailableBody({
@@ -22,6 +23,7 @@ class NotAvailableBody extends StatelessWidget {
             : localizations?.translate('no_products_available') ??
                   'No products available',
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+          fontSize: getResponsiveFontSize(context, fontSize: 12),
           color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
         ),
       ),

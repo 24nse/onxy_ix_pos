@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 
 class ProceedToCheckoutButton extends StatelessWidget {
   const ProceedToCheckoutButton({super.key, this.onPressed});
@@ -25,6 +26,7 @@ class ProceedToCheckoutButton extends StatelessWidget {
             AppLocalizations.of(context)?.translate('proceed_to_checkout') ??
                 'Proceed to Checkout',
             style: theme.textTheme.labelLarge?.copyWith(
+              fontSize: getResponsiveFontSize(context, fontSize: 14),
               color: theme.colorScheme.onPrimary,
               fontWeight: FontWeight.bold,
             ),
