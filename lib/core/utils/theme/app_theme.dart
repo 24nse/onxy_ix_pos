@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-
 import 'app_colors.dart';
 import 'app_styles.dart';
 
+String getFontFamily(Locale locale) {
+  if (locale.languageCode == 'ar') {
+    return 'Cairo';
+  }
+  return 'Roboto';
+}
+
+
 class AppTheme {
-  static ThemeData lightTheme(BuildContext context) {
+  static ThemeData lightTheme(BuildContext context,Locale locale) {
     return ThemeData(
-      fontFamily: 'Poppins',
+      fontFamily: getFontFamily(locale),
+  
       primaryColor: AppColors.primaryLight,
       scaffoldBackgroundColor: AppColors.backgroundLight,
       cardColor: AppColors.cardLight,
@@ -38,9 +46,11 @@ class AppTheme {
     );
   }
 
-  static ThemeData darkTheme(BuildContext context) {
+  static ThemeData darkTheme(BuildContext context,Locale locale) {
     return ThemeData(
-      fontFamily: 'Poppins',
+      fontFamily:getFontFamily(locale),
+      // fontFamilyFallback: ['NotoSans', 'Arial', 'sans-serif']
+    
       primaryColor: AppColors.primaryDark,
       scaffoldBackgroundColor: AppColors.backgroundDark,
       cardColor: AppColors.cardDark,
@@ -55,6 +65,7 @@ class AppTheme {
         primary: AppColors.primaryDark,
         secondary: AppColors.secondaryDark,
         surface: AppColors.cardDark,
+        
         background: AppColors.backgroundDark,
         error: AppColors.error,
       ),

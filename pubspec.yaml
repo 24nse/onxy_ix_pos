@@ -46,7 +46,7 @@ dependencies:
   syncfusion_flutter_datagrid: ^30.1.39
   font_awesome_flutter: ^10.8.0
   overlay_support: ^2.1.0
-  google_fonts: ^6.2.1
+  
   get_it: ^8.0.3
 
 dev_dependencies:
@@ -109,5 +109,7 @@ flutter:
           weight: 400
         - asset: assets/fonts/Cairo-SemiBold.ttf
           weight: 600
+
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

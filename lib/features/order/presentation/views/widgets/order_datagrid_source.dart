@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
@@ -162,7 +163,7 @@ class OrderDataGridSource extends DataGridSource {
   }
 
   Widget _buildDeleteButton(CartItem item) => IconButton(
-    icon: const Icon(Icons.delete, color: Colors.red),
+    icon: const Icon(FontAwesomeIcons.trashCan, color: Colors.red),
     onPressed: () {
       cubit.removeFromCart(item);
       showCustomToast(
