@@ -39,9 +39,17 @@
   "product_deleted_successfully": "تمت إزالة المنتج من سلة التسوق بنجاح.",
   "success": "نجاح",
   "product_added_to_cart_successfully": "تم إضافة المنتج إلى السلة بنجاح",
-
   "action_completed_successfully": "تم الإجراء بنجاح",
   "all_payments_cleared": "تم مسح جميع المدفوعات.",
   "products": "المنتجات",
-  "cart": "السلة"
+  "cart": "السلة",
+  "payment_incomplete": "الدفع غير مكتمل",
+  "payment_not_complete_message": "يرجى إكمال الدفع قبل إتمام الطلب.",
+  "invalid_payment": "دفع غير صحيح",
+  "please_enter_a_valid_payment_amount": "يرجى إدخال مبلغ دفع صحيح.",
+  "payment_exceeds_total": "المبلغ المدفوع يتجاوز المجموع",
+  "payment_amount_too_high": "مبلغ الدفع أعلى من المبلغ المتبقي.",
+  "no_products_found": "لم يتم العثور على منتجات",
+  "no_products_available": "لا توجد منتجات متاحة",
+  "search_results": "نتائج البحث"
 }

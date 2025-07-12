@@ -187,11 +187,25 @@ class PaymentCalculatorSection extends HookWidget {
                     ),
                   ),
                 ),
-                () {
+                () async {
                   final payment = context.read<PaymentCubit>().state;
                   if (payment.isNotEmpty && double.tryParse(payment) != null && double.parse(payment) > 0) {
+                    final paymentAmount = double.parse(payment);
+                    final cartState = context.read<CartCubit>().state;
+                    final remainingAmount = cartState.remainingAmount;
+                    
+                    if (paymentAmount > remainingAmount) {
+                      showCustomToast(
+                        context,
+                        title: AppLocalizations.of(context)?.translate('payment_exceeds_total') ?? 'Payment Exceeds Total',
+                        message: AppLocalizations.of(context)?.translate('payment_amount_too_high') ?? 'Payment amount is higher than remaining amount.',
+                        isError: true,
+                      );
+                      return;
+                    }
+                    
                     context.read<CartCubit>().updatePaymentInput(payment);
-                    context.read<CartCubit>().addPayment();
+                    context.read<CartCubit>().addPayment(paymentAmount);
                     context.read<PaymentCubit>().reset();
                     showCustomToast(
                       context,
@@ -203,6 +217,7 @@ class PaymentCalculatorSection extends HookWidget {
                       context,
                       title: AppLocalizations.of(context)?.translate('invalid_payment') ?? 'Invalid Payment',
                       message: AppLocalizations.of(context)?.translate('please_enter_a_valid_payment_amount') ?? 'Please enter a valid payment amount.',
+                      isError: true,
                     );
                   }
                 },

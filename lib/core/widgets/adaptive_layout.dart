@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
-import 'package:onyx_ix_pos/features/home/presentation/views/mobile_layout.dart';
 
 class AdaptiveLayout extends StatelessWidget {
   const AdaptiveLayout({

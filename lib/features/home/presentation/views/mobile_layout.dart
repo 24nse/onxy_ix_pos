@@ -7,10 +7,10 @@ class MobileLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TabBarView(
+    return TabBarView(
       children: [
-        ProductCatalogSection(),
-        OrderSummarySection(),
+        const ProductCatalogSection(),
+        const OrderSummarySection(),
       ],
     );
   }

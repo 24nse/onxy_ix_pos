@@ -5,7 +5,9 @@ import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/cubits/full_screen_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_state.dart';
+import 'package:onyx_ix_pos/features/order/presentation/views/widgets/cart_items_is_empty.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/cart_list.dart';
+import 'package:onyx_ix_pos/features/order/presentation/views/widgets/custom_header_section.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/order_calculation_section.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/payment_details_section.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/proceed_to_checkout_button.dart';
@@ -37,50 +39,14 @@ class OrderSummarySection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            AppLocalizations.of(
-                                  context,
-                                )?.translate('order_summary') ??
-                                'Order Summary',
-                            style: theme.textTheme.displayMedium,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.fullscreen),
-                        onPressed: () {
-                          context.read<FullScreenCubit>().toggleFullScreen();
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                CustomHeaderSection(theme: theme),
                 const SizedBox(height: 16),
                 Expanded(
                   child: BlocBuilder<CartCubit, CartState>(
                     builder: (context, state) {
+                     
                       return state.items.isEmpty
-                          ? Center(
-                              child: Text(
-                                AppLocalizations.of(
-                                      context,
-                                    )?.translate('your_cart_is_empty') ??
-                                    'Your cart is empty',
-                                style: theme.textTheme.bodyLarge?.copyWith(
-                                  color: theme.colorScheme.onSurface.withValues(
-                                    alpha: 0.6,
-                                  ),
-                                ),
-                              ),
-                            )
+                          ? CartItemsIsEmpty(theme: theme)
                           : Column(
                               children: [
                                 Expanded(
@@ -102,22 +68,10 @@ class OrderSummarySection extends StatelessWidget {
                                 const SizedBox(height: 4),
                                 ProceedToCheckoutButton(
                                   onPressed: () {
-                                    context.read<CartCubit>().clearCart();
-                                    showCustomToast(
-                                      context,
-                                      title:
-                                          AppLocalizations.of(
-                                            context,
-                                          )?.translate('complete_purchase') ??
-                                          'Checkout Complete',
-                                      message:
-                                          AppLocalizations.of(
-                                            context,
-                                          )?.translate(
-                                            'action_completed_successfully',
-                                          ) ??
-                                          'The order has been successfully processed.',
-                                    );
+                                    context.read<CartCubit>().checkout();
+                                    final state = context.read<CartCubit>().state;
+                                    
+                                    _checkPaymentCompleteOrInComplete(state, context);
                                   },
                                 ),
                               ],
@@ -131,5 +85,23 @@ class OrderSummarySection extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _checkPaymentCompleteOrInComplete(CartState state, BuildContext context) {
+     if (state.error != null) {
+      showCustomToast(
+        context,
+        title: AppLocalizations.of(context)?.translate('payment_incomplete') ?? 'Payment Incomplete',
+        message: AppLocalizations.of(context)?.translate('payment_not_complete_message') ?? 'Please complete the payment before checkout.',
+        isError: true,
+      );
+                                     
+    } else {
+      showCustomToast(
+        context,
+        title: AppLocalizations.of(context)?.translate('complete_purchase') ?? 'Checkout Complete',
+        message: AppLocalizations.of(context)?.translate('action_completed_successfully') ?? 'The order has been successfully processed.',
+      );
+    }
   }
 }

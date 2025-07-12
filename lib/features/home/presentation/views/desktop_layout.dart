@@ -13,7 +13,10 @@ class DesktopLayout extends StatelessWidget {
       builder: (context, state) {
         return state?const OrderSummarySection(): Row(
           children: [
-            Expanded(flex: 4, child:const ProductCatalogSection()),
+            Expanded(
+              flex: 4, 
+              child: const ProductCatalogSection(),
+            ),
             Expanded(flex: 4, child:const OrderSummarySection()),
           ],
         );

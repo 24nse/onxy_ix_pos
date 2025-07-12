@@ -20,7 +20,6 @@ class LanguageMenuButton extends StatelessWidget {
       tooltip: '',
       padding: EdgeInsets.zero,
   menuPadding: EdgeInsets.zero,
-  // constraints: BoxConstraints(), 
 
       offset: const Offset(-10, 42),
       shape: RoundedRectangleBorder(
@@ -38,7 +37,6 @@ class LanguageMenuButton extends StatelessWidget {
           icon: Icons.language,
           isActive: false,
           onTap: () {
-            // Open the popup menu when the container or icon is pressed
             final popupMenuButton = context
                 .findAncestorStateOfType<PopupMenuButtonState<Locale>>();
             popupMenuButton?.showButtonMenu();

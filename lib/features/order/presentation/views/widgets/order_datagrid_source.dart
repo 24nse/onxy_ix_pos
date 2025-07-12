@@ -125,8 +125,8 @@ class OrderDataGridSource extends DataGridSource {
             ),
             child: IconButton(
               padding: EdgeInsets.zero,
-              icon: Icon(Icons.remove, size: iconSize),
-              onPressed: () => cubit.decrementQuantity(item),
+              icon: Icon(FontAwesomeIcons.minus, size: iconSize),
+              onPressed: () => cubit.decrementQuantity(item.product),
             ),
           ),
           Padding(
@@ -153,8 +153,8 @@ class OrderDataGridSource extends DataGridSource {
             ),
             child: IconButton(
               padding: EdgeInsets.zero,
-              icon: Icon(Icons.add, size: iconSize),
-              onPressed: () => cubit.incrementQuantity(item),
+              icon: Icon(FontAwesomeIcons.plus, size: iconSize),
+              onPressed: () => cubit.incrementQuantity(item.product),
             ),
           ),
         ],
@@ -165,7 +165,7 @@ class OrderDataGridSource extends DataGridSource {
   Widget _buildDeleteButton(CartItem item) => IconButton(
     icon: const Icon(FontAwesomeIcons.trashCan, color: Colors.red),
     onPressed: () {
-      cubit.removeFromCart(item);
+      cubit.removeFromCart(item.product);
       showCustomToast(
         context,
         title: AppLocalizations.of(context)?.translate('product_deleted') ?? 'Product Deleted',
