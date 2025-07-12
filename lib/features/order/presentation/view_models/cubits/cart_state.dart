@@ -4,11 +4,13 @@ class CartState {
   final List<CartItem> items;
   final String paymentInput;
   final double amountPaid;
+  final String? error;
 
   CartState({
     required this.paymentInput,
     required this.amountPaid,
     required this.items,
+    this.error,
   });
 
   double get subtotal =>
@@ -32,11 +34,13 @@ class CartState {
     List<CartItem>? items,
     String? paymentInput,
     double? amountPaid,
+    String? error,
   }) {
     return CartState(
       items: items ?? this.items,
       paymentInput: paymentInput ?? this.paymentInput,
       amountPaid: amountPaid ?? this.amountPaid,
+      error: error ?? this.error,
     );
   }
 }
