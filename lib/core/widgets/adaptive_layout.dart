@@ -21,7 +21,7 @@ class AdaptiveLayout extends StatelessWidget {
 
         if (width < SizeConfig.mobile) {
           return mobileLayout(context);
-        } else if (width <= SizeConfig.tablet && tabletLayout != null) {
+        } else if (width < SizeConfig.desktop && tabletLayout != null) {
           return tabletLayout!(context);
         } else {
           return desktopLayout(context);

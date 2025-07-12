@@ -45,7 +45,7 @@ class CustomHoverIconContainer extends HookWidget {
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          margin: const EdgeInsets.symmetric(horizontal: 8),
+          margin: const EdgeInsets.symmetric(horizontal: 16),
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: isActive || isHovered.value ? activeColor : inactiveColor,

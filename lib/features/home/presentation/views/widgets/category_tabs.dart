@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/core/widgets/adaptive_layout.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 
@@ -24,7 +24,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         // alignment: Alignment.center,
         height: 35,
@@ -99,17 +99,16 @@ class _CategoryTabsState extends State<CategoryTabs> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: onTabColor.withOpacity(0.8), size: 16),
+          Icon(icon, color: onTabColor.withValues(alpha: 0.8), size: 14),
           const SizedBox(width: 6),
           FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
               translatedLabel,
               style: textTheme.labelLarge?.copyWith(
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.bold,
                 color: onTabColor,
-                fontFamily: Theme.of(context).textTheme.labelLarge?.fontFamily,
-                fontSize: 13,
+                fontSize: getResponsiveFontSize(context, fontSize: 100),
               ),
             ),
           ),

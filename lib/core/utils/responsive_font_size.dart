@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class SizeConfig {
   static const double desktop = 1200;
-  static const double tablet = 800;
-  static const double mobile = 700;
+  static const double tablet = 900;
+  static const double mobile = 550;
 
   static late double width, height;
 
@@ -17,7 +17,7 @@ double getResponsiveFontSize(context, {required double fontSize}) {
   double scaleFactor = getScaleFactor(context);
   double responsiveFontSize = fontSize * scaleFactor;
 
-  double lowerLimit = fontSize * .8;
+  double lowerLimit = fontSize * 1.1;
   double upperLimit = fontSize * 1.2;
 
   return responsiveFontSize.clamp(lowerLimit, upperLimit);

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/cubits/search_cubit.dart';
 
 class ErrorBody extends StatelessWidget {
@@ -15,6 +16,7 @@ class ErrorBody extends StatelessWidget {
           Text(
             'Error: ${error}',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontSize: getResponsiveFontSize(context, fontSize: 12),
               color: Theme.of(context).colorScheme.error,
             ),
           ),

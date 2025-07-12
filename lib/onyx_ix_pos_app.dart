@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/utils/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +19,7 @@ class OnyxIxPosApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     log(MediaQuery.sizeOf(context).width.toString());
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<ThemeCubit>()),

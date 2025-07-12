@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_state.dart';
 import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
@@ -33,6 +34,7 @@ class PaymentDetailsSection extends StatelessWidget {
                   AppLocalizations.of(context)?.translate('payment_details') ??
                       'Payment Details:',
                   style: textTheme.labelLarge?.copyWith(
+                    fontSize: getResponsiveFontSize(context, fontSize: 14),
                     color: Theme.of(context).brightness == Brightness.dark
                         ? Colors.white
                         : colorScheme.onSecondaryContainer,
@@ -66,7 +68,7 @@ class PaymentDetailsSection extends StatelessWidget {
                           color: 
                              Colors.black,
                             
-                          fontSize: 12
+                          fontSize: getResponsiveFontSize(context, fontSize: 12)
                         ),
                         
                       ),
@@ -106,22 +108,28 @@ class PaymentDetailsSection extends StatelessWidget {
         FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            softWrap: true,
             title,
             style: textTheme.bodyLarge?.copyWith(
               color: isRemaining ? valueColor : colorScheme.onSurface,
               fontWeight: isRemaining ? FontWeight.bold : FontWeight.normal,
-              fontSize: 12
+            fontSize: getResponsiveFontSize(context,fontSize: 8.0)
             ),
           ),
         ),
         FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
+            maxLines: 1,
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
             value,
             style: textTheme.bodyLarge?.copyWith(
               color: valueColor,
               fontWeight: FontWeight.bold,
-              fontSize: 12
+              fontSize: getResponsiveFontSize(context,fontSize: 8.0)
             ),
           ),
         ),

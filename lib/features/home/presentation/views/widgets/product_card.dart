@@ -58,6 +58,7 @@ class ProductCard extends StatelessWidget {
                         onPressed: onAddToCart,
                         icon: const Icon(FontAwesomeIcons.cartPlus, size: 16),
                         label: Text(
+                          
                           AppLocalizations.of(context)?.translate('add_to_cart') ?? 'Add to Cart',
                         ),
                       
@@ -68,7 +69,7 @@ class ProductCard extends StatelessWidget {
                           ),
                           backgroundColor: AppColors.secondaryLight,
                           foregroundColor: Colors.white,
-                          textStyle: AppStyles.textStyle16Bold(context).copyWith(
+                          textStyle:TextTheme.of(context).displayLarge!.copyWith(
                             fontSize: getResponsiveFontSize(context, fontSize: 12),
                           ),
                         ),
@@ -83,6 +84,7 @@ class ProductCard extends StatelessWidget {
     return Text(
                 '\$${product.price.toStringAsFixed(2)}',
                 style: AppStyles.textStyle16(context).copyWith(
+                  fontSize: getResponsiveFontSize(context, fontSize: 10),
                   fontWeight: FontWeight.bold,
                   
                   color:Color(0xFF567cc5),
@@ -90,12 +92,13 @@ class ProductCard extends StatelessWidget {
               );
   }
 
-  Text _buildCategoryName(BuildContext context) => Text(product.category, style: AppStyles.textStyle12(context).copyWith(color: Color(0xFFa3a4b6),));
+  Text _buildCategoryName(BuildContext context) => Text(product.category, style: AppStyles.textStyle12(context).copyWith(fontSize: getResponsiveFontSize(context, fontSize: 10),color: Color(0xFFa3a4b6),));
 
   Text _buildProductName(BuildContext context) {
     return Text(
                 product.name,
                 style: AppStyles.textStyle16(context).copyWith(
+                  fontSize: getResponsiveFontSize(context, fontSize: 14),
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).brightness == Brightness.dark
                       ? Colors.white
