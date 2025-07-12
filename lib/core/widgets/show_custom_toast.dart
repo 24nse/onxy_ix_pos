@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 
-void showCustomToast(BuildContext context, {String? title, String? message}) {
+void showCustomToast(BuildContext context, {String? title, String? message, bool isError = false}) {
   final double width = MediaQuery.of(context).size.width;
   final bool isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
@@ -28,10 +28,9 @@ void showCustomToast(BuildContext context, {String? title, String? message}) {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
                 title ?? AppLocalizations.of(context)?.translate('success') ?? 'Success',
-                style: const TextStyle(
-
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: isError ? Colors.white : Colors.black,
                 ),
               ),
             ),
@@ -40,13 +39,13 @@ void showCustomToast(BuildContext context, {String? title, String? message}) {
               message ??
                   AppLocalizations.of(context)?.translate('action_completed_successfully') ??
                   'Action completed successfully',
-              style: const TextStyle(color: Colors.black87),
+              style: TextStyle(color: isError ? Colors.white70 : Colors.black87),
             ),
           ],
         ),
       ),
       duration: const Duration(seconds: 2),
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: isError ? Colors.red.shade600 : Colors.grey.shade200,
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       margin: EdgeInsets.only(

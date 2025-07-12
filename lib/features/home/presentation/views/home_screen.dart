@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
+import 'package:onyx_ix_pos/core/utils/service_locator.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view_models/cubits/search_cubit.dart';
 import 'package:onyx_ix_pos/features/settings/presentation/cubits/theme_cubit.dart';
 import 'package:onyx_ix_pos/core/widgets/custom_hover_icon_container.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
@@ -14,12 +16,9 @@ import 'package:onyx_ix_pos/features/home/presentation/views/tablet_layout.dart'
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
-  
-
 
   @override
   Widget build(BuildContext context) {
-
     final themeCubit = useMemoized(() => context.read<ThemeCubit>(), []);
     final isDarkMode =
         useStream<bool>(
@@ -35,7 +34,8 @@ class HomeScreen extends HookWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            AppLocalizations.of(context)?.translate('app_title') ?? 'Onyx IX POS',
+            AppLocalizations.of(context)?.translate('app_title') ??
+                'Onyx IX POS',
           ),
           actions: [
             LanguageMenuButton(),
@@ -43,18 +43,23 @@ class HomeScreen extends HookWidget {
               icon: isDarkMode
                   ? Icons.light_mode_outlined
                   : Icons.dark_mode_outlined,
-                            onTap: () {
+              onTap: () {
                 themeCubit.toggleTheme();
-             
               },
             ),
           ],
-                         bottom: screenWidth < SizeConfig.desktop ? const MainScreenTabs() : null,
+          bottom: screenWidth < SizeConfig.desktop
+              ? const MainScreenTabs()
+              : null,
         ),
-        body: AdaptiveLayout(
-           mobileLayout: (context) =>const MobileLayout(),
-        tabletLayout: (context) =>const TabletLayout(),
-        desktopLayout: (context) =>const DesktopLayout(),
+        body: BlocProvider<SearchCubit>(
+         
+          create: (context) => sl<SearchCubit>(),
+          child: AdaptiveLayout(
+            mobileLayout: (context) => const MobileLayout(),
+            tabletLayout: (context) => const TabletLayout(),
+            desktopLayout: (context) => const DesktopLayout(),
+          ),
         ),
       ),
     );

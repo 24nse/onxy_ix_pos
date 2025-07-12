@@ -4,6 +4,7 @@ import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
 import 'package:onyx_ix_pos/features/home/domain/entities/product.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product, required this.onAddToCart});
@@ -22,81 +23,20 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(4),
-              ),
-              child: Image.network(
-                product.image,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                errorBuilder: (context, error, stackTrace) {
-                  return const Center(
-                    child: Icon(Icons.image_not_supported, size: 50),
-                  );
-                },
-              ),
-            ),
-          ),
+          _buildImageSection(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  product.name,
-                  style: AppStyles.textStyle16(context).copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.black,
-                  ),
-                ),
+                _buildProductName(context),
                 const SizedBox(height: 3),
-                Text(product.category, style: AppStyles.textStyle12(context).copyWith(color: Color(0xFFa3a4b6),)),
+                _buildCategoryName(context),
                 const SizedBox(height: 3),
-                Text(
-                  '\$${product.price.toStringAsFixed(2)}',
-                  style: AppStyles.textStyle16(context).copyWith(
-                    fontWeight: FontWeight.bold,
-                    
-                    color:Color(0xFF567cc5),
-                  ),
-                ),
+                _buildPrice(context),
                 const SizedBox(height: 24),
-                Row(
-                  
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 30,
-                        width: 200,
-                        child: ElevatedButton.icon(
-                          onPressed: onAddToCart,
-                          icon: const Icon(Icons.add_circle_outline, size: 16),
-                          label: Text(
-                            AppLocalizations.of(context)?.translate('add_to_cart') ?? 'Add to Cart',
-                          ),
-                        
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            backgroundColor: AppColors.secondaryLight,
-                            foregroundColor: Colors.white,
-                            textStyle: AppStyles.textStyle16Bold(context).copyWith(
-                              fontSize: getResponsiveFontSize(context, fontSize: 12),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                _buildButtonAddToCart(context),
               ],
             ),
           ),
@@ -104,4 +44,83 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
+
+
+  Row _buildButtonAddToCart(BuildContext context) {
+    return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 30,
+                      width: 200,
+                      child: ElevatedButton.icon(
+                        onPressed: onAddToCart,
+                        icon: const Icon(FontAwesomeIcons.cartPlus, size: 16),
+                        label: Text(
+                          AppLocalizations.of(context)?.translate('add_to_cart') ?? 'Add to Cart',
+                        ),
+                      
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          backgroundColor: AppColors.secondaryLight,
+                          foregroundColor: Colors.white,
+                          textStyle: AppStyles.textStyle16Bold(context).copyWith(
+                            fontSize: getResponsiveFontSize(context, fontSize: 12),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+  }
+
+  Text _buildPrice(BuildContext context) {
+    return Text(
+                '\$${product.price.toStringAsFixed(2)}',
+                style: AppStyles.textStyle16(context).copyWith(
+                  fontWeight: FontWeight.bold,
+                  
+                  color:Color(0xFF567cc5),
+                ),
+              );
+  }
+
+  Text _buildCategoryName(BuildContext context) => Text(product.category, style: AppStyles.textStyle12(context).copyWith(color: Color(0xFFa3a4b6),));
+
+  Text _buildProductName(BuildContext context) {
+    return Text(
+                product.name,
+                style: AppStyles.textStyle16(context).copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+                ),
+              );
+  }
+Expanded _buildImageSection() {
+    return Expanded(
+    child: ClipRRect(
+      borderRadius: const BorderRadius.vertical(
+        top: Radius.circular(4),
+      ),
+      child: Image.network(
+        product.image,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        errorBuilder: (context, error, stackTrace) {
+          return const Center(
+            child: Icon(FontAwesomeIcons.image, size: 40, color: Colors.grey),
+          );
+        },
+      ),
+    ),
+  );
+  }
 }
+

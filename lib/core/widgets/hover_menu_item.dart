@@ -39,15 +39,10 @@ class HoverableMenuItemState extends State<HoverableMenuItem> {
         alignment: Alignment.center,
         duration: const Duration(milliseconds: 150),
 padding:  EdgeInsets.zero,
-        // width: widget.width,
-        // height: widget.height,
-        // alignment: Alignment.center,
+        
         decoration: BoxDecoration(
           color: isHovered ? activeColor : Colors.transparent,
-          // border: Border.all(
-          //   color: isHovered ? Colors.green : Colors.grey.shade300,
-          //   width: widget.borderWidth,
-          // ),
+         
           borderRadius: BorderRadius.circular(widget.borderRadius),
         ),
 
