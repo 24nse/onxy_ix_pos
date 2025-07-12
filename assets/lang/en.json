@@ -1,5 +1,5 @@
 {
-  "app_title": "Onyx POS",
+  "app_title": "Onyx IX POS",
   "order_summary": "Order Summary",
   "your_cart_is_empty": "Your cart is empty",
   "subtotal_post_discount": "Subtotal (Post-Discount)",
@@ -40,8 +40,8 @@
   "success": "Success",
   "action_completed_successfully": "Action completed successfully",
   "product_added_to_cart_successfully": "Product added to cart successfully",
-  "all_payments_cleared": "All payments have been cleared.",
-  "products": "products",
+   "all_payments_cleared": "All payments have been cleared.",
+    "products": "products",
   "cart": "cart",
   "payment_incomplete": "Payment Incomplete",
   "payment_not_complete_message": "Please complete the payment before checkout.",

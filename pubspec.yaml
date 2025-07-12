@@ -89,6 +89,7 @@ flutter:
   # example:
   assets:
     - assets/fonts/
+    - assets/images/
 
   fonts:
     - family: Cairo
@@ -109,7 +110,12 @@ flutter:
           weight: 400
         - asset: assets/fonts/Cairo-SemiBold.ttf
           weight: 600
-
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf
+        - asset: assets/fonts/Roboto-VariableFont_wdth,wght.ttf
+      
+        
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
