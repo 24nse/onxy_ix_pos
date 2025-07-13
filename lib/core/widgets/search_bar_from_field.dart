@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/core/utils/theme/app_colors.dart';
 
 class SearchBarFromField extends StatelessWidget {
@@ -11,6 +12,7 @@ class SearchBarFromField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.centerLeft,
       height: 35,
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
@@ -29,9 +31,11 @@ class SearchBarFromField extends StatelessWidget {
         decoration: InputDecoration(
          
           hintText: hintText,
-          hintStyle: TextStyle(
-            color: Color(0xFFa3a4b6),
-          ),
+          hintStyle:Theme.of(context).textTheme.displayLarge!.copyWith(
+            fontSize: getResponsiveFontSize(context, fontSize: 14),
+                        color: Color(0xFFa3a4b6),
+
+          ) ,
           prefixIcon: const Icon(Icons.search,color: Color(0xFFa3a4b6),size: 18,),
           contentPadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
       border: InputBorder.none

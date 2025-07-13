@@ -112,7 +112,7 @@ Expanded _buildImageSection() {
       borderRadius: const BorderRadius.vertical(
         top: Radius.circular(4),
       ),
-      child: Image.network(
+      child: Image.asset(
         product.image,
         fit: BoxFit.cover,
         width: double.infinity,

@@ -19,7 +19,7 @@ class NotAvailableBody extends StatelessWidget {
     return Center(
       child: Text(
         isNotEmpty
-            ? '${localizations?.translate('no_products_found') ?? 'No products found'} for "${text}"'
+            ? '${localizations?.translate('no_products_found') ?? 'No products found'} for "$text"'
             : localizations?.translate('no_products_available') ??
                   'No products available',
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
