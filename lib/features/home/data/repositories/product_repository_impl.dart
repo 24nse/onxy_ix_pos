@@ -9,14 +9,14 @@ class ProductRepositoryImpl implements ProductRepository {
       name: 'Espresso',
       category: 'Beverages',
       price: 3.50,
-      image: "assets/images/d1.jpg"
+      image: "fold/images/d1.jpg"
     ),
     Product(
       id: '2',
       name: 'Latte',
       category: 'Beverages',
       price: 4.50,
-      image: "assets/images/d2.jpg"
+      image: "fold/images/d2.jpg"
 
     ),
     Product(
@@ -24,28 +24,28 @@ class ProductRepositoryImpl implements ProductRepository {
       name: 'Croissant',
       category: 'Snacks',
       price: 2.75,
-      image: "assets/images/s1.jpg"
+      image: "fold/images/s1.jpg"
     ),
     Product(
       id: '4',
       name: 'Caesar Salad',
       category: 'Meals',
       price: 8.50,
-      image: "assets/images/meals1.jpg"
+      image: "fold/images/meals1.jpg"
     ),
     Product(
       id: '5',
       name: 'Cheeseburger',
       category: 'Meals',
       price: 9.00,
-      image: "assets/images/meals2.jpg"
+      image: "fold/images/meals2.jpg"
     ),
     Product(
       id: '6',
       name: 'Potato Chips',
       category: 'Snacks',
       price: 1.50,
-      image: "assets/images/s2.jpg"
+      image: "fold/images/s2.jpg"
     ),
   ];
 

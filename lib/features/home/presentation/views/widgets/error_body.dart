@@ -14,7 +14,7 @@ class ErrorBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Error: ${error}',
+            'Error: $error',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               fontSize: getResponsiveFontSize(context, fontSize: 12),
               color: Theme.of(context).colorScheme.error,

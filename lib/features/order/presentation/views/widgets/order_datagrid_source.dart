@@ -99,7 +99,7 @@ class OrderDataGridSource extends DataGridSource {
       borderRadius: BorderRadius.circular(8.0),
       child: AspectRatio(
         aspectRatio: 1,
-        child: Image.network(
+        child: Image.asset(
           item.product.image,
           
         ),
