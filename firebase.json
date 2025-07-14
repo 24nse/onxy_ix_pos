@@ -1,16 +1,21 @@
 {
   "hosting": {
-    "public": "buildweb",
+    "public": "build/web",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
     "rewrites": [
+      { "source": "**", "destination": "/index.html" },
       {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+      "source": "!/fold/**",   
+      "destination": "/fold"
+    }
+    ],
+    
+    "frameworksBackend": {
+      "region": "asia-east1"
+    }
   }
 }

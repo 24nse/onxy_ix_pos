@@ -43,7 +43,7 @@ class ProductCatalogSection extends HookWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomSearchBar(formKey: formKey,localizations: localizations,),
+            CustomSearchBar(formKey: formKey, localizations: localizations),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16.0,
@@ -52,7 +52,9 @@ class ProductCatalogSection extends HookWidget {
               child: Text(
                 localizations?.translate('product_catalog') ??
                     'Product Catalog',
-                style: TextTheme.of(context).bodyLarge!.copyWith(fontSize: getResponsiveFontSize(context, fontSize: 14)),
+                style: TextTheme.of(context).bodyLarge!.copyWith(
+                  fontSize: getResponsiveFontSize(context, fontSize: 14),
+                ),
               ),
             ),
             BlocBuilder<SearchCubit, SearchState>(
@@ -143,4 +145,3 @@ class ProductCatalogSection extends HookWidget {
     );
   }
 }
-

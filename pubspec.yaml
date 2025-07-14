@@ -57,7 +57,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -87,33 +87,33 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   assets:
-    - assets/fonts/
-    - assets/images/
-    - assets/lang/
+    - fold/fonts/
+    - fold/images/
+    - fold/lang/
 
   fonts:
     - family: Cairo
       fonts:
-        - asset: assets/fonts/Cairo-Black.ttf
+        - asset: fold/fonts/Cairo-Black.ttf
           weight: 900
-        - asset: assets/fonts/Cairo-Bold.ttf
+        - asset: fold/fonts/Cairo-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Cairo-ExtraBold.ttf
+        - asset: fold/fonts/Cairo-ExtraBold.ttf
           weight: 800
-        - asset: assets/fonts/Cairo-ExtraLight.ttf
+        - asset: fold/fonts/Cairo-ExtraLight.ttf
           weight: 200
-        - asset: assets/fonts/Cairo-Light.ttf
+        - asset: fold/fonts/Cairo-Light.ttf
           weight: 300
-        - asset: assets/fonts/Cairo-Medium.ttf
+        - asset: fold/fonts/Cairo-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: fold/fonts/Cairo-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Cairo-SemiBold.ttf
+        - asset: fold/fonts/Cairo-SemiBold.ttf
           weight: 600
     - family: Roboto
       fonts:
-        - asset: assets/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf
-        - asset: assets/fonts/Roboto-VariableFont_wdth,wght.ttf
+        - asset: fold/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf
+        - asset: fold/fonts/Roboto-VariableFont_wdth,wght.ttf
       
         
 
