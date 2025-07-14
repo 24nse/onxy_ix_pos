@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/utils/responsive_font_size.dart';
 import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
-import 'package:onyx_ix_pos/core/utils/theme/app_styles.dart';
+import 'package:onyx_ix_pos/features/home/presentation/view_models/cubits/search_state.dart';
 import 'package:onyx_ix_pos/features/home/presentation/views/widgets/category_tabs.dart';
 import 'package:onyx_ix_pos/features/home/presentation/views/widgets/custom_search_bar.dart';
 import 'package:onyx_ix_pos/features/home/presentation/views/widgets/error_body.dart';

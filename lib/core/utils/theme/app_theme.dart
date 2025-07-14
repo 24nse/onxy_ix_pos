@@ -30,7 +30,7 @@ class AppTheme {
         primary: AppColors.primaryLight,
         secondary: AppColors.secondaryLight,
         surface: AppColors.cardLight,
-        background: AppColors.backgroundLight,
+        // background: AppColors.backgroundLight,
         error: AppColors.error,
       ),
       appBarTheme: AppBarTheme(
@@ -66,7 +66,7 @@ class AppTheme {
         secondary: AppColors.secondaryDark,
         surface: AppColors.cardDark,
         
-        background: AppColors.backgroundDark,
+        // background: AppColors.backgroundDark,
         error: AppColors.error,
       ),
       appBarTheme: AppBarTheme(

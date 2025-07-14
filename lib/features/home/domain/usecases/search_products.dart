@@ -12,26 +12,31 @@ class SearchProductsUseCase extends UseCase<List<Product>, String> {
     if (query.trim().isEmpty) {
       return repository.getProducts();
     }
-    
+
     final normalizedQuery = query.toLowerCase().trim();
     final allProducts = repository.getProducts();
-    
+
     return allProducts.where((product) {
       final nameMatches = product.name.toLowerCase().contains(normalizedQuery);
-      
-      final categoryMatches = product.category.toLowerCase().contains(normalizedQuery);
-      
+
+      final categoryMatches = product.category.toLowerCase().contains(
+        normalizedQuery,
+      );
+
       bool priceMatches = false;
-      if (normalizedQuery.contains('.') || RegExp(r'^\d+$').hasMatch(normalizedQuery)) {
+      if (normalizedQuery.contains('.') ||
+          RegExp(r'^\d+$').hasMatch(normalizedQuery)) {
         try {
           final queryPrice = double.parse(normalizedQuery);
-          priceMatches = product.price == queryPrice || 
-                        product.price.toString().contains(normalizedQuery);
+          priceMatches =
+              product.price == queryPrice ||
+              product.price.toString().contains(normalizedQuery);
         } catch (e) {
+          return false;
         }
       }
-      
+
       return nameMatches || categoryMatches || priceMatches;
     }).toList();
   }
-} 
+}
