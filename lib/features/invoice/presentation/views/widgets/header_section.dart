@@ -23,7 +23,7 @@ class HeaderSection extends StatelessWidget {
           const SizedBox(height: 4),
           Column(
             children: [
-              Text('فاتورة ضريبية',
+              CustomText(text:  'فاتورة ضريبية',
                style: TextStyle(
                           color: Colors.black,
                           fontSize: 12,
@@ -31,7 +31,7 @@ class HeaderSection extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
               ),
-              Text('Tax Invoice',
+              CustomText(text:  'Tax Invoice',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 12,
@@ -39,7 +39,7 @@ class HeaderSection extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Text('12411648899',
+              CustomText(text:  '12411648899',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 12,
@@ -125,7 +125,9 @@ class CustomText extends StatelessWidget {
       fit: BoxFit.scaleDown,
       child: Text(
         text,
-
+        textAlign: TextAlign.right,
+        textDirection: TextDirection.rtl,
+      
         style: style ?? TextStyle(
           color: color ?? const Color(0xFF474747),
           fontSize: fontSize ?? 12,

@@ -99,7 +99,7 @@ List<PlutoRow> get plutoRows => [
 ];
 List<PlutoColumn> get plutoColumns => [
    PlutoColumn(
-    title: 'الإجمالي\nTotal',
+    title: 'الإجمالي',
     field: 'total',
     type: PlutoColumnType.text(),
     width: 80,
@@ -108,7 +108,7 @@ List<PlutoColumn> get plutoColumns => [
     backgroundColor: Color(0xFFDC292F),
   ),
    PlutoColumn(
-    title: 'قيمة ضريبة\nVAT',
+    title: 'قيمة ضريبة',
     field: 'vat_value',
     type: PlutoColumnType.text(),
     width: 70,
@@ -117,7 +117,7 @@ List<PlutoColumn> get plutoColumns => [
     backgroundColor: Color(0xFFDC292F),
   ),
   PlutoColumn(
-    title: 'ضريبة %\nVAT %',
+    title: 'ضريبة %',
     field: 'vat_percent',
     type: PlutoColumnType.text(),
     width: 70,
@@ -126,7 +126,7 @@ List<PlutoColumn> get plutoColumns => [
     backgroundColor: Color(0xFFDC292F),
   ),
  PlutoColumn(
-    title: 'السعر\nPrice',
+    title: 'السعر',
     field: 'price',
     type: PlutoColumnType.text(),
     width: 70,
@@ -135,7 +135,7 @@ List<PlutoColumn> get plutoColumns => [
     backgroundColor: Color(0xFFDC292F),
   ),
   PlutoColumn(
-    title: 'الكمية المجانية\nFree Qty',
+    title: 'الكمية المجانية',
     field: 'free_qty',
     type: PlutoColumnType.text(),
     width: 90,
@@ -145,7 +145,7 @@ List<PlutoColumn> get plutoColumns => [
   ),
  
   PlutoColumn(
-    title: 'الكمية\nQty',
+    title: 'الكمية',
     field: 'qty',
     type: PlutoColumnType.text(),
     width: 60,
@@ -154,7 +154,7 @@ List<PlutoColumn> get plutoColumns => [
     backgroundColor: Color(0xFFDC292F),
   ),
   PlutoColumn(
-    title: 'الوحدة\nUnit',
+    title: 'الوحدة',
     field: 'unit',
     type: PlutoColumnType.text(),
     width: 70,
@@ -163,7 +163,7 @@ List<PlutoColumn> get plutoColumns => [
     backgroundColor: Color(0xFFDC292F),
   ),
    PlutoColumn(
-    title: 'اسم الصنف\nItem Name',
+    title: 'اسم الصنف',
     field: 'item',
     type: PlutoColumnType.text(),
     width: 160,
