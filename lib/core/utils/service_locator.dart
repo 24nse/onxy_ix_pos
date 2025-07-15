@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:onyx_ix_pos/features/invoice/di/invoice_dependency_injection.dart';
 import '../../features/settings/presentation/cubits/theme_cubit.dart';
 import '../../features/settings/presentation/cubits/locale_cubit.dart';
 import '../../features/home/presentation/view_models/cubits/full_screen_cubit.dart';
@@ -11,6 +12,7 @@ final sl = GetIt.instance;
 void setupServiceLocator() {
   setupHomeDependencyInjection();
   setupOrderDependencyInjection();
+  setupInvoiceDependencyInjection();
   
   sl.registerLazySingleton<ThemeCubit>(() => ThemeCubit());
   sl.registerLazySingleton<LocaleCubit>(() => LocaleCubit());

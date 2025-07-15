@@ -15,6 +15,7 @@ final sl = GetIt.instance;
 
 void setupOrderDependencyInjection() {
   sl.registerLazySingleton<CartRepository>(() => CartRepositoryImpl());
+  sl.registerLazySingleton<CartRepositoryImpl>(() => sl<CartRepository>() as CartRepositoryImpl);
 
   sl.registerLazySingleton(() => AddToCartUseCase(sl<CartRepository>()));
   sl.registerLazySingleton(() => RemoveFromCartUseCase(sl<CartRepository>()));

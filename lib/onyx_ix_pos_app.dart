@@ -19,7 +19,7 @@ class OnyxIxPosApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     log(MediaQuery.sizeOf(context).width.toString());
+    log(MediaQuery.sizeOf(context).width.toString());
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<ThemeCubit>()),
@@ -36,8 +36,8 @@ class OnyxIxPosApp extends StatelessWidget {
                 builder: (context) {
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
-                    theme: AppTheme.lightTheme(context,locale),
-                    darkTheme: AppTheme.darkTheme(context,locale),
+                    theme: AppTheme.lightTheme(context, locale),
+                    darkTheme: AppTheme.darkTheme(context, locale),
                     themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
                     localizationsDelegates: const [
                       AppLocalizations.delegate,
@@ -46,10 +46,13 @@ class OnyxIxPosApp extends StatelessWidget {
                       GlobalCupertinoLocalizations.delegate,
                     ],
                     locale: locale,
-                    supportedLocales: const [Locale('en', ''), Locale('ar', '')],
+                    supportedLocales: const [
+                      Locale('en', ''),
+                      Locale('ar', ''),
+                    ],
                     home: HomeScreen(),
                   );
-                }
+                },
               );
             },
           );
