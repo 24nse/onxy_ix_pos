@@ -47,6 +47,7 @@ dependencies:
   overlay_support: ^2.1.0
   
   get_it: ^8.0.3
+  pluto_grid: ^8.0.0
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,9 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+dependency_overrides:
+  intl: ^0.20.2
+
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -86,6 +90,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
   assets:
     - fold/fonts/
     - fold/images/

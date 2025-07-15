@@ -7,16 +7,15 @@ class InfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+
       children: [
         Row(
           children: [
-              Expanded(
-              child: infoColumn('تاريخ الفاتورة', '24/7/2024 - 10:00:00 PM'),
-            ),
-              Expanded(child: infoColumn('طريقة الدفع', 'نقدي')),
-          
+            Expanded(child: infoColumn('تاريخ الفاتورة', '24/7/2024 - 10:00:00 PM')),
+            Expanded(child: infoColumn('طريقة الدفع', 'نقدي')),
+
             Expanded(child: infoColumn('تاريخ الاستحقاق', '28/7/2024')),
-          
           ],
         ),
         const SizedBox(height: 8),
@@ -29,7 +28,7 @@ class InfoSection extends StatelessWidget {
                 alignment: CrossAxisAlignment.end,
                 info: [
                   {': الاسم': 'شركة قصر الروابي'},
-                                    {': المدينة': ' 3'},
+                  {': المدينة': ' 3'},
 
                   {': الدولة': 'السعودية - 1'},
                   {': الرمز البريدي ': '8727'},
@@ -49,7 +48,7 @@ class InfoSection extends StatelessWidget {
                   {': الاسم': 'عميل نقدي عام'},
                   {': المدينة': ' 3'},
                   {': الدولة': 'السعودية - 1'},
-                    {': الرمز البريدي ': '8727'},
+                  {': الرمز البريدي ': '8727'},
                   {': الرقم الضريبي': '8727'},
                   {': السجل التجاري': '3006256961000003'},
                   {': معرف آخر': '10'},
@@ -62,12 +61,21 @@ class InfoSection extends StatelessWidget {
       ],
     );
   }
-}
-
+  
 Widget infoColumn(String label, String value) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
-    children: [CustomText(text: label,style: TextStyle(color: Color(0xFF819AA7),fontSize: 14),), const SizedBox(height: 4), CustomText(text: value, style: TextStyle(color: Color(0xFF000000), fontSize: 14),)],
+    children: [
+      CustomText(
+        text: label,
+        style: TextStyle(color: Color(0xFF819AA7), fontSize: 14),
+      ),
+      const SizedBox(height: 4),
+      CustomText(
+        text: value,
+        // style: TextStyle(color: Color(0xFF000000), fontSize: 14),
+      ),
+    ],
   );
 }
 
@@ -78,7 +86,6 @@ Widget customInfoContainer({
   required List<Map<String, String>> info,
 }) {
   return Container(
- 
     margin: const EdgeInsets.symmetric(horizontal: 8),
     decoration: BoxDecoration(
       border: Border.all(color: const Color(0xFFF9F9F9)),
@@ -89,11 +96,15 @@ Widget customInfoContainer({
     child: Column(
       crossAxisAlignment: alignment,
       children: [
-        CustomText(text: title,  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: titleColor)),
-        Divider(
-          color: Color(0xFFE2E2E2),
-          thickness: 2,
+        CustomText(
+          text: title,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: titleColor,
+          ),
         ),
+        Divider(color: Color(0xFFE2E2E2), thickness: 2),
         const SizedBox(height: 4),
         ...info.map((item) {
           final key = item.keys.first;
@@ -101,13 +112,25 @@ Widget customInfoContainer({
           return Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              CustomText(text: value, style: TextStyle(color: Color(0xFF000000), fontSize: 16,fontWeight: FontWeight.w500),),
+              CustomText(
+                text: value,
+                style: TextStyle(
+                  color: Color(0xFF000000),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               SizedBox(width: 8),
-              CustomText(text: key ,style: TextStyle(color: Color(0xFF474747),fontSize: 14),),
+              CustomText(
+                text: key,
+                style: TextStyle(color: Color(0xFF474747), fontSize: 14),
+              ),
             ],
           );
         }),
       ],
     ),
   );
+}
+
 }
