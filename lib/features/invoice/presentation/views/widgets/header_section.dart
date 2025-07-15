@@ -121,13 +121,17 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: style ?? TextStyle(
-        color: color ?? const Color(0xFF474747),
-        fontSize: fontSize ?? 12,
-        fontFamily: 'Cairo',
-        fontWeight: FontWeight.w400,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(
+        textAlign: TextAlign.right,
+        text,
+        style: style ?? TextStyle(
+          color: color ?? const Color(0xFF474747),
+          fontSize: fontSize ?? 12,
+          fontFamily: 'Cairo',
+          fontWeight: FontWeight.w400,
+        ),
       ),
     );
   }

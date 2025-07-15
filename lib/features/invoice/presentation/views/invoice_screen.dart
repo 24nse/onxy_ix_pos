@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/features/invoice/presentation/views/widgets/header_section.dart';
+import 'package:onyx_ix_pos/features/invoice/presentation/views/widgets/info_section.dart';
 
 class InvoiceScreen extends StatelessWidget {
   const InvoiceScreen({super.key});
@@ -13,6 +14,8 @@ class InvoiceScreen extends StatelessWidget {
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             HeaderSection(),
+            const SizedBox(height: 16),
+            InfoSection(),
           ],
         ),
       ),
