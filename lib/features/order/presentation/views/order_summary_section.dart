@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onyx_ix_pos/core/localization/app_localizations.dart';
 import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
+import 'package:onyx_ix_pos/features/invoice/presentation/views/invoice_screen.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_state.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/cart_items_is_empty.dart';
@@ -68,6 +69,11 @@ class OrderSummarySection extends StatelessWidget {
                                 ProceedToCheckoutButton(
                                   onPressed: () {
                                     context.read<CartCubit>().checkout();
+                                         Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>const InvoiceScreen()),
+            );
+                                 
                                     final state = context.read<CartCubit>().state;
                                     
                                     _checkPaymentCompleteOrInComplete(state, context);
