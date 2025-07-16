@@ -13,6 +13,8 @@ import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/payment_cubit.dart';
 import 'package:onyx_ix_pos/features/settings/presentation/cubits/locale_cubit.dart';
 import 'package:onyx_ix_pos/features/settings/presentation/cubits/theme_cubit.dart';
+import 'package:go_router/go_router.dart';
+import 'package:onyx_ix_pos/features/invoice/presentation/views/invoice_screen.dart';
 
 class OnyxIxPosApp extends StatelessWidget {
   const OnyxIxPosApp({super.key});
@@ -20,6 +22,20 @@ class OnyxIxPosApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log(MediaQuery.sizeOf(context).width.toString());
+
+    final GoRouter _router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => HomeScreen(),
+        ),
+        GoRoute(
+          path: '/invoice',
+          builder: (context, state) => InvoiceScreen(),
+        ),
+      ],
+    );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<ThemeCubit>()),
@@ -34,7 +50,7 @@ class OnyxIxPosApp extends StatelessWidget {
             builder: (context, locale) {
               return Builder(
                 builder: (context) {
-                  return MaterialApp(
+                  return MaterialApp.router(
                     debugShowCheckedModeBanner: false,
                     theme: AppTheme.lightTheme(context, locale),
                     darkTheme: AppTheme.darkTheme(context, locale),
@@ -50,7 +66,7 @@ class OnyxIxPosApp extends StatelessWidget {
                       Locale('en', ''),
                       Locale('ar', ''),
                     ],
-                    home: HomeScreen(),
+                    routerConfig: _router,
                   );
                 },
               );
