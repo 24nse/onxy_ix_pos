@@ -94,15 +94,30 @@ class OrderDataGridSource extends DataGridSource {
   }
 
   Widget _buildImageCell(CartItem item) => Container(
-    padding: const EdgeInsets.all( 4.0),
+    padding: const EdgeInsets.all(4.0),
     child: ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
       child: AspectRatio(
         aspectRatio: 1,
-        child: Image.asset(
-          item.product.image,
-          
-        ),
+        child: item.product.image.startsWith('http')
+            ? Image.network(
+                item.product.image,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(FontAwesomeIcons.image, size: 24, color: Colors.grey),
+                  );
+                },
+              )
+            : Image.asset(
+                item.product.image,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(FontAwesomeIcons.image, size: 24, color: Colors.grey),
+                  );
+                },
+              ),
       ),
     ),
   );

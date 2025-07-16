@@ -107,23 +107,35 @@ class ProductCard extends StatelessWidget {
               );
   }
 Expanded _buildImageSection() {
-    return Expanded(
+  final isNetwork = product.image.startsWith('http');
+  return Expanded(
     child: ClipRRect(
       borderRadius: const BorderRadius.vertical(
         top: Radius.circular(4),
       ),
-      child: Image.asset(
-        product.image,
-        fit: BoxFit.cover,
-        width: double.infinity,
-        errorBuilder: (context, error, stackTrace) {
-          return const Center(
-            child: Icon(FontAwesomeIcons.image, size: 40, color: Colors.grey),
-          );
-        },
-      ),
+      child: isNetwork
+          ? Image.network(
+              product.image,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              errorBuilder: (context, error, stackTrace) {
+                return const Center(
+                  child: Icon(FontAwesomeIcons.image, size: 40, color: Colors.grey),
+                );
+              },
+            )
+          : Image.asset(
+              product.image,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              errorBuilder: (context, error, stackTrace) {
+                return const Center(
+                  child: Icon(FontAwesomeIcons.image, size: 40, color: Colors.grey),
+                );
+              },
+            ),
     ),
   );
-  }
+}
 }
 

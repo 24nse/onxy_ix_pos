@@ -1,87 +1,82 @@
 import '../../domain/entities/product.dart';
 import '../../domain/repositories/product_repository.dart';
+import '../remote/product_remote_data_source.dart';
+import '../local/product_local_data_source.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
-  // بيانات ثابتة مؤقتاً - يمكن استبدالها لاحقاً بـ API أو قاعدة بيانات
-  final List<Product> _products = [
-    Product(
-      id: '1',
-      name: 'Espresso',
-      category: 'Beverages',
-      price: 3.50,
-      image: "fold/images/d1.jpg"
-    ),
-    Product(
-      id: '2',
-      name: 'Latte',
-      category: 'Beverages',
-      price: 4.50,
-      image: "fold/images/d2.jpg"
+  final ProductRemoteDataSource remoteDataSource;
+  final ProductLocalDataSource localDataSource;
 
-    ),
-    Product(
-      id: '3',
-      name: 'Croissant',
-      category: 'Snacks',
-      price: 2.75,
-      image: "fold/images/s1.jpg"
-    ),
-    Product(
-      id: '4',
-      name: 'Caesar Salad',
-      category: 'Meals',
-      price: 8.50,
-      image: "fold/images/meals1.jpg"
-    ),
-    Product(
-      id: '5',
-      name: 'Cheeseburger',
-      category: 'Meals',
-      price: 9.00,
-      image: "fold/images/meals2.jpg"
-    ),
-    Product(
-      id: '6',
-      name: 'Potato Chips',
-      category: 'Snacks',
-      price: 1.50,
-      image: "fold/images/s2.jpg"
-    ),
-  ];
+  List<Product>? _cache;
+  String _lastSource = '';
+  String get lastSource => _lastSource;
 
-  @override
-  List<Product> getProducts() {
-    return List.from(_products);
+  ProductRepositoryImpl({
+    required this.remoteDataSource,
+    required this.localDataSource,
+  });
+
+  Future<List<Product>> _fetchProducts() async {
+    if (_cache != null) return _cache!;
+    try {
+      final remoteProducts = await remoteDataSource.fetchProducts();
+      if (remoteProducts.isNotEmpty) {
+        print('Loaded products from API');
+        _lastSource = 'API';
+        _cache = remoteProducts;
+        return remoteProducts;
+      } else {
+        // API returned empty list, fallback to local
+        print('API returned empty, loading mock data');
+        _lastSource = 'Mock';
+        final localProducts = await localDataSource.fetchProducts();
+        _cache = localProducts;
+        return localProducts;
+      }
+    } catch (e) {
+      // API call failed, fallback to local
+      print('API fetch failed: $e');
+      _lastSource = 'Mock';
+      final localProducts = await localDataSource.fetchProducts();
+      _cache = localProducts;
+      return localProducts;
+    }
   }
 
   @override
-  List<Product> searchProducts(String query) {
-    return _products
+  Future<List<Product>> getProducts() async {
+    return await _fetchProducts();
+  }
+
+  @override
+  Future<List<Product>> searchProducts(String query) async {
+    final products = await _fetchProducts();
+    return products
         .where((product) =>
             product.name.toLowerCase().contains(query.toLowerCase()))
         .toList();
   }
 
   @override
-  List<Product> getProductsByCategory(String category) {
-    return _products
+  Future<List<Product>> getProductsByCategory(String category) async {
+    final products = await _fetchProducts();
+    return products
         .where((product) =>
             product.category.toLowerCase() == category.toLowerCase())
         .toList();
   }
 
   @override
-  List<String> getCategories() {
-    return _products
-        .map((product) => product.category)
-        .toSet()
-        .toList();
+  Future<List<String>> getCategories() async {
+    final products = await _fetchProducts();
+    return products.map((product) => product.category).toSet().toList();
   }
 
   @override
-  Product? getProductById(String id) {
+  Future<Product?> getProductById(String id) async {
+    final products = await _fetchProducts();
     try {
-      return _products.firstWhere((product) => product.id == id);
+      return products.firstWhere((product) => product.id == id);
     } catch (e) {
       return null;
     }
