@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../data/invoice_repository_impl.dart';
+import '../../../data/repositories/invoice_repository_impl.dart';
 import '../../../domain/entities/invoice.dart';
 
 part 'invoice_state.dart';

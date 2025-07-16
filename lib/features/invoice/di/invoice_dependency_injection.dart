@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import '../../order/data/repositories/cart_repository_impl.dart';
-import '../data/invoice_repository_impl.dart';
+import '../data/repositories/invoice_repository_impl.dart';
 import '../presentation/view_models/cubits/invoice_cubit.dart';
 
 final sl = GetIt.instance;
