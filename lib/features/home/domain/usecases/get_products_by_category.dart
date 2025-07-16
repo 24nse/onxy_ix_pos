@@ -2,16 +2,16 @@ import 'package:onyx_ix_pos/core/domain/usecase.dart';
 import '../entities/product.dart';
 import '../repositories/product_repository.dart';
 
-class GetProductsByCategoryUseCase extends UseCase<List<Product>, String> {
+class GetProductsByCategoryUseCase extends UseCase<Future<List<Product>>, String> {
   final ProductRepository repository;
 
   GetProductsByCategoryUseCase(this.repository);
 
   @override
-  List<Product> call(String category) {
+  Future<List<Product>> call(String category) async {
     if (category == 'all') {
-      return repository.getProducts();
+      return await repository.getProducts();
     }
-    return repository.getProductsByCategory(category);
+    return await repository.getProductsByCategory(category);
   }
 } 
