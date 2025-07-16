@@ -11,6 +11,7 @@ import 'package:onyx_ix_pos/features/order/presentation/views/widgets/order_calc
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/payment_details_section.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/proceed_to_checkout_button.dart';
 import 'package:go_router/go_router.dart';
+import 'package:onyx_ix_pos/features/order/domain/entities/payment.dart';
 
 class OrderSummarySection extends StatelessWidget {
   const OrderSummarySection({super.key});
@@ -67,12 +68,28 @@ class OrderSummarySection extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 4),
                                 ProceedToCheckoutButton(
-                                  onPressed: () {
-                                    context.read<CartCubit>().checkout();
-                                    context.go('/invoice');
-                                    final state = context.read<CartCubit>().state;
-                                    
-                                    _checkPaymentCompleteOrInComplete(state, context);
+                                  onPressed: () async {
+                                    final selected = await showDialog<PaymentMethod>(
+                                      context: context,
+                                      builder: (context) {
+                                        return SimpleDialog(
+                                          title: Text('اختر طريقة الدفع'),
+                                          children: PaymentMethod.values.map((method) {
+                                            return SimpleDialogOption(
+                                              onPressed: () => Navigator.pop(context, method),
+                                              child: Text(method.displayName),
+                                            );
+                                          }).toList(),
+                                        );
+                                      },
+                                    );
+                                    if (selected != null) {
+                                      context.read<CartCubit>().setPaymentMethod(selected);
+                                      context.read<CartCubit>().checkout();
+                                      context.go('/invoice');
+                                      final state = context.read<CartCubit>().state;
+                                      _checkPaymentCompleteOrInComplete(state, context);
+                                    }
                                   },
                                 ),
                               ],

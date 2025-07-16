@@ -1,16 +1,19 @@
 import 'package:onyx_ix_pos/features/order/domain/entities/cart_item.dart';
+import 'package:onyx_ix_pos/features/order/domain/entities/payment.dart';
 
 class CartState {
   final List<CartItem> items;
   final String paymentInput;
   final double amountPaid;
   final String? error;
+  final PaymentMethod? paymentMethod;
 
   CartState({
     required this.paymentInput,
     required this.amountPaid,
     required this.items,
     this.error,
+    this.paymentMethod,
   });
 
   double get subtotal =>
@@ -35,12 +38,14 @@ class CartState {
     String? paymentInput,
     double? amountPaid,
     String? error,
+    PaymentMethod? paymentMethod,
   }) {
     return CartState(
       items: items ?? this.items,
       paymentInput: paymentInput ?? this.paymentInput,
       amountPaid: amountPaid ?? this.amountPaid,
       error: error ?? this.error,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
     );
   }
 }

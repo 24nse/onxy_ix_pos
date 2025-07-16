@@ -7,21 +7,16 @@ import 'package:onyx_ix_pos/features/invoice/presentation/views/widgets/info_sec
 import 'package:onyx_ix_pos/features/invoice/presentation/views/widgets/plutogrid_table_section.dart';
 import 'package:onyx_ix_pos/features/invoice/presentation/views/widgets/summary_section.dart';
 import '../../domain/entities/invoice.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
+
 import 'package:intl/intl.dart';
-import 'package:onyx_ix_pos/features/invoice/domain/entities/mock_data.dart';
+
 
 
 class InvoiceScreen extends StatelessWidget {
   const InvoiceScreen({super.key});
 
   Future<void> printInvoicePdf(BuildContext context, Invoice invoice) async {
-    final customer = getCustomerById(invoice.customerId);
-    final seller = getSellerById(invoice.sellerId);
-    final pdf = pw.Document();
-    final dueDateStr = DateFormat('yyyy/MM/dd').format(invoice.dueDate);
-    final invoiceDateStr = DateFormat('yyyy/MM/dd - HH:mm:ss').format(invoice.date);
+
 
   }
 
@@ -60,7 +55,7 @@ class InvoiceScreen extends StatelessWidget {
                     BlocBuilder<InvoiceCubit, InvoiceState>(
                       builder: (context, state) {
                         if (state is InvoiceLoaded) {
-                          return InfoSection(invoice: state.invoice);
+                          return InfoSection();
                         }
                         return const SizedBox.shrink();
                       },

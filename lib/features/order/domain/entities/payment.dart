@@ -1,3 +1,24 @@
+enum PaymentMethod {
+  cash,
+  card,
+  bankTransfer,
+}
+
+extension PaymentMethodExtension on PaymentMethod {
+  String get displayName {
+    switch (this) {
+      case PaymentMethod.cash:
+        return 'نقدي';
+      case PaymentMethod.card:
+        return 'بطاقة';
+      case PaymentMethod.bankTransfer:
+        return 'تحويل بنكي';
+      default:
+        return '';
+    }
+  }
+}
+
 class Payment {
   final String id;
   final double amount;

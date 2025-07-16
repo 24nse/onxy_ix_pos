@@ -1,68 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/features/invoice/presentation/views/widgets/header_section.dart';
+import 'package:onyx_ix_pos/features/invoice/data/datasource/local/mock_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
+import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_state.dart';
+import 'package:onyx_ix_pos/features/order/domain/entities/payment.dart';
 
 class InfoSection extends StatelessWidget {
   const InfoSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-
-      children: [
-        Row(
+    final customer = mockCustomers.first;
+    final seller = mockSellers.first;
+    return BlocBuilder<CartCubit, CartState>(
+      builder: (context, state) {
+        final paymentMethod = state.paymentMethod?.displayName ?? 'نقدي';
+        final invoiceDate = DateTime.now();
+        final invoiceDateStr = '${invoiceDate.year}/${invoiceDate.month}/${invoiceDate.day} - ${invoiceDate.hour}:${invoiceDate.minute.toString().padLeft(2, '0')}';
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(child: infoColumn('طريقة الدفع', 'نقدي')),
-
-            Expanded(child: infoColumn('تاريخ الاستحقاق', '28/7/2024')),
-            Expanded(
-              child: infoColumn('تاريخ الفاتورة', '24/7/2024 - 10:00:00 PM'),
+            Row(
+              children: [
+                Expanded(child: infoColumn('طريقة الدفع', paymentMethod)),
+                Expanded(child: infoColumn('تاريخ الاستحقاق', '28/7/2024')),
+                Expanded(child: infoColumn('تاريخ الفاتورة', invoiceDateStr)),
+              ],
             ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: customInfoContainer(
+                    margin: const EdgeInsets.only(left: 16, right: 8),
+                    title: 'العميل',
+                    titleColor: Color(0xFFDC292F),
+                    alignment: CrossAxisAlignment.end,
+                    info: [
+                      {' الاسم': customer.name},
+                      {' المدينة': customer.city},
+                      {' الدولة': customer.country},
+                      {' الرمز البريدي ': customer.postalCode},
+                      {' الرقم الضريبي': customer.vatNumber},
+                      {' السجل التجاري': customer.commercialRegister},
+                      {' معرف آخر': customer.otherId},
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: customInfoContainer(
+                    margin: const EdgeInsets.only(left: 8, right: 16),
+                    title: 'بيانات المورد',
+                    titleColor: Color(0xFFDC292F),
+                    alignment: CrossAxisAlignment.end,
+                    info: [
+                      {' الاسم': seller.name},
+                      {' المدينة': seller.city},
+                      {' الدولة': seller.country},
+                      {' الرمز البريدي ': seller.postalCode},
+                      {' الرقم الضريبي': seller.vatNumber},
+                      {' السجل التجاري': seller.commercialRegister},
+                      {' معرف آخر': seller.otherId},
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
           ],
-        ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            Expanded(
-              child: customInfoContainer(
-                margin: const EdgeInsets.only(left: 16, right: 8),
-                title: 'العميل',
-                titleColor: Color(0xFFDC292F),
-                alignment: CrossAxisAlignment.end,
-                info: [
-                  {' الاسم': 'عميل نقدي عام'},
-                  {' المدينة': ' 3'},
-                  {' الدولة': 'السعودية - 1'},
-                  {' الرمز البريدي ': '8727'},
-                  {' الرقم الضريبي': '8727'},
-                  {' السجل التجاري': '3006256961000003'},
-                  {' معرف آخر': '10'},
-                ],
-              ),
-            ),
-
-            Expanded(
-              child: customInfoContainer(
-                margin: const EdgeInsets.only(left: 8, right: 16),
-                title: 'بيانات المورد',
-                titleColor: Color(0xFFDC292F),
-                alignment: CrossAxisAlignment.end,
-                info: [
-                  {' الاسم': 'شركة قصر الروابي'},
-                  {' المدينة': ' 3'},
-
-                  {' الدولة': 'السعودية - 1'},
-                  {' الرمز البريدي ': '8727'},
-                  {' الرقم الضريبي': '8727'},
-                  {' السجل التجاري': '3006256961000003'},
-                  {' معرف آخر': '10'},
-                ],
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-      ],
+        );
+      },
     );
   }
 
@@ -82,8 +90,7 @@ class InfoSection extends StatelessWidget {
       ],
     );
   }
-
-  Widget customInfoContainer({
+ Widget customInfoContainer({
     required String title,
     required Color titleColor,
     required CrossAxisAlignment alignment,
@@ -149,4 +156,6 @@ class InfoSection extends StatelessWidget {
       ),
     );
   }
+
 }
+ 

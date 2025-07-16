@@ -21,7 +21,6 @@ class OnyxIxPosApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(MediaQuery.sizeOf(context).width.toString());
 
     final GoRouter _router = GoRouter(
       routes: [

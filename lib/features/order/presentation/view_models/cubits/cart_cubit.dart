@@ -153,4 +153,8 @@ class CartCubit extends Cubit<CartState> {
   void clearError() {
     emit(state.copyWith(error: null));
   }
+
+  void setPaymentMethod(PaymentMethod method) {
+    emit(state.copyWith(paymentMethod: method));
+  }
 }
