@@ -10,7 +10,7 @@ class ProductRemoteDataSource {
   Future<List<Product>> fetchProducts({String? category}) async {
     try {
       final response = await apiService.dio.get(
-        'https://cors-anywhere.herokuapp.com/https://fakerestaurantapi.runasp.net/api/Restaurant/items',
+        'https://fakerestaurantapi.runasp.net/api/Restaurant/items',
       );
       if (response.statusCode == 200 && response.data is List) {
         final List data = response.data as List;

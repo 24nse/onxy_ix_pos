@@ -1,14 +1,14 @@
-import 'package:onyx_ix_pos/core/domain/usecase.dart';
+import 'package:dartz/dartz.dart';
+import 'package:onyx_ix_pos/core/error/failure.dart';
 import '../entities/product.dart';
 import '../repositories/product_repository.dart';
 
-class SearchProductsUseCase extends UseCase<Future<List<Product>>, String> {
+class SearchProductsUseCase {
   final ProductRepository repository;
 
   SearchProductsUseCase(this.repository);
 
-  @override
-  Future<List<Product>> call(String query) async {
+  Future<Either<Failure, List<Product>>> call(String query) async {
     return await repository.searchProducts(query);
   }
 }

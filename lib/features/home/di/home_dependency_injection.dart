@@ -15,7 +15,7 @@ final sl = GetIt.instance;
 void setupHomeDependencyInjection() {
   sl.registerLazySingleton<Dio>(() => Dio());
   sl.registerLazySingleton<ApiService>(
-    () => ApiService(dio: sl(), baseUrl: 'https://api.example.com'),
+    () => ApiService(dio: sl(), baseUrl: 'https://fakerestaurantapi.runasp.net/api/Restaurant/5/menu'),
   );
   sl.registerLazySingleton<ProductRemoteDataSource>(
     () => ProductRemoteDataSource(apiService: sl()),
@@ -23,12 +23,13 @@ void setupHomeDependencyInjection() {
   sl.registerLazySingleton<ProductLocalDataSource>(
     () => ProductLocalDataSource(),
   );
-  sl.registerLazySingleton<ProductRepository>(
+  sl.registerLazySingleton<ProductRepositoryImpl>(
     () => ProductRepositoryImpl(
       remoteDataSource: sl(),
       localDataSource: sl(),
     ),
   );
+  sl.registerLazySingleton<ProductRepository>(() => sl<ProductRepositoryImpl>());
 
   sl.registerLazySingleton(() => GetProductsUseCase(sl()));
   sl.registerLazySingleton(() => SearchProductsUseCase(sl()));
