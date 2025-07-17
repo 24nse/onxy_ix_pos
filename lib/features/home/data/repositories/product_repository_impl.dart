@@ -48,17 +48,17 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, List<Product>>> getProducts() async {
+  Future<Either<Failures, List<Product>>> getProducts() async {
     try {
       final products = await _fetchProducts();
       return Right(products);
     } catch (e) {
-      return Left(Failure('Failed to get products: $e'));
+      return Left(ServerFailure('Failed to get products: $e'));
     }
   }
 
   @override
-  Future<Either<Failure, List<Product>>> searchProducts(String query) async {
+  Future<Either<Failures, List<Product>>> searchProducts(String query) async {
     try {
       final products = await _fetchProducts();
       final filtered = products
@@ -69,12 +69,12 @@ class ProductRepositoryImpl implements ProductRepository {
           .toList();
       return Right(filtered);
     } catch (e) {
-      return Left(Failure('Failed to search products: $e'));
+      return Left(ServerFailure('Failed to search products: $e'));
     }
   }
 
   @override
-  Future<Either<Failure, List<Product>>> getProductsByCategory(
+  Future<Either<Failures, List<Product>>> getProductsByCategory(
     String category,
   ) async {
     try {
@@ -87,12 +87,12 @@ class ProductRepositoryImpl implements ProductRepository {
           .toList();
       return Right(filtered);
     } catch (e) {
-      return Left(Failure('Failed to get products by category: $e'));
+      return Left(ServerFailure('Failed to get products by category: $e'));
     }
   }
 
   @override
-  Future<Either<Failure, List<String>>> getCategories() async {
+  Future<Either<Failures, List<String>>> getCategories() async {
     try {
       final products = await _fetchProducts();
       final categories = products
@@ -101,23 +101,23 @@ class ProductRepositoryImpl implements ProductRepository {
           .toList();
       return Right(categories);
     } catch (e) {
-      return Left(Failure('Failed to get categories: $e'));
+      return Left(ServerFailure('Failed to get categories: $e'));
     }
   }
 
   @override
-  Future<Either<Failure, Product?>> getProductById(String id) async {
+  Future<Either<Failures, Product?>> getProductById(String id) async {
     try {
       final products = await _fetchProducts();
       final product = products.where((product) => product.id == id).isNotEmpty
           ? products.firstWhere((product) => product.id == id)
           : null;
       if (product == null) {
-        return Left(Failure('Product not found'));
+        return Left(ServerFailure('Product not found'));
       }
       return Right(product);
     } catch (e) {
-      return Left(Failure('Failed to get product by id: $e'));
+      return Left(ServerFailure('Failed to get product by id: $e'));
     }
   }
 }

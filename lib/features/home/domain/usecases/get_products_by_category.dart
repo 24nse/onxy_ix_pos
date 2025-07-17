@@ -8,7 +8,7 @@ class GetProductsByCategoryUseCase {
 
   GetProductsByCategoryUseCase(this.repository);
 
-  Future<Either<Failure, List<Product>>> call(String category) async {
+  Future<Either<Failures, List<Product>>> call(String category) async {
     if (category == 'all') {
       return await repository.getProducts();
     }

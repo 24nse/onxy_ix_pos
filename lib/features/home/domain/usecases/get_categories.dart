@@ -7,7 +7,7 @@ class GetCategoriesUseCase {
 
   GetCategoriesUseCase(this.repository);
 
-  Future<Either<Failure, List<String>>> call(void params) async {
+  Future<Either<Failures, List<String>>> call(void params) async {
     return await repository.getCategories();
   }
 } 
