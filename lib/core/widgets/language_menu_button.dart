@@ -58,7 +58,7 @@ class LanguageMenuButton extends StatelessWidget {
   ) {
     return PopupMenuItem<Locale>(
       height: 30,
-      padding: EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       value: value,
       child: DefaultTextStyle(
         style: Theme.of(context).textTheme.displayLarge!.copyWith(

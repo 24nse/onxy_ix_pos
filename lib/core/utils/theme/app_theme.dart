@@ -13,7 +13,7 @@ String getFontFamily(Locale locale) {
 class AppTheme {
   static ThemeData lightTheme(BuildContext context,Locale locale) {
     return ThemeData(
-      fontFamily: getFontFamily(locale),
+      fontFamily: 'Cairo',
   
       primaryColor: AppColors.primaryLight,
       scaffoldBackgroundColor: AppColors.backgroundLight,
@@ -48,7 +48,7 @@ class AppTheme {
 
   static ThemeData darkTheme(BuildContext context,Locale locale) {
     return ThemeData(
-      fontFamily:getFontFamily(locale),
+      fontFamily: 'Cairo',
       // fontFamilyFallback: ['NotoSans', 'Arial', 'sans-serif']
     
       primaryColor: AppColors.primaryDark,

@@ -32,7 +32,7 @@ class InvoiceRepositoryImpl implements InvoiceRepository {
     return Invoice(
       id: id,
       date: DateTime.now(),
-      dueDate: DateTime.now().add(Duration(days: 7)),
+      dueDate: DateTime.now().add(const Duration(days: 7)),
       paymentMethod: 'نقدي',
       customerId: 'customer-1',
       sellerId: 'seller-1',

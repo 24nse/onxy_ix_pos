@@ -15,6 +15,7 @@ import 'package:onyx_ix_pos/features/home/presentation/views/widgets/product_car
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/cubits/search_cubit.dart';
 
+
 class ProductCatalogSection extends HookWidget {
   const ProductCatalogSection({super.key});
 

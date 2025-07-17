@@ -8,12 +8,12 @@ class OrderCalculationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 12),
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8,horizontal: 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children:const [
+        children:[
           Expanded(flex: 6, child: SubtotalSection()),
            SizedBox(width: 20),
           Expanded(flex: 5, child: PaymentCalculatorSection()),

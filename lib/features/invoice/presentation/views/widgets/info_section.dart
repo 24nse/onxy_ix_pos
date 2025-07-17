@@ -115,6 +115,16 @@ class InfoSection extends StatelessWidget {
     );
   }
 
+
+
+
+
+
+
+
+
+
+
   Widget infoColumn(String label, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,

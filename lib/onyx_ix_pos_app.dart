@@ -1,5 +1,4 @@
 
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:onyx_ix_pos/core/utils/service_locator.dart';
@@ -22,15 +21,15 @@ class OnyxIxPosApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final GoRouter _router = GoRouter(
+    final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           path: '/',
-          builder: (context, state) => HomeScreen(),
+          builder: (context, state) => const HomeScreen(),
         ),
         GoRoute(
           path: '/invoice',
-          builder: (context, state) => InvoiceScreen(),
+          builder: (context, state) => const InvoiceScreen(),
         ),
       ],
     );
@@ -65,7 +64,7 @@ class OnyxIxPosApp extends StatelessWidget {
                       Locale('en', ''),
                       Locale('ar', ''),
                     ],
-                    routerConfig: _router,
+                    routerConfig: router,
                   );
                 },
               );

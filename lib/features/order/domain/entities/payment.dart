@@ -13,9 +13,7 @@ extension PaymentMethodExtension on PaymentMethod {
         return 'بطاقة';
       case PaymentMethod.bankTransfer:
         return 'تحويل بنكي';
-      default:
-        return '';
-    }
+      }
   }
 }
 

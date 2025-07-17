@@ -40,7 +40,7 @@ class HomeScreen extends HookWidget {
                 'Onyx IX POS',
           ),
           actions: [
-            LanguageMenuButton(),
+            const LanguageMenuButton(),
             CustomHoverIconContainer(
               icon: isDarkMode
                   ? Icons.light_mode_outlined

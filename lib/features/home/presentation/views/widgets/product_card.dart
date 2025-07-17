@@ -87,12 +87,12 @@ class ProductCard extends StatelessWidget {
                   fontSize: getResponsiveFontSize(context, fontSize: 10),
                   fontWeight: FontWeight.bold,
                   
-                  color:Color(0xFF567cc5),
+                  color:const Color(0xFF567cc5),
                 ),
               );
   }
 
-  Text _buildCategoryName(BuildContext context) => Text(product.category, style: AppStyles.textStyle12(context).copyWith(fontSize: getResponsiveFontSize(context, fontSize: 10),color: Color(0xFFa3a4b6),));
+  Text _buildCategoryName(BuildContext context) => Text(product.category, style: AppStyles.textStyle12(context).copyWith(fontSize: getResponsiveFontSize(context, fontSize: 10),color: const Color(0xFFa3a4b6),));
 
   Text _buildProductName(BuildContext context) {
     return Text(

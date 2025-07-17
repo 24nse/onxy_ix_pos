@@ -7,10 +7,10 @@ class TabletLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
+    return const TabBarView(
       children: [
-        const ProductCatalogSection(),
-        const OrderSummarySection(),
+        ProductCatalogSection(),
+        OrderSummarySection(),
       ],
     );
   }

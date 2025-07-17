@@ -33,7 +33,7 @@ class SearchBarFromField extends StatelessWidget {
           hintText: hintText,
           hintStyle:Theme.of(context).textTheme.displayLarge!.copyWith(
             fontSize: getResponsiveFontSize(context, fontSize: 14),
-                        color: Color(0xFFa3a4b6),
+                        color: const Color(0xFFa3a4b6),
 
           ) ,
           prefixIcon: const Icon(Icons.search,color: Color(0xFFa3a4b6),size: 18,),

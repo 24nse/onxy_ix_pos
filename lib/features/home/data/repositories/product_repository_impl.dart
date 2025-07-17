@@ -20,18 +20,14 @@ class ProductRepositoryImpl implements ProductRepository {
   });
 
   Future<List<Product>> _fetchProducts() async {
-    print("object");
     if (_cache != null) return _cache!;
     try {
       final remoteProducts = await remoteDataSource.fetchProducts();
       if (remoteProducts.isNotEmpty) {
-        print('Loaded products from API');
         _lastSource = 'API';
         _cache = remoteProducts;
         return remoteProducts;
       } else {
-        // API returned empty list, fallback to local
-        print('API returned empty, loading mock data');
         _lastSource = 'Mock';
         final localProducts = await localDataSource.fetchProducts();
         _cache = localProducts;
@@ -39,7 +35,6 @@ class ProductRepositoryImpl implements ProductRepository {
       }
     } catch (e) {
       // API call failed, fallback to local
-      print('API fetch failed: $e');
       _lastSource = 'Mock';
       final localProducts = await localDataSource.fetchProducts();
       _cache = localProducts;

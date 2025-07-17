@@ -12,21 +12,15 @@ class PlutogridTableSection extends StatelessWidget {
       builder: (context, state) {
         List<PlutoRow> rows = [];
         if (state is InvoiceLoaded) {
-          print('Invoice items length: ${state.invoice.items.length}');
-          for (var item in state.invoice.items) {
-            print(
-              'Item: name=${item.name}, unit=${item.unit}, qty=${item.quantity}, free_qty=${item.freeQuantity}, price=${item.price}, vat_percent=${item.vatPercent}, vat_value=${item.vatValue}, total=${item.total}',
-            );
-          }
+       
           rows = state.invoice.items.asMap().entries.map((entry) {
             final index = entry.key + 1;
             final item = entry.value;
-            print(item.name);
             return PlutoRow(
               cells: {
                 'number': PlutoCell(value: index.toString()),
-                'item': PlutoCell(value: item.name ?? ''),
-                'unit': PlutoCell(value: item.unit ?? ''),
+                'item': PlutoCell(value: item.name),
+                'unit': PlutoCell(value: item.unit),
                 'qty': PlutoCell(value: item.quantity.toString()),
                 'free_qty': PlutoCell(value: item.freeQuantity.toString()),
                 'price': PlutoCell(value: item.price.toStringAsFixed(2)),
@@ -42,7 +36,7 @@ class PlutogridTableSection extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-            border: Border.all(color: Color(0xFFF9F9F9)),
+            border: Border.all(color: const Color(0xFFF9F9F9)),
             borderRadius: BorderRadius.circular(8),
           ),
           height: 220,
@@ -58,18 +52,20 @@ class PlutogridTableSection extends StatelessWidget {
                 resizeMode: PlutoResizeMode.pushAndPull,
               ),
               style: PlutoGridStyleConfig(
-                gridBorderColor: Color(0xFFF9F9F9),
+                gridBorderColor: const Color(0xFFF9F9F9),
                 gridBackgroundColor: Colors.white,
                 rowColor: Colors.white,
                 activatedColor: const Color(0xFFF5F5F5).withValues(alpha: 0.5),
                 cellTextStyle: const TextStyle(
                   fontSize: 13,
                   color: Colors.black,
+                  fontFamily: 'Cairo',
                 ),
                 columnTextStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
-                  color: Colors.black,
+                  color: Colors.white,
+                  fontFamily: 'Cairo',
                 ),
                 columnHeight: 44,
                 rowHeight: 38,
@@ -94,7 +90,7 @@ List<PlutoColumn> get plutoColumns => [
     width: 50,
     titleTextAlign: PlutoColumnTextAlign.center,
     textAlign: PlutoColumnTextAlign.center,
-    backgroundColor: Color(0xFFDC292F),
+    backgroundColor: const Color(0xFFDC292F),
   ),
   PlutoColumn(
     title: 'اسم الصنف',
@@ -103,7 +99,7 @@ List<PlutoColumn> get plutoColumns => [
     width: 160,
     titleTextAlign: PlutoColumnTextAlign.center,
     textAlign: PlutoColumnTextAlign.center,
-    backgroundColor: Color(0xFFDC292F),
+    backgroundColor: const Color(0xFFDC292F),
   ),
   PlutoColumn(
     title: 'الوحدة',
@@ -112,7 +108,7 @@ List<PlutoColumn> get plutoColumns => [
     width: 70,
     titleTextAlign: PlutoColumnTextAlign.center,
     textAlign: PlutoColumnTextAlign.center,
-    backgroundColor: Color(0xFFDC292F),
+    backgroundColor: const Color(0xFFDC292F),
   ),
   PlutoColumn(
     title: 'السعر',
@@ -121,7 +117,7 @@ List<PlutoColumn> get plutoColumns => [
     width: 70,
     titleTextAlign: PlutoColumnTextAlign.center,
     textAlign: PlutoColumnTextAlign.center,
-    backgroundColor: Color(0xFFDC292F),
+    backgroundColor: const Color(0xFFDC292F),
   ),
   PlutoColumn(
     title: 'الكمية',
@@ -130,7 +126,7 @@ List<PlutoColumn> get plutoColumns => [
     width: 60,
     titleTextAlign: PlutoColumnTextAlign.center,
     textAlign: PlutoColumnTextAlign.center,
-    backgroundColor: Color(0xFFDC292F),
+    backgroundColor: const Color(0xFFDC292F),
   ),
   PlutoColumn(
     title: 'الكمية المجانية',
@@ -139,7 +135,7 @@ List<PlutoColumn> get plutoColumns => [
     width: 90,
     titleTextAlign: PlutoColumnTextAlign.center,
     textAlign: PlutoColumnTextAlign.center,
-    backgroundColor: Color(0xFFDC292F),
+    backgroundColor: const Color(0xFFDC292F),
   ),
   PlutoColumn(
     title: 'ضريبة %',
@@ -148,7 +144,7 @@ List<PlutoColumn> get plutoColumns => [
     width: 70,
     titleTextAlign: PlutoColumnTextAlign.center,
     textAlign: PlutoColumnTextAlign.center,
-    backgroundColor: Color(0xFFDC292F),
+    backgroundColor: const Color(0xFFDC292F),
   ),
   PlutoColumn(
     title: 'قيمة ضريبة',
@@ -157,7 +153,7 @@ List<PlutoColumn> get plutoColumns => [
     width: 70,
     titleTextAlign: PlutoColumnTextAlign.center,
     textAlign: PlutoColumnTextAlign.center,
-    backgroundColor: Color(0xFFDC292F),
+    backgroundColor: const Color(0xFFDC292F),
   ),
   PlutoColumn(
     title: 'الإجمالي',
@@ -166,6 +162,6 @@ List<PlutoColumn> get plutoColumns => [
     width: 80,
     titleTextAlign: PlutoColumnTextAlign.center,
     textAlign: PlutoColumnTextAlign.center,
-    backgroundColor: Color(0xFFDC292F),
+    backgroundColor: const Color(0xFFDC292F),
   ),
 ].reversed.toList();

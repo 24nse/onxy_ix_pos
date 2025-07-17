@@ -62,7 +62,7 @@ class SubtotalSection extends StatelessWidget {
     final style = isTotal
         ? textTheme.labelLarge?.copyWith(
           fontSize: getResponsiveFontSize(context,fontSize: 12),
-          color: Color(0xFF4364b8))
+          color: const Color(0xFF4364b8))
         : textTheme.bodyLarge?.copyWith(color: effectiveColor,fontSize: getResponsiveFontSize(context, fontSize: 12));
 
     return Padding(
