@@ -51,5 +51,8 @@
   "payment_amount_too_high": "Payment amount is higher than remaining amount",
   "no_products_found": "No products found",
   "no_products_available": "No products available",
-  "search_results": "Search Results"
+  "search_results": "Search Results",
+  "payment_incomplete_title": "Payment Incomplete",
+  "payment_incomplete_message": "Please complete the payment before checkout.",
+  "remaining_amount": "The Remaining amount is :"
 }

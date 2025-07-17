@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:onyx_ix_pos/features/invoice/presentation/views/widgets/pdf.dart';
+import 'package:printing/printing.dart';
 import '../../view_models/cubits/invoice_cubit.dart';
 import 'header_section.dart';
 
@@ -15,32 +17,106 @@ class SummarySection extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              summaryRow(label: 'الإجمالي', value: '${invoice.subtotal.toStringAsFixed(2)} SAR', border: true),
-              summaryRow(label: 'الخصم', value: invoice.discount.toStringAsFixed(2), border: true),
-              summaryRow(label: 'إجمالي الضريبة', value: invoice.totalVat.toStringAsFixed(2), border: true),
-              summaryRow(label: 'إجمالي الإعفاء', value: invoice.totalExempt.toStringAsFixed(2), border: true),
-              summaryRow(label: 'الإجمالي بالضريبة', value: '${invoice.totalWithVat.toStringAsFixed(2)} SAR', bold: true),
+              summaryRow(
+                label: 'الإجمالي',
+                value: '${invoice.subtotal.toStringAsFixed(2)} SAR',
+                border: true,
+              ),
+              summaryRow(
+                label: 'الخصم',
+                value: invoice.discount.toStringAsFixed(2),
+                border: true,
+              ),
+              summaryRow(
+                label: 'إجمالي الضريبة',
+                value: invoice.totalVat.toStringAsFixed(2),
+                border: true,
+              ),
+              summaryRow(
+                label: 'إجمالي الإعفاء',
+                value: invoice.totalExempt.toStringAsFixed(2),
+                border: true,
+              ),
+              summaryRow(
+                label: 'الإجمالي بالضريبة',
+                value: '${invoice.totalWithVat.toStringAsFixed(2)} SAR',
+                bold: true,
+              ),
               const SizedBox(height: 8),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
                   height: 40,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     border: Border(
-                      top: BorderSide(
-                        color: const Color(0xFFD8232A),
-                        width: 2,
-                      ),
-                      bottom: BorderSide(
-                        color:  const Color(0xFFD8232A),
-                        width: 2,
-                      ),
+                      top: BorderSide(color: Color(0xFFD8232A), width: 2),
+                      bottom: BorderSide(color: Color(0xFFD8232A), width: 2),
                     ),
                   ),
-                  child: CustomText(text: invoice.amountInWords),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: IconButton(
+                          icon: const Icon(Icons.picture_as_pdf),
+                          tooltip: 'تحميل PDF',
+                          onPressed: () async {
+                            PdfPreview(
+                              build: (format) => generatePdf(
+                                customerId: invoice.customerId,
+                                sellerId: invoice.sellerId,
+                                items: invoice.items,
+                                subtotal: invoice.subtotal,
+                                discount: invoice.discount,
+                                totalVat: invoice.totalVat,
+                                totalExempt: invoice.totalExempt,
+                                totalWithVat: invoice.totalWithVat,
+                                amountInWords: invoice.amountInWords,
+                                paymentMethod: invoice.paymentMethod,
+                                dueDate: invoice.dueDate.toString(),
+                                invoiceDateStr: invoice.date.toString(),
+                              ),
+                            );
+                            await Printing.layoutPdf(
+                              onLayout: (format) => generatePdf(
+                                customerId: invoice.customerId,
+                                sellerId: invoice.sellerId,
+                                items: invoice.items,
+                                subtotal: invoice.subtotal,
+                                discount: invoice.discount,
+                                totalVat: invoice.totalVat,
+                                totalExempt: invoice.totalExempt,
+                                totalWithVat: invoice.totalWithVat,
+                                amountInWords: invoice.amountInWords,
+                                paymentMethod: invoice.paymentMethod,
+                                dueDate: invoice.dueDate.toString(),
+                                invoiceDateStr: invoice.date.toString(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+
+                      Expanded(
+                        flex: 10,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomText(
+                              text: invoice.amountInWords,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Cairo',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              )
+              ),
             ],
           );
         } else {
@@ -66,7 +142,7 @@ class SummarySection extends StatelessWidget {
           border: border
               ? Border(
                   bottom: BorderSide(
-                    color: Colors.grey.withValues(alpha:  0.5),
+                    color: Colors.grey.withValues(alpha: 0.5),
                     width: 1,
                   ),
                 )
@@ -76,12 +152,26 @@ class SummarySection extends StatelessWidget {
           textDirection: TextDirection.rtl,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomText(text: label),
+            CustomText(
+              text: label,
+              style: const TextStyle(fontFamily: 'Cairo'),
+            ),
             const SizedBox(width: 8),
-            CustomText(text: value,style: TextStyle(fontWeight: bold ? FontWeight.bold : FontWeight.normal),),
+            CustomText(
+              text: value,
+              style: TextStyle(
+                fontFamily: 'Cairo',
+                fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+  ///
+  ///
 }
+
+
+///

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +13,7 @@ class PlutogridTableSection extends StatelessWidget {
       builder: (context, state) {
         List<PlutoRow> rows = [];
         if (state is InvoiceLoaded) {
-       
+
           rows = state.invoice.items.asMap().entries.map((entry) {
             final index = entry.key + 1;
             final item = entry.value;
@@ -32,6 +33,7 @@ class PlutogridTableSection extends StatelessWidget {
               },
             );
           }).toList();
+
         }
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -42,7 +44,7 @@ class PlutogridTableSection extends StatelessWidget {
           height: 220,
           width: double.infinity,
           child: PlutoGrid(
-             key: ValueKey(rows.length),
+            key: ValueKey(rows.length),
             columns: plutoColumns,
             rows: rows,
             mode: PlutoGridMode.readOnly,

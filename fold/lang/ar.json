@@ -49,5 +49,8 @@
   "payment_amount_too_high": "مبلغ الدفع أعلى من المبلغ المتبقي.",
   "no_products_found": "لم يتم العثور على منتجات",
   "no_products_available": "لا توجد منتجات متاحة",
-  "search_results": "نتائج البحث"
+  "search_results": "نتائج البحث",
+  "payment_incomplete_title": "الدفع غير مكتمل",
+  "payment_incomplete_message": "يرجى إكمال الدفع قبل المتابعة.",
+  "remaining_amount": "المبلغ المتبقي هو :"
 }
