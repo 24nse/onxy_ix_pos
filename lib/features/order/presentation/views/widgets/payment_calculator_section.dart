@@ -9,6 +9,7 @@ import 'package:onyx_ix_pos/core/widgets/show_custom_toast.dart';
 import 'package:onyx_ix_pos/features/home/presentation/view_models/cubits/full_screen_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/cart_cubit.dart';
 import 'package:onyx_ix_pos/features/order/presentation/view_models/cubits/payment_cubit.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 
 class PaymentCalculatorSection extends HookWidget {
   const PaymentCalculatorSection({super.key});
@@ -66,10 +67,14 @@ class PaymentCalculatorSection extends HookWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 GestureDetector(
                   onTap: () {
-                    context.read<PaymentCubit>().onKeyPressed(BackspaceKey());
+                    EasyDebounce.debounce(
+                      'payment-backspace-debounce',
+                      const Duration(milliseconds: 250),
+                      () => context.read<PaymentCubit>().onKeyPressed(BackspaceKey()),
+                    );
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -91,7 +96,7 @@ class PaymentCalculatorSection extends HookWidget {
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             GridView.count(
               crossAxisCount: 3,
               mainAxisSpacing: 4,
@@ -169,9 +174,12 @@ class PaymentCalculatorSection extends HookWidget {
                   context,
                   'C',
                   () {
-                  context.read<PaymentCubit>().onKeyPressed(ClearKey());
-               
-                },
+                    EasyDebounce.debounce(
+                      'payment-clear-debounce',
+                      const Duration(milliseconds: 250),
+                      () => context.read<PaymentCubit>().onKeyPressed(ClearKey()),
+                    );
+                  },
                 ),
               ],
             ),
@@ -274,7 +282,7 @@ Widget _buildCalcButtonWidget(
   return ElevatedButton(
     onPressed: onPressed,
     style: ElevatedButton.styleFrom(
-      backgroundColor: Color(0xFF95aada),
+      backgroundColor: const Color(0xFF95aada),
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     ),
