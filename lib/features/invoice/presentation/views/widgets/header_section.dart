@@ -10,8 +10,8 @@ class HeaderSection extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(8),
       clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(color: const Color(0xFFEBF7FF) ),
-      child: Row(
+      decoration: const BoxDecoration(color: Color(0xFFEBF7FF) ),
+      child: const Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomContainerImage(
@@ -20,21 +20,21 @@ class HeaderSection extends StatelessWidget {
               
               Icons.qr_code, size: 40, color: Colors.black),
           ),
-          const SizedBox(height: 4),
+          SizedBox(width: 10),
           Column(
             children: [
               CustomText(text:  'فاتورة ضريبية',
-               style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontFamily: 'Cairo',
-                          fontWeight: FontWeight.w500,
-                        ),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               CustomText(text:  'Tax Invoice',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w500,
                 ),
@@ -42,35 +42,35 @@ class HeaderSection extends StatelessWidget {
               CustomText(text:  '12411648899',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w500,
                 ),
               ),
             ],
           ),
-          const Spacer(),
+          Spacer(),
           // Title and address
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
-           spacing: 7,
+            spacing: 7,
             children: [
               CustomText(
               text:   'شركة قصر الروابي', style: TextStyle(
-                          color: const Color(
+                          color: Color(
                             0xFF000000,
                           ) ,
-                          fontSize: 12,
-                          fontFamily: 'Cairo',
-                          fontWeight: FontWeight.bold,
-                        ),
+                  fontSize: 14,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               CustomText(
                 
                 text: '3761 طريق الملك فهد الفرعي',
                 style: TextStyle(
-                  color: const Color(0xFF474747),
-                  fontSize: 9,
+                  color: Color(0xFF474747),
+                  fontSize: 12,
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w400,
                 ),
@@ -78,15 +78,15 @@ class HeaderSection extends StatelessWidget {
               CustomText(
                 text: 'حي المعذر - المملكة العربية السعودية',
                 style: TextStyle(
-                  color: const Color(0xFF474747),
-                  fontSize: 9,
+                  color: Color(0xFF474747),
+                  fontSize: 12,
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w400,
                 ),
               ),
             ],
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: 10),
           // Logo
           CustomContainerImage(
             child: Center(

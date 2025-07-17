@@ -8,7 +8,6 @@ import 'package:onyx_ix_pos/features/invoice/presentation/views/widgets/plutogri
 import 'package:onyx_ix_pos/features/invoice/presentation/views/widgets/summary_section.dart';
 import '../../domain/entities/invoice.dart';
 
-import 'package:intl/intl.dart';
 
 
 
@@ -22,55 +21,43 @@ class InvoiceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<InvoiceCubit>(),
-      child: Builder(
-      builder: (context) {
-        return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
-              title: const Text('الفاتورة'),
-              actions: [
-                BlocBuilder<InvoiceCubit, InvoiceState>(
-                  builder: (context, state) {
-                    if (state is InvoiceLoaded) {
-                      return IconButton(
-                        icon: const Icon(Icons.picture_as_pdf),
-                        tooltip: 'تحميل PDF',
-                        onPressed: () => printInvoicePdf(context, state.invoice),
-                      );
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ),
-              ],
-            ),
-            body: SingleChildScrollView(
-              child: SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    HeaderSection(),
-                    const SizedBox(height: 16),
-                    BlocBuilder<InvoiceCubit, InvoiceState>(
-                      builder: (context, state) {
-                        if (state is InvoiceLoaded) {
-                          return InfoSection();
-                        }
-                        return const SizedBox.shrink();
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    PlutogridTableSection(),
-                    const SizedBox(height: 16),
-                    SummarySection(),
-                  ],
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: BlocProvider(
+        create: (_) => sl<InvoiceCubit>(),
+        child: Builder(
+        builder: (context) {
+          return Scaffold(
+              backgroundColor: Colors.white,
+              body: SingleChildScrollView(
+                child: SafeArea(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const HeaderSection(),
+                      const SizedBox(height: 16),
+                      BlocBuilder<InvoiceCubit, InvoiceState>(
+                        builder: (context, state) {
+                          if (state is InvoiceLoaded) {
+                            return const InfoSection();
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      const PlutogridTableSection(),
+                      const SizedBox(height: 16),
+                      const SummarySection(),
+                     const SizedBox(height: 16),
+
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
-        );
+            );
+          },
+        ),
+          ),
+    );
       }
 }

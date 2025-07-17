@@ -29,44 +29,85 @@ class InfoSection extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Row(
-              children: [
-                Expanded(
-                  child: customInfoContainer(
-                    margin: const EdgeInsets.only(left: 16, right: 8),
-                    title: 'العميل',
-                    titleColor: Color(0xFFDC292F),
-                    alignment: CrossAxisAlignment.end,
-                    info: [
-                      {' الاسم': customer.name},
-                      {' المدينة': customer.city},
-                      {' الدولة': customer.country},
-                      {' الرمز البريدي ': customer.postalCode},
-                      {' الرقم الضريبي': customer.vatNumber},
-                      {' السجل التجاري': customer.commercialRegister},
-                      {' معرف آخر': customer.otherId},
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: customInfoContainer(
-                    margin: const EdgeInsets.only(left: 8, right: 16),
-                    title: 'بيانات المورد',
-                    titleColor: Color(0xFFDC292F),
-                    alignment: CrossAxisAlignment.end,
-                    info: [
-                      {' الاسم': seller.name},
-                      {' المدينة': seller.city},
-                      {' الدولة': seller.country},
-                      {' الرمز البريدي ': seller.postalCode},
-                      {' الرقم الضريبي': seller.vatNumber},
-                      {' السجل التجاري': seller.commercialRegister},
-                      {' معرف آخر': seller.otherId},
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            // Responsive layout for customer/seller info
+            (() {
+              final isMobile = MediaQuery.of(context).size.width < 600;
+              if (isMobile) {
+                return Column(
+                  children: [
+                    customInfoContainer(
+                      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                      title: 'العميل',
+                      titleColor: const Color(0xFFDC292F),
+                      alignment: CrossAxisAlignment.end,
+                      info: [
+                        {' الاسم': customer.name},
+                        {' المدينة': customer.city},
+                        {' الدولة': customer.country},
+                        {' الرمز البريدي ': customer.postalCode},
+                        {' الرقم الضريبي': customer.vatNumber},
+                        {' السجل التجاري': customer.commercialRegister},
+                        {' معرف آخر': customer.otherId},
+                      ],
+                    ),
+                    customInfoContainer(
+                      margin: const EdgeInsets.only(left: 16, right: 16),
+                      title: 'بيانات المورد',
+                      titleColor: const Color(0xFFDC292F),
+                      alignment: CrossAxisAlignment.end,
+                      info: [
+                        {' الاسم': seller.name},
+                        {' المدينة': seller.city},
+                        {' الدولة': seller.country},
+                        {' الرمز البريدي ': seller.postalCode},
+                        {' الرقم الضريبي': seller.vatNumber},
+                        {' السجل التجاري': seller.commercialRegister},
+                        {' معرف آخر': seller.otherId},
+                      ],
+                    ),
+                  ],
+                );
+              } else {
+                return Row(
+                  children: [
+                    Expanded(
+                      child: customInfoContainer(
+                        margin: const EdgeInsets.only(left: 16, right: 8),
+                        title: 'العميل',
+                        titleColor: const Color(0xFFDC292F),
+                        alignment: CrossAxisAlignment.end,
+                        info: [
+                          {' الاسم': customer.name},
+                          {' المدينة': customer.city},
+                          {' الدولة': customer.country},
+                          {' الرمز البريدي ': customer.postalCode},
+                          {' الرقم الضريبي': customer.vatNumber},
+                          {' السجل التجاري': customer.commercialRegister},
+                          {' معرف آخر': customer.otherId},
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: customInfoContainer(
+                        margin: const EdgeInsets.only(left: 8, right: 16),
+                        title: 'بيانات المورد',
+                        titleColor: const Color(0xFFDC292F),
+                        alignment: CrossAxisAlignment.end,
+                        info: [
+                          {' الاسم': seller.name},
+                          {' المدينة': seller.city},
+                          {' الدولة': seller.country},
+                          {' الرمز البريدي ': seller.postalCode},
+                          {' الرقم الضريبي': seller.vatNumber},
+                          {' السجل التجاري': seller.commercialRegister},
+                          {' معرف آخر': seller.otherId},
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              }
+            })(),
             const SizedBox(height: 12),
           ],
         );
@@ -80,17 +121,20 @@ class InfoSection extends StatelessWidget {
       children: [
         CustomText(
           text: label,
-          style: TextStyle(color: Color(0xFF819AA7), fontSize: 14),
+          style: const TextStyle(color: Color(0xFF819AA7), fontSize: 14,fontFamily: 'Cairo'),
         ),
         const SizedBox(height: 4),
         CustomText(
           text: value,
-          // style: TextStyle(color: Color(0xFF000000), fontSize: 14),
+          style: const TextStyle(color: Color(0xFF000000), fontSize: 14,fontWeight: FontWeight.bold,fontFamily: 'Cairo'),
         ),
       ],
     );
   }
- Widget customInfoContainer({
+
+
+}
+  Widget customInfoContainer({
     required String title,
     required Color titleColor,
     required CrossAxisAlignment alignment,
@@ -102,7 +146,7 @@ class InfoSection extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xFFF9F9F9)),
         borderRadius: BorderRadius.circular(8),
-        color: Color(0xFFF9F9F9),
+        color: const Color(0xFFF9F9F9),
       ),
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Column(
@@ -112,11 +156,12 @@ class InfoSection extends StatelessWidget {
             text: title,
             style: TextStyle(
               fontSize: 16,
+              fontFamily: 'Cairo',
               fontWeight: FontWeight.bold,
               color: titleColor,
             ),
           ),
-          Divider(color: Color(0xFFE2E2E2), thickness: 2),
+          const Divider(color: Color(0xFFE2E2E2), thickness: 2),
           const SizedBox(height: 4),
           ...info.map((item) {
             final key = item.keys.first;
@@ -129,23 +174,24 @@ class InfoSection extends StatelessWidget {
                   child: Container(
                         alignment: Alignment.centerRight,
                     child: CustomText(
+                      
                       text: value,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF000000),
+                        fontFamily: 'Cairo',
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width:8),
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Container(
                                 alignment: Alignment.centerRight,
                     child: CustomText(
                       text: key,
-                      style: TextStyle(color: Color(0xFF474747), fontSize: 14),
+                      style: const TextStyle(color: Color(0xFF474747), fontSize: 14, fontFamily: 'Cairo'),
                     ),
                   ),
                 ),
@@ -156,6 +202,3 @@ class InfoSection extends StatelessWidget {
       ),
     );
   }
-
-}
- 

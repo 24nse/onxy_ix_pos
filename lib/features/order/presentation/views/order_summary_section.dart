@@ -11,7 +11,6 @@ import 'package:onyx_ix_pos/features/order/presentation/views/widgets/order_calc
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/payment_details_section.dart';
 import 'package:onyx_ix_pos/features/order/presentation/views/widgets/proceed_to_checkout_button.dart';
 import 'package:go_router/go_router.dart';
-import 'package:onyx_ix_pos/features/order/domain/entities/payment.dart';
 
 class OrderSummarySection extends StatelessWidget {
   const OrderSummarySection({super.key});
@@ -45,22 +44,21 @@ class OrderSummarySection extends StatelessWidget {
                 Expanded(
                   child: BlocBuilder<CartCubit, CartState>(
                     builder: (context, state) {
-                     
                       return state.items.isEmpty
                           ? CartItemsIsEmpty(theme: theme)
                           : Column(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: SingleChildScrollView(
                                     child: Column(
                                       children: [
                                         SizedBox(
                                           height: 140,
-                                          child: const CartList(),
+                                          child: CartList(),
                                         ),
-                                        const SizedBox(height: 8),
+                                        SizedBox(height: 8),
                                         OrderCalculationSection(),
-                                        const SizedBox(height: 4),
+                                        SizedBox(height: 4),
                                         PaymentDetailsSection(),
                                       ],
                                     ),
@@ -69,27 +67,14 @@ class OrderSummarySection extends StatelessWidget {
                                 const SizedBox(height: 4),
                                 ProceedToCheckoutButton(
                                   onPressed: () async {
-                                    final selected = await showDialog<PaymentMethod>(
-                                      context: context,
-                                      builder: (context) {
-                                        return SimpleDialog(
-                                          title: Text('اختر طريقة الدفع'),
-                                          children: PaymentMethod.values.map((method) {
-                                            return SimpleDialogOption(
-                                              onPressed: () => Navigator.pop(context, method),
-                                              child: Text(method.displayName),
-                                            );
-                                          }).toList(),
-                                        );
-                                      },
+                                    context.read<CartCubit>().checkout();
+                                    final state = context
+                                        .read<CartCubit>()
+                                        .state;
+                                    _checkPaymentCompleteOrInComplete(
+                                      state,
+                                      context,
                                     );
-                                    if (selected != null) {
-                                      context.read<CartCubit>().setPaymentMethod(selected);
-                                      context.read<CartCubit>().checkout();
-                                      context.go('/invoice');
-                                      final state = context.read<CartCubit>().state;
-                                      _checkPaymentCompleteOrInComplete(state, context);
-                                    }
                                   },
                                 ),
                               ],
@@ -105,20 +90,31 @@ class OrderSummarySection extends StatelessWidget {
     );
   }
 
-  void _checkPaymentCompleteOrInComplete(CartState state, BuildContext context) {
-     if (state.error != null) {
-      showCustomToast(
-        context,
-        title: AppLocalizations.of(context)?.translate('payment_incomplete') ?? 'Payment Incomplete',
-        message: AppLocalizations.of(context)?.translate('payment_not_complete_message') ?? 'Please complete the payment before checkout.',
-        isError: true,
-      );
-                                     
+  void _checkPaymentCompleteOrInComplete(
+    CartState state,
+    BuildContext context,
+  ) {
+    if (state.amountPaid.toStringAsFixed(2) ==
+        state.grandTotal.toStringAsFixed(2)) {
+      context.go('/invoice');
     } else {
-      showCustomToast(
-        context,
-        title: AppLocalizations.of(context)?.translate('complete_purchase') ?? 'Checkout Complete',
-        message: AppLocalizations.of(context)?.translate('action_completed_successfully') ?? 'The order has been successfully processed.',
+      showDialog(
+        context: context,
+        builder: (context) => SimpleDialog(
+          title: Text(
+            AppLocalizations.of(context)?.translate('payment_incomplete_title') ?? 'Payment Incomplete',
+            style: const TextStyle(fontFamily: 'Cairo'),
+          ),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                '${AppLocalizations.of(context)?.translate('payment_incomplete_message') ?? 'Please complete the payment before checkout.'}\n${AppLocalizations.of(context)?.translate('remaining_amount') ?? 'The Remaining amount is :'}${state.remainingAmount.toStringAsFixed(2)}',
+                style: const TextStyle(fontFamily: 'Cairo'),
+              ),
+            ),
+          ],
+        ),
       );
     }
   }
